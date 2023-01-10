@@ -26,9 +26,7 @@ function GithubInfo({ username, userId }) {
   );
 }
 
-export default GithubInfo;
-
-      `,
+export default GithubInfo;`,
       active: true,
     },
     'App.js': {
@@ -37,7 +35,7 @@ export default GithubInfo;
 export default function App() {
   return <GithubInfo username={"dimasmds"} userId={25724809} />;
 }`,
-      hidden: true,
+      hidden: false,
     },
     'styles.css': {
       code: `* {
@@ -67,7 +65,11 @@ export default function App() {
     },
   };
   return (
-    <ReactSandpack files={files} />
+    <ReactSandpack
+      files={files}
+      options={{
+      }}
+    />
   );
 }
 
