@@ -6,7 +6,7 @@ import theme from './theme';
 
 function BaseSandpack({ template, files }) {
   const [searchParams] = useSearchParams();
-  const height = searchParams.get('height') || '98vh';
+  const height = searchParams.get('height') || '99vh';
   const console = Boolean(searchParams.get('console')) || false;
   const themeName = searchParams.get('theme') || 'light';
 
