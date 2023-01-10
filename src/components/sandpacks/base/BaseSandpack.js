@@ -4,7 +4,7 @@ import { Sandpack } from '@codesandbox/sandpack-react';
 import { useSearchParams } from 'react-router-dom';
 import theme from './theme';
 
-function BaseSandpack({ template, files }) {
+function BaseSandpack({ template, files, options }) {
   const [searchParams] = useSearchParams();
   const height = searchParams.get('height') || '99vh';
   const console = Boolean(searchParams.get('console')) || false;
@@ -20,6 +20,7 @@ function BaseSandpack({ template, files }) {
         showLineNumbers: true,
         showConsole: console,
         showConsoleButton: true,
+        ...options,
       }}
     />
   );
@@ -28,6 +29,11 @@ function BaseSandpack({ template, files }) {
 BaseSandpack.propTypes = {
   template: PropTypes.oneOf(['react', 'vue', 'svelte', 'angular', 'vanilla']).isRequired,
   files: PropTypes.any.isRequired,
+  options: PropTypes.any,
+};
+
+BaseSandpack.defaultProps = {
+  options: {},
 };
 
 export default BaseSandpack;
