@@ -39,6 +39,32 @@ export default function App() {
 }`,
       hidden: true,
     },
+    'styles.css': {
+      code: `* {
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.github-info {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 8px
+}
+
+.github-info img {
+  width: 100px;
+}
+
+.github-info a {
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+`,
+      hidden: true,
+    },
   };
   return (
     <ReactSandpack files={files} />
