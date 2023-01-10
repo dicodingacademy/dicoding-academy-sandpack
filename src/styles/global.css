@@ -7,3 +7,26 @@
   font-size: 1em !important;
 }
 
+.embed-code-generator {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px
+
+}
+.embed-code-generator label {
+  padding: 0.25em;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.embed-code-generator label input, .embed-code-generator button {
+  width: 500px;
+  padding: 8px;
+}
+
+.embed-code-generator textarea {
+  min-width: 500px;
+  min-height: 250px;
+}
