@@ -20,6 +20,7 @@ function BaseSandpack({ template, files, options }) {
         showLineNumbers: true,
         showConsole: console,
         showConsoleButton: true,
+        editorWidthPercentage: 65,
         ...options,
       }}
     />
