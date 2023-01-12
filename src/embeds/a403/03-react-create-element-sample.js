@@ -29,7 +29,7 @@ function ReactCreateElementSample03() {
     <ReactSandpack
       files={files}
       options={{
-        editorWidthPercentage: 75,
+        editorWidthPercentage: 65,
       }}
     />
   );
