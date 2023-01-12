@@ -2,13 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Sandpack } from '@codesandbox/sandpack-react';
 import { useSearchParams } from 'react-router-dom';
-import theme from './theme';
+import { githubLight, sandpackDark } from '@codesandbox/sandpack-themes';
 
 function BaseSandpack({ template, files, options }) {
   const [searchParams] = useSearchParams();
   const height = searchParams.get('height') || '99vh';
   const console = Boolean(searchParams.get('console')) || false;
   const themeName = searchParams.get('theme') || 'light';
+
+  const theme = {
+    light: { ...githubLight, font: { ...githubLight.font, size: '14.4px' } },
+    dark: { ...sandpackDark, font: { ...sandpackDark.font, size: '14.4px' } },
+  };
 
   return (
     <Sandpack
