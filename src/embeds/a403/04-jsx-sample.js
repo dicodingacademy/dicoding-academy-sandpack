@@ -13,8 +13,7 @@ const files = {
 );
 
 // abaikan kode di bawah ini
-export default element;
-    `,
+export default element;`,
     hidden: false,
     active: true,
   },
