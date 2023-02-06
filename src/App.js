@@ -6,6 +6,7 @@ import DeclarativeSample02 from './embeds/a403/02-declarative-sample';
 import ReactCreateElementSample03 from './embeds/a403/03-react-create-element-sample';
 import JSXSample04 from './embeds/a403/04-jsx-sample';
 import SynchronousProcess01 from './embeds/a256/01-synchronous-process';
+import SynchronousProcess02 from './embeds/a256/02-synchronous-process';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Route path="/a403/03-react-create-element-sample" element={<ReactCreateElementSample03 />} />
       <Route path="/a403/04-jsx-sample" element={<JSXSample04 />} />
       <Route path="/a256/01-synchronous-process" element={<SynchronousProcess01 />} />
+      <Route path="/a256/02-synchronous-process" element={<SynchronousProcess02 />} />
     </Routes>
   );
 }
