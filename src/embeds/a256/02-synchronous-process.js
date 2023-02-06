@@ -27,7 +27,9 @@ const files = {
             Generate
           </button>
           {primes && <p>proses membuat {primes.length} bilangan prima selesai</p>}
-          <textarea placeholder="tulis sesuatu di sini selagi proses mendapatkan bilangan prima" />
+          <br />
+          <br />
+          <textarea placeholder="tulis sesuatu di sini selagi proses mendapatkan bilangan prima" style={{ minHeight: '100px', minWidth: '300px' }}/>
         </div>
       );
     }
