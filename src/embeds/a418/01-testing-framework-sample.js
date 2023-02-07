@@ -3,8 +3,7 @@ import TestSandpack from '../../components/sandpacks/TestSandpack';
 
 const files = {
   'detectTriangle.js': {
-    code: `
-const detectTriangle = (sideA, sideB, sideC) => {
+    code: `const detectTriangle = (sideA, sideB, sideC) => {
   if (sideA === sideB && sideB === sideC) {
     return "Segitiga sama sisi";
   }
@@ -41,8 +40,7 @@ describe("Sebuah fungsi detectTriangle", () => {
     expect(detectTriangle(2, 3, 5)).toEqual("Segitiga sembarang");
     expect(detectTriangle(8, 2, 1)).toEqual("Segitiga sembarang");
   });
-});
-    `,
+});`,
     hidden: false,
     active: true,
   },
