@@ -96,6 +96,7 @@ function SynchronousProcess02() {
       files={files}
       options={{
         editorWidthPercentage: 0.001,
+        resizablePanels: false,
       }}
     />
   );
