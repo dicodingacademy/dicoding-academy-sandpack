@@ -26,10 +26,10 @@ const files = {
           <button type="button" onClick={onGenerate}>
             Generate
           </button>
-          {primes && <p>proses membuat {primes.length} bilangan prima selesai</p>}
           <br />
           <br />
           <textarea placeholder="tulis sesuatu di sini selagi proses mendapatkan bilangan prima" style={{ minHeight: '100px', minWidth: '300px' }}/>
+          {primes && <p>proses membuat {primes.length} bilangan prima selesai</p>}
         </div>
       );
     }
