@@ -15,15 +15,15 @@ const shouldNotChangeFiles = {
     "build": "parcel build index.html"
   },
   "dependencies": {
-    "lit": "2.4.1",
-    "lit-html": "2.4.0"
+    "@babel/plugin-syntax-class-properties": "7.12.13",
+    "babel-plugin-transform-class-properties": "6.24.1",
+    "lit": "2.4.1"
   },
   "devDependencies": {
     "parcel-bundler": "^1.6.1"
   },
   "keywords": []
-}
- `,
+}`,
     hidden: true,
   },
   'sandbox.config.json': {
@@ -40,7 +40,9 @@ const shouldNotChangeFiles = {
   '.babelrc': {
     code: `\
 {
-  "presets": ["es2017"],
+  "presets": [
+    "es2016"
+  ],
   "plugins": [
     [
       "transform-runtime",
@@ -49,7 +51,9 @@ const shouldNotChangeFiles = {
         "regenerator": true
       }
     ],
-    "transform-object-rest-spread"
+    "transform-object-rest-spread",
+    "syntax-class-properties",
+    "transform-class-properties"
   ]
 }
     `,
@@ -78,11 +82,19 @@ const changableFiles = {
   },
   'src/index.js': {
     code: `\
-import "./styles.css";
-import { LitElement } from "lit";
-import { html } from "lit-html";
+import { LitElement, html, css } from "lit";
 
 class HelloWorld extends LitElement {
+  static styles = css\`
+    :host {
+      font-family: sans-serif;
+    }
+    
+    h1 {
+      color: red;
+    }
+  \`;
+
   render() {
     return html\`
      <h1>Hello, World!</h1>
@@ -92,14 +104,6 @@ class HelloWorld extends LitElement {
 
 customElements.define("hello-world", HelloWorld);
 
-`,
-    hidden: false,
-  },
-  'src/styles.css': {
-    code: `\
-body {
-  font-family: sans-serif;
-}
 `,
     hidden: false,
   },
