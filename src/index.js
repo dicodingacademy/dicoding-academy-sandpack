@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { a256Routes } from './embeds/a256';
 import { a403Routes } from './embeds/a403';
+import { a418Routes } from './embeds/a418';
 import HomePage from './pages/HomePage';
 
 import './styles/global.css';
@@ -16,6 +17,7 @@ const appRouter = createBrowserRouter([
   },
   ...a256Routes,
   ...a403Routes,
+  ...a418Routes,
 ]);
 
 root.render(
