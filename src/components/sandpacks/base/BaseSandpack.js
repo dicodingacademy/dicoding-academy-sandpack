@@ -26,6 +26,7 @@ function BaseSandpack({ template, files, options }) {
         showConsole: console,
         showConsoleButton: true,
         editorWidthPercentage: 65,
+        resizablePanels: true,
         ...options,
       }}
     />
