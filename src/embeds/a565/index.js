@@ -16,6 +16,7 @@ import SlotAssignedElement14 from './14-slot-assigned-element';
 import SelfStylingComponent15 from './15-self-styling-component';
 import StylingOnChildComponent16 from './16-styling-on-child-component';
 import StylingInComponent17 from './17-styling-in-component';
+import MultipleStyling18 from './18-multiple-styling';
 
 const a565Routes = [
   {
@@ -85,6 +86,10 @@ const a565Routes = [
   {
     path: '/a565/17-styling-in-component',
     element: <StylingInComponent17 />,
+  },
+  {
+    path: '/a565/18-multiple-styling',
+    element: <MultipleStyling18 />,
   },
 ];
 
