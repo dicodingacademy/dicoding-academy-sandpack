@@ -7,6 +7,7 @@ import ReactiveUpdateSample05 from './05-reactive-update-sample';
 import KonversiNilaiSample06 from './06-konversi-nilai-sample';
 import LitMenambahkanEventListenerSample07 from './07-menambahkan-event-listener-sample';
 import ObjekShadowRootSample08 from './08-objek-shadowroot-sample';
+import DisableShadowRoot09 from './09-disable-shadow-root';
 
 const a565Routes = [
   {
@@ -40,6 +41,10 @@ const a565Routes = [
   {
     path: '/a565/08-objek-shadowroot-sample',
     element: <ObjekShadowRootSample08 />,
+  },
+  {
+    path: '/a565/09-disable-shadow-root',
+    element: <DisableShadowRoot09 />,
   },
 ];
 
