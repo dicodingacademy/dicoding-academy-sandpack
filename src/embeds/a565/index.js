@@ -14,6 +14,7 @@ import NamedSlot12 from './12-named-slot';
 import CatchChildrenElement13 from './13-catch-children-element';
 import SlotAssignedElement14 from './14-slot-assigned-element';
 import SelfStylingComponent15 from './15-self-styling-component';
+import StylingOnChildComponent16 from './16-styling-on-child-component';
 
 const a565Routes = [
   {
@@ -75,6 +76,10 @@ const a565Routes = [
   {
     path: '/a565/15-self-styling-component',
     element: <SelfStylingComponent15 />,
+  },
+  {
+    path: '/a565/16-styling-on-child-component',
+    element: <StylingOnChildComponent16 />,
   },
 ];
 
