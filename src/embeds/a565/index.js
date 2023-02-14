@@ -10,6 +10,7 @@ import ObjekShadowRootSample08 from './08-objek-shadowroot-sample';
 import DisableShadowRoot09 from './09-disable-shadow-root';
 import ShadowRootOptions10 from './10-shadow-root-options';
 import ElementSlot11 from './11-element-slot';
+import NamedSlot12 from './12-named-slot';
 
 const a565Routes = [
   {
@@ -55,6 +56,10 @@ const a565Routes = [
   {
     path: '/a565/11-element-slot',
     element: <ElementSlot11 />,
+  },
+  {
+    path: '/a565/12-named-slot',
+    element: <NamedSlot12 />,
   },
 ];
 
