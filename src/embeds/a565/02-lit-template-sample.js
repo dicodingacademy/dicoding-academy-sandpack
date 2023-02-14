@@ -22,7 +22,7 @@ const files = {
   },
   'src/index.js': {
     code: `\
-import { LitElement, html, css } from "lit";
+import { LitElement, html, css } from 'lit';
 
 class MyElement extends LitElement {
   static styles = css\`
@@ -38,7 +38,7 @@ class MyElement extends LitElement {
   }
 }
 
-customElements.define("my-element", MyElement);`,
+customElements.define('my-element', MyElement);`,
     hidden: false,
     active: true,
   },

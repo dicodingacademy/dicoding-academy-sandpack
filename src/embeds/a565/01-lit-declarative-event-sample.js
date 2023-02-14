@@ -22,7 +22,7 @@ const files = {
   },
   'src/index.js': {
     code: `\
-import { LitElement, html } from "lit";
+import { LitElement, html } from 'lit';
 
 class MyElement extends LitElement {
   render() {
@@ -30,11 +30,11 @@ class MyElement extends LitElement {
   }
 
   _showAlert(e) {
-    window.alert("Alert sudah tampil");
+    window.alert('Alert sudah tampil');
   }
 }
 
-customElements.define("my-element", MyElement);`,
+customElements.define('my-element', MyElement);`,
     hidden: false,
     active: true,
   },
