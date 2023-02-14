@@ -8,6 +8,7 @@ import KonversiNilaiSample06 from './06-konversi-nilai-sample';
 import LitMenambahkanEventListenerSample07 from './07-menambahkan-event-listener-sample';
 import ObjekShadowRootSample08 from './08-objek-shadowroot-sample';
 import DisableShadowRoot09 from './09-disable-shadow-root';
+import ShadowRootOptions10 from './10-shadow-root-options';
 
 const a565Routes = [
   {
@@ -45,6 +46,10 @@ const a565Routes = [
   {
     path: '/a565/09-disable-shadow-root',
     element: <DisableShadowRoot09 />,
+  },
+  {
+    path: '/a565/10-shadow-root-options',
+    element: <ShadowRootOptions10 />,
   },
 ];
 
