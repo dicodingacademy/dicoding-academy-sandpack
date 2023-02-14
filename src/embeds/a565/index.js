@@ -6,6 +6,7 @@ import LitReactivePropertiesSample04 from './04-reactive-properties-sample';
 import ReactiveUpdateSample05 from './05-reactive-update-sample';
 import KonversiNilaiSample06 from './06-konversi-nilai-sample';
 import LitMenambahkanEventListenerSample07 from './07-menambahkan-event-listener-sample';
+import ObjekShadowRootSample08 from './08-objek-shadowroot-sample';
 
 const a565Routes = [
   {
@@ -35,6 +36,10 @@ const a565Routes = [
   {
     path: '/a565/07-menambahkan-event-listener-sample',
     element: <LitMenambahkanEventListenerSample07 />,
+  },
+  {
+    path: '/a565/08-objek-shadowroot-sample',
+    element: <ObjekShadowRootSample08 />,
   },
 ];
 

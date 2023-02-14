@@ -109,21 +109,24 @@ customElements.define("hello-world", HelloWorld);
   },
 };
 
-function LitSandpack({ files }) {
+function LitSandpack({ files, options }) {
   return (
     <BaseSandpack
       template="vanilla"
       files={{ ...shouldNotChangeFiles, ...changableFiles, ...files }}
+      options={options}
     />
   );
 }
 
 LitSandpack.propTypes = {
   files: PropTypes.any,
+  options: PropTypes.any,
 };
 
 LitSandpack.defaultProps = {
   files: {},
+  options: {},
 };
 
 export default LitSandpack;
