@@ -4,6 +4,7 @@ import LitTemplateSample02 from './02-lit-template-sample';
 import LitRenderLitComponent03 from './03-render-lit-component';
 import LitReactivePropertiesSample04 from './04-reactive-properties-sample';
 import ReactiveUpdateSample05 from './05-reactive-update-sample';
+import KonversiNilaiSample06 from './06-konversi-nilai-sample';
 
 const a565Routes = [
   {
@@ -25,6 +26,10 @@ const a565Routes = [
   {
     path: '/a565/05-reactive-update-sample',
     element: <ReactiveUpdateSample05 />,
+  },
+  {
+    path: '/a565/06-konversi-nilai-sample',
+    element: <KonversiNilaiSample06 />,
   },
 ];
 
