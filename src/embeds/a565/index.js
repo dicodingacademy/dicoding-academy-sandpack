@@ -12,6 +12,7 @@ import ShadowRootOptions10 from './10-shadow-root-options';
 import ElementSlot11 from './11-element-slot';
 import NamedSlot12 from './12-named-slot';
 import CatchChildrenElement13 from './13-catch-children-element';
+import SlotAssignedElement14 from './14-slot-assigned-element';
 
 const a565Routes = [
   {
@@ -65,6 +66,10 @@ const a565Routes = [
   {
     path: '/a565/13-catch-children-element',
     element: <CatchChildrenElement13 />,
+  },
+  {
+    path: '/a565/14-slot-assigned-element',
+    element: <SlotAssignedElement14 />,
   },
 ];
 
