@@ -21,13 +21,13 @@ import { LitElement, html, css } from 'lit';
  
 class MyElement extends LitElement {
   static styles = css\`
-    h1 {
+    p {
       color: green;
     }
   \`;
  
   render() {
-    return html\`<h1>Saya hijau!</h1>\`;
+    return html\`<p>Saya hijau!</p>\`;
   }
 }
 
