@@ -19,7 +19,7 @@ const files = {
   },
   'src/index.js': {
     code: `\
-import { LitElement, html} from 'lit';
+import { LitElement, html } from 'lit';
  
 class MyElement extends LitElement {
   render() {
