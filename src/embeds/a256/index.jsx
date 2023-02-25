@@ -6,6 +6,7 @@ import CallbackChallange04 from './04-callback-challange';
 import UserWeatherSync05 from './05-user-weather-sync';
 import UserWeatherAsync06 from './06-user-weather-asnyc';
 import UserWeatherPromise07 from './07-user-weather-promise';
+import PromiseSample08 from './08-promise-sample';
 
 const a256Routes = [
   {
@@ -35,6 +36,10 @@ const a256Routes = [
   {
     path: '/a256/07-user-weather-promise',
     element: <UserWeatherPromise07 />,
+  },
+  {
+    path: '/a256/08-promise-sample',
+    element: <PromiseSample08 />,
   },
 ];
 
