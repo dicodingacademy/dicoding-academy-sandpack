@@ -9,6 +9,7 @@ import UserWeatherPromise07 from './07-user-weather-promise';
 import PromiseSample08 from './08-promise-sample';
 import FSReadFilePromisify09 from './09-fs-readfile-promisify';
 import ChainingPromise10 from './10-chaining-promise';
+import AsyncAwaitSample11 from './11-async-await-sample';
 
 const a256Routes = [
   {
@@ -50,6 +51,10 @@ const a256Routes = [
   {
     path: '/a256/10-chaining-promise',
     element: <ChainingPromise10 />,
+  },
+  {
+    path: '/a256/11-async-await-sample',
+    element: <AsyncAwaitSample11 />,
   },
 ];
 
