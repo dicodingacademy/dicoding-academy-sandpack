@@ -17,7 +17,7 @@ function withDrawMoney(amount) {
 }
 
 function buyCinemaTicket(money) {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     setTimeout(() => {
       if (money < 10) {
         reject(new Error('not enough money to buy ticket'));
@@ -29,7 +29,7 @@ function buyCinemaTicket(money) {
 }
 
 function goInsideCinema(ticket) {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     setTimeout(() => {
       if (!ticket) {
         reject(new Error('no ticket'));
