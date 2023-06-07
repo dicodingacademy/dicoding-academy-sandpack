@@ -2,6 +2,7 @@ import React from 'react';
 import MultipleInputElement01 from './01-multiple-input-element';
 import SingleInputElement02 from './02-single-input-element';
 import BadTextarea04 from './03-bad-textarea';
+import Textarea04 from './04-textarea.jsx';
 
 const a123Routes = [
   {
@@ -15,6 +16,10 @@ const a123Routes = [
   {
     path: '/a123/03-bad-textarea',
     element: <BadTextarea04 />,
+  },
+  {
+    path: '/a123/04-textarea',
+    element: <Textarea04 />,
   },
 ];
 
