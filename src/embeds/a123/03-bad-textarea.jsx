@@ -34,10 +34,10 @@ document.body.appendChild(paragraph);
   },
 };
 
-function BadTextarea04() {
+function BadTextarea03() {
   return (
     <VanillaSandpack files={files} />
   );
 }
 
-export default BadTextarea04;
+export default BadTextarea03;
