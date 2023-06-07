@@ -3,7 +3,8 @@ import MultipleInputElement01 from './01-multiple-input-element';
 import SingleInputElement02 from './02-single-input-element';
 import BadTextarea03 from './03-bad-textarea';
 import Textarea04 from './04-textarea';
-import LabelSample05 from './05-label-sample.jsx';
+import LabelSample05 from './05-label-sample';
+import PlaceholderSample06 from './06-placeholder-sample';
 
 const a123Routes = [
   {
@@ -25,6 +26,10 @@ const a123Routes = [
   {
     path: '/a123/05-label-sample',
     element: <LabelSample05 />,
+  },
+  {
+    path: '/a123/06-placeholder-sample',
+    element: <PlaceholderSample06 />,
   },
 ];
 
