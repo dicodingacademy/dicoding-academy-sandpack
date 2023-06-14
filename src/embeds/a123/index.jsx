@@ -5,6 +5,7 @@ import BadTextarea03 from './03-bad-textarea';
 import Textarea04 from './04-textarea';
 import LabelSample05 from './05-label-sample';
 import PlaceholderSample06 from './06-placeholder-sample';
+import ListSample07 from './07-list-sample';
 
 const a123Routes = [
   {
@@ -30,6 +31,10 @@ const a123Routes = [
   {
     path: '/a123/06-placeholder-sample',
     element: <PlaceholderSample06 />,
+  },
+  {
+    path: '/a123/07-list-sample',
+    element: <ListSample07 />,
   },
 ];
 
