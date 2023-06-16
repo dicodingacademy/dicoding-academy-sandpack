@@ -32,6 +32,19 @@ import CSSInheritanceSample30 from './30-css-inheritance-sample';
 import CSSGroupSelectorSample31 from './31-css-group-selector-sample';
 import CSSRuleOrderSelectorSample32 from './32-css-rule-order-selector-sample';
 import CSSImportantSample33 from './33-css-important-sample';
+import TypeSelector34 from './34-type-selector';
+import ClassSelector35 from './35-class-selector';
+import ClassSelector36 from './36-class-selector';
+import IdSelector37 from './37-id-selector';
+import AttributeSelector38 from './38-attribute-selector';
+import UniversalSelector39 from './39-universal-selector';
+import AdjacentSelector40 from './40-adjacent-selector';
+import GeneralSelector41 from './41-general-selector';
+import ChildSelector42 from './42-child-selector';
+import DescendantSelector43 from './43-descendant-selector';
+import PseudoClassSelector44 from './44-pseudo-class-selector';
+import PseudoElementSelector45 from './45-pseudo-element-selector';
+import PseudoElementSelector46 from './46-pseudo-element-selector';
 
 const a123Routes = [
   {
@@ -165,6 +178,58 @@ const a123Routes = [
   {
     path: '/a123/33-css-important-sample',
     element: <CSSImportantSample33 />,
+  },
+  {
+    path: '/a123/34-type-selector',
+    element: <TypeSelector34 />,
+  },
+  {
+    path: '/a123/35-class-selector',
+    element: <ClassSelector35 />,
+  },
+  {
+    path: '/a123/36-class-selector',
+    element: <ClassSelector36 />,
+  },
+  {
+    path: '/a123/37-id-selector',
+    element: <IdSelector37 />,
+  },
+  {
+    path: '/a123/38-attribute-selector',
+    element: <AttributeSelector38 />,
+  },
+  {
+    path: '/a123/39-universal-selector',
+    element: <UniversalSelector39 />,
+  },
+  {
+    path: '/a123/40-adjacent-selector',
+    element: <AdjacentSelector40 />,
+  },
+  {
+    path: '/a123/41-general-selector',
+    element: <GeneralSelector41 />,
+  },
+  {
+    path: '/a123/42-child-selector',
+    element: <ChildSelector42 />,
+  },
+  {
+    path: '/a123/43-descendant-selector',
+    element: <DescendantSelector43 />,
+  },
+  {
+    path: '/a123/44-pseudo-class-selector',
+    element: <PseudoClassSelector44 />,
+  },
+  {
+    path: '/a123/45-pseudo-element-selector',
+    element: <PseudoElementSelector45 />,
+  },
+  {
+    path: '/a123/46-pseudo-element-selector',
+    element: <PseudoElementSelector46 />,
   },
 ];
 
