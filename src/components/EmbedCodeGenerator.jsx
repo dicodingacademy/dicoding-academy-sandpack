@@ -11,7 +11,8 @@ function EmbedCodeGenerator() {
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
-    const generatedIframe = generateIframe(`${src}?theme=${theme}`, 'Dicoding Sandpack', height, width);
+    const trimmedSrc = src.replace('https://academy-sandpack.dicoding.dev', '');
+    const generatedIframe = generateIframe(`https://academy-sandpack.dicoding.dev${trimmedSrc}?theme=${theme}`, 'Dicoding Sandpack', height, width);
     setIframeCode(generatedIframe);
   };
 
