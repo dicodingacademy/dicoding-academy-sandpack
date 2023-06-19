@@ -88,6 +88,12 @@ import PositioningAbsolute86 from './86-positioning-absolute-2';
 import MediaQuery87 from './87-media-query';
 import TableSample88 from './88-table-sample';
 import RowSpan89 from './89-row-span';
+import Paragraph90 from './90-paragraph';
+import Heading91 from './91-heading';
+import ListSample92 from './92-list-sample';
+import LongQuotations93 from './93-long-quotations';
+import PreformattedText94 from './94-preformatted-text';
+import Figure95 from './95-figure';
 
 const a123Routes = [
   {
@@ -445,6 +451,30 @@ const a123Routes = [
   {
     path: '/a123/89-row-span',
     element: <RowSpan89 />,
+  },
+  {
+    path: '/a123/90-paragraph',
+    element: <Paragraph90 />,
+  },
+  {
+    path: '/a123/91-heading',
+    element: <Heading91 />,
+  },
+  {
+    path: '/a123/92-list-sample',
+    element: <ListSample92 />,
+  },
+  {
+    path: '/a123/93-long-quotations',
+    element: <LongQuotations93 />,
+  },
+  {
+    path: '/a123/94-preformatted-text',
+    element: <PreformattedText94 />,
+  },
+  {
+    path: '/a123/95-figure',
+    element: <Figure95 />,
   },
 ];
 
