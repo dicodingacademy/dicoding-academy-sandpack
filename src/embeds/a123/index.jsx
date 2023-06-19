@@ -86,6 +86,8 @@ import ClearProperty84 from './84-clear-property';
 import TeknikOverflow85 from './85-teknik-overflow';
 import PositioningAbsolute86 from './86-positioning-absolute-2';
 import MediaQuery87 from './87-media-query';
+import TableSample88 from './88-table-sample';
+import RowSpan89 from './89-row-span';
 
 const a123Routes = [
   {
@@ -435,6 +437,14 @@ const a123Routes = [
   {
     path: '/a123/87-media-query',
     element: <MediaQuery87 />,
+  },
+  {
+    path: '/a123/88-table-sample',
+    element: <TableSample88 />,
+  },
+  {
+    path: '/a123/89-row-span',
+    element: <RowSpan89 />,
   },
 ];
 
