@@ -5,7 +5,7 @@ const files = {
   'index.html': {
     code: `\
 <!DOCTYPE html>
-<html>
+<html lang="id">
   <head>
     <meta charset="UTF-8" />
     <title>Judul Dokumen</title>
