@@ -1,11 +1,14 @@
 import React from 'react';
-import StaticWebSandpack from '../../components/sandpacks/StaticWebSandpack';
+import VanillaSandpack from '../../components/sandpacks/VanillaSandpack';
 
 const files = {
   'index.html': {
     code: `\
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="UTF-8" />
+  </head>
   <body>
     <script src="index.js"></script>
   </body>
@@ -20,8 +23,9 @@ const files = {
   },
   'index.js': {
     code: `\
-// Silakan hapus komentar di bawah ini untuk melihat hasilnya
-// let pesanInput = prompt('Masukkan pesan sesukamu...');
+// Silakan aktifkan kode di bawah ini dengan hapus komentar untuk melihat hasilnya
+// let pesanInput = prompt('Silakan masukkan pesan yang kamu suka!');
+// console.log(pesanInput);
 `,
     hidden: false,
     active: true,
@@ -29,7 +33,15 @@ const files = {
 };
 
 function BOMMethodPrompt08A() {
-  return <StaticWebSandpack files={files} />;
+  return (
+    <VanillaSandpack
+      files={files}
+      options={{
+        showConsole: true,
+        editorWidthPercentage: 60,
+      }}
+    />
+  );
 }
 
 export default BOMMethodPrompt08A;

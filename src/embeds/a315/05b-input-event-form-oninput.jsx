@@ -10,7 +10,7 @@ const files = {
     <meta charset="UTF-8" />
     <title>Form World</title>
 
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <div class="contents">
@@ -19,7 +19,8 @@ const files = {
       <div class="formContent">
         <form id="formDataDiri" autocomplete="off">
           <div class="form-element" id="fieldName">
-            <label for="inputNama">Nama Panggilan:</label><br />
+            <label for="inputNama">Nama Panggilan:</label>
+            <br />
             <input
               id="inputNama"
               type="text"
@@ -34,20 +35,35 @@ const files = {
           </div>
 
           <div class="form-element" id="fieldCopy">
-            <label for="inputCopy"><i>Copy</i> tulisan ini:</label><br />
-            <input id="inputCopy" type="text" name="copy" value="Hello World!" readonly />
+            <label for="inputCopy"><i>Copy</i> tulisan ini:</label>
+            <br />
+            <input
+              id="inputCopy"
+              type="text"
+              name="copy"
+              value="Hello World!"
+              readonly
+            />
             <br />
           </div>
 
           <div class="form-element" id="fieldPaste">
-            <label for="inputPaste"><i>Paste</i> tulisan di sini:</label><br />
-            <input id="inputPaste" type="text" name="paste" placeholder="Paste sesuatu di sini" />
+            <label for="inputPaste"><i>Paste</i> tulisan di sini:</label>
+            <br />
+            <input
+              id="inputPaste"
+              type="text"
+              name="paste"
+              placeholder="Paste sesuatu di sini"
+            />
             <br />
           </div>
 
           <div class="form-element" id="fieldCaptcha">
-            <label for="inputCaptcha">Tulis <i>captcha</i> berikut.</label><br />
-            <img src="https://i.ibb.co/yy59QPB/Captcha.png" alt="Captcha" /><br />
+            <label for="inputCaptcha">Tulis <i>captcha</i> berikut.</label>
+            <br />
+            <img src="https://i.ibb.co/yy59QPB/Captcha.png" alt="Captcha" />
+            <br />
             <input
               id="inputCaptcha"
               type="text"
@@ -55,7 +71,9 @@ const files = {
               placeholder="Tulis captcha di sini"
             />
             <br />
-            <p>Tekan Enter pada keyboard jika sudah selesai menulis <i>captcha</i></p>
+            <p>
+              Tekan Enter pada keyboard jika sudah selesai menulis <i>captcha</i>
+            </p>
           </div>
 
           <div class="form-element" align="center">
@@ -101,14 +119,41 @@ const files = {
 document.addEventListener('DOMContentLoaded', function () {
   const inputMaxLengthOnLoad = document.getElementById('inputNama').maxLength;
   document.getElementById('sisaKarakter').innerText = inputMaxLengthOnLoad;
+
+  document.getElementById('inputNama').addEventListener('input', function () {
+    const jumlahKarakterDiketik = document.getElementById('inputNama').value.length;
+    const jumlahKarakterMaksimal = document.getElementById('inputNama').maxLength;
+
+    console.log('jumlahKarakterDiketik: ', jumlahKarakterDiketik);
+    console.log('jumlahKarakterMaksimal: ', jumlahKarakterMaksimal);
+
+    const sisaKarakterUpdate = jumlahKarakterMaksimal - jumlahKarakterDiketik;
+    document.getElementById('sisaKarakter').innerText = sisaKarakterUpdate.toString();
+
+    if (sisaKarakterUpdate === 0) {
+      document.getElementById('sisaKarakter').innerText = 'Batas maksimal tercapai!';
+    } else if (sisaKarakterUpdate <= 5) {
+      document.getElementById('notifikasiSisaKarakter').style.color = 'red';
+    } else {
+      document.getElementById('notifikasiSisaKarakter').style.color = 'black';
+    }
+  });
 });
 `,
     hidden: false,
   },
 };
 
-function InputEventFormPrepare05A() {
-  return <StaticWebSandpack files={files} />;
+function InputEventFormOninput05B() {
+  return (
+    <StaticWebSandpack
+      files={files}
+      options={{
+        showConsole: true,
+        editorWidthPercentage: 60,
+      }}
+    />
+  );
 }
 
-export default InputEventFormPrepare05A;
+export default InputEventFormOninput05B;

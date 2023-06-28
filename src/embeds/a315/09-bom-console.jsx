@@ -1,11 +1,14 @@
 import React from 'react';
-import StaticWebSandpack from '../../components/sandpacks/StaticWebSandpack';
+import VanillaSandpack from '../../components/sandpacks/VanillaSandpack';
 
 const files = {
   'index.html': {
     code: `\
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="UTF-8" />
+  </head>
   <body>
     <script src="index.js"></script>
   </body>
@@ -20,10 +23,11 @@ const files = {
   },
   'index.js': {
     code: `\
-console.log('Ini adalah console log');
-console.info('Ini adalah console info');
-console.warn('Ini adalah console warn');
-console.error('Ini adalah console error');
+// Silakan aktifkan kode di bawah ini dengan hapus komentar untuk melihat hasilnya
+// console.log('Ini adalah console log');
+// console.info('Ini adalah console info');
+// console.warn('Ini adalah console warn');
+// console.error('Ini adalah console error');
 `,
     hidden: false,
     active: true,
@@ -31,7 +35,15 @@ console.error('Ini adalah console error');
 };
 
 function BOMConsole09() {
-  return <StaticWebSandpack files={files} />;
+  return (
+    <VanillaSandpack
+      files={files}
+      options={{
+        showConsole: true,
+        editorWidthPercentage: 60,
+      }}
+    />
+  );
 }
 
 export default BOMConsole09;
