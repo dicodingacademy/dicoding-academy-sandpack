@@ -6,6 +6,9 @@ const files = {
     code: `\
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="UTF-8" />
+  </head>
   <body>
     <script src="index.js"></script>
   </body>
@@ -20,10 +23,10 @@ const files = {
   },
   'index.js': {
     code: `\
-let pesan = 'Halo, user!';
+let message = 'Halo, user!';
 
-// Silakan hapus komentar di bawah ini untuk melihat hasilnya
-// alert(pesan);
+// Silakan aktifkan kode di bawah ini dengan hapus komentar untuk melihat hasilnya
+// alert(message);
 `,
     hidden: false,
     active: true,

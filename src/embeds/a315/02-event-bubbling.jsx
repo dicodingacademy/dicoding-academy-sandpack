@@ -48,7 +48,14 @@ body div {
 };
 
 function EventBubbling02() {
-  return <StaticWebSandpack files={files} />;
+  return (
+    <StaticWebSandpack
+      files={files}
+      options={{
+        editorWidthPercentage: 55,
+      }}
+    />
+  );
 }
 
 export default EventBubbling02;

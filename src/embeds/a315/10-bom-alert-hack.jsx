@@ -6,6 +6,9 @@ const files = {
     code: `\
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="UTF-8" />
+  </head>
   <body>
     <script src="index.js"></script>
   </body>
@@ -24,7 +27,7 @@ function alert(nama) {
   console.log('Hati-hati, ' + nama);
 }
  
-// Silakan hapus komentar yang dibutuhkan di bawah ini untuk melihat hasilnya
+// Silakan aktifkan kode di bawah ini dengan hapus komentar untuk melihat hasilnya
 
 // 1. Output di bawah akan tercetak ke console browser
 // alert('Chewbacca'); // Output: Hati-hati, Chewbacca
@@ -38,7 +41,14 @@ function alert(nama) {
 };
 
 function BOMAlertHack10() {
-  return <StaticWebSandpack files={files} />;
+  return (
+    <StaticWebSandpack
+      files={files}
+      options={{
+        editorWidthPercentage: 55,
+      }}
+    />
+  );
 }
 
 export default BOMAlertHack10;

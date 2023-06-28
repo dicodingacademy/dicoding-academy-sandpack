@@ -46,6 +46,7 @@ body div {
   'index.js': {
     code: `\
 const divs = document.getElementsByTagName('div');
+
 for (let el of divs) {
   el.addEventListener('click', function () {
     alert('ELEMEN ' + el.getAttribute('id').toUpperCase());
@@ -57,7 +58,14 @@ for (let el of divs) {
 };
 
 function EventCapturing03() {
-  return <StaticWebSandpack files={files} />;
+  return (
+    <StaticWebSandpack
+      files={files}
+      options={{
+        editorWidthPercentage: 55,
+      }}
+    />
+  );
 }
 
 export default EventCapturing03;

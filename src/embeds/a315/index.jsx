@@ -4,9 +4,9 @@ import OpeningEvent01 from './01-opening-event';
 import EventBubbling02 from './02-event-bubbling';
 import EventCapturing03 from './03-event-capturing';
 import FormOnsubmit04 from './04-form-onsubmit';
-import InputEventFormPrepare05A from './05a-input-event-form';
-import InputEventFormOninput05B from './05b-input-event-form';
-import InputEventFormOnfocus05C from './05c-input-event-form';
+import InputEventFormPrepare05A from './05a-input-event-form-prepare.jsx';
+import InputEventFormOninput05B from './05b-input-event-form-oninput.jsx';
+import InputEventFormOnfocus05C from './05c-input-event-form-onfocus.jsx';
 import InputEventFormOnblur05D from './05d-input-event-form-onblur';
 import InputEventFormOnchange05E from './05e-input-event-form-onchange';
 import InputEventFormOncopy05F from './05f-input-event-form-oncopy';
@@ -22,10 +22,12 @@ import BOMMethodPromptConversion08C from './08c-bom-method-prompt-conversion';
 import BOMMethodPromptDefaultValue08D from './08d-bom-method-prompt-default-value';
 import BOMConsole09 from './09-bom-console';
 import BOMAlertHack10 from './10-bom-alert-hack';
+import LocalStorageExample11 from "./11-local-storage-example.jsx";
+import SessionStorageExample12 from "./12-session-storage-example.jsx";
 
 const a315Routes = [
   {
-    path: '/a315/01-pendahuluan-event',
+    path: '/a315/01-opening-event',
     element: <OpeningEvent01 />,
   },
   {
@@ -111,6 +113,14 @@ const a315Routes = [
   {
     path: '/a315/10-bom-alert-hack',
     element: <BOMAlertHack10 />,
+  },
+  {
+    path: '/a315/11-local-storage-example',
+    element: <LocalStorageExample11 />,
+  },
+  {
+    path: '/a315/12-session-storage-example',
+    element: <SessionStorageExample12 />,
   },
 ];
 

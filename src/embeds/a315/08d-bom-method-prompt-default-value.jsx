@@ -1,11 +1,14 @@
 import React from 'react';
-import StaticWebSandpack from '../../components/sandpacks/StaticWebSandpack';
+import VanillaSandpack from '../../components/sandpacks/VanillaSandpack';
 
 const files = {
   'index.html': {
     code: `\
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="UTF-8" />
+  </head>
   <body>
     <script src="index.js"></script>
   </body>
@@ -30,7 +33,15 @@ const files = {
 };
 
 function BOMMethodPromptDefaultValue08D() {
-  return <StaticWebSandpack files={files} />;
+  return (
+    <VanillaSandpack
+      files={files}
+      options={{
+        showConsole: true,
+        editorWidthPercentage: 60,
+      }}
+    />
+  );
 }
 
 export default BOMMethodPromptDefaultValue08D;

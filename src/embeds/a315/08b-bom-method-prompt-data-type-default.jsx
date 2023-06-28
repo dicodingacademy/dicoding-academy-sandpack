@@ -1,11 +1,14 @@
 import React from 'react';
-import StaticWebSandpack from '../../components/sandpacks/StaticWebSandpack';
+import VanillaSandpack from '../../components/sandpacks/VanillaSandpack';
 
 const files = {
   'index.html': {
     code: `\
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="UTF-8" />
+  </head>
   <body>
     <script src="index.js"></script>
   </body>
@@ -20,9 +23,9 @@ const files = {
   },
   'index.js': {
     code: `\
-// Silakan hapus dua komentar di bawah ini untuk melihat hasilnya
+// Silakan aktifkan kode di bawah ini dengan hapus komentar untuk melihat hasilnya
 // let pesanInput = prompt('Silakan masukkan angka...');
-// console.log(typeof pesanInput); // output -> 'string'
+// console.log(\`Tipe data dari \\\`pesanInput\\\` adalah \${typeof pesanInput}\`);
 `,
     hidden: false,
     active: true,
@@ -30,7 +33,15 @@ const files = {
 };
 
 function BOMMethodPromptConversion08C() {
-  return <StaticWebSandpack files={files} />;
+  return (
+    <VanillaSandpack
+      files={files}
+      options={{
+        showConsole: true,
+        editorWidthPercentage: 60,
+      }}
+    />
+  );
 }
 
 export default BOMMethodPromptConversion08C;
