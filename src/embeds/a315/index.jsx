@@ -1,32 +1,32 @@
 import React from 'react';
 
-import PendahuluanEvent01 from './01-pendahuluan-event';
+import OpeningEvent01 from './01-opening-event';
 import EventBubbling02 from './02-event-bubbling';
 import EventCapturing03 from './03-event-capturing';
 import FormOnsubmit04 from './04-form-onsubmit';
 import InputEventFormPrepare05A from './05a-input-event-form';
-import InputEventFormOninput05B from "./05b-input-event-form.jsx";
-import InputEventFormOnfocus05C from "./05c-input-event-form.jsx";
-import InputEventFormOnblur05D from "./05d-input-event-form-onblur.jsx";
-import InputEventFormOnchange05E from "./05e-input-event-form-onchange.jsx";
-import InputEventFormOncopy05F from "./05f-input-event-form-oncopy.jsx";
-import InputEventFormOnpaste05G from "./05g-input-event-form-onpaste.jsx";
-import InputEventFormComplete05H from "./05h-input-event-form-complete.jsx";
-import JSInWebInternal06A from "./06a-js-in-web-internal.jsx";
-import JSInWebExternal06B from "./06b-js-in-web-external.jsx";
-import BOMMethodAlertWithVariable07B from "./07b-bom-method-alert-with-variable.jsx";
-import BOMMethodAlert07A from "./07a-bom-method-alert.jsx";
-import BOMMethodPrompt08A from "./08a-bom-method-prompt.jsx";
-import BOMMethodPromptDataTypeDefault08B from "./08b-bom-method-prompt-data-type-default.jsx";
-import BOMMethodPromptConversion08C from "./08b-bom-method-prompt-data-type-default.jsx";
-import BOMMethodPromptDefaultValue08D from "./08d-bom-method-prompt-default-value.jsx";
-import BOMConsole09 from "./09-bom-console.jsx";
-import BOMAlertHack10 from "./10-bom-alert-hack.jsx";
+import InputEventFormOninput05B from './05b-input-event-form';
+import InputEventFormOnfocus05C from './05c-input-event-form';
+import InputEventFormOnblur05D from './05d-input-event-form-onblur';
+import InputEventFormOnchange05E from './05e-input-event-form-onchange';
+import InputEventFormOncopy05F from './05f-input-event-form-oncopy';
+import InputEventFormOnpaste05G from './05g-input-event-form-onpaste';
+import InputEventFormComplete05H from './05h-input-event-form-complete';
+import JSInWebInternal06A from './06a-js-in-web-internal';
+import JSInWebExternal06B from './06b-js-in-web-external';
+import BOMMethodAlertWithVariable07B from './07b-bom-method-alert-with-variable';
+import BOMMethodAlert07A from './07a-bom-method-alert';
+import BOMMethodPrompt08A from './08a-bom-method-prompt';
+import BOMMethodPromptDataTypeDefault08B from './08b-bom-method-prompt-data-type-default';
+import BOMMethodPromptConversion08C from './08c-bom-method-prompt-conversion';
+import BOMMethodPromptDefaultValue08D from './08d-bom-method-prompt-default-value';
+import BOMConsole09 from './09-bom-console';
+import BOMAlertHack10 from './10-bom-alert-hack';
 
 const a315Routes = [
   {
     path: '/a315/01-pendahuluan-event',
-    element: <PendahuluanEvent01 />,
+    element: <OpeningEvent01 />,
   },
   {
     path: '/a315/02-event-bubbling',
