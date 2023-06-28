@@ -20,8 +20,8 @@ const files = {
   },
 };
 
-function PendahuluanEvent01() {
+function OpeningEvent01() {
   return <StaticWebSandpack files={files} />;
 }
 
-export default PendahuluanEvent01;
+export default OpeningEvent01;
