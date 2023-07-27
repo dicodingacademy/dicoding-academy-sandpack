@@ -1,5 +1,5 @@
 import React from 'react';
-import StaticWebSandpack from '../../components/sandpacks/StaticWebSandpack';
+import VanillaSandpack from '../../components/sandpacks/VanillaSandpack';
 
 const files = {
   'index.html': {
@@ -42,7 +42,7 @@ function alert(nama) {
 
 function BOMAlertHack10() {
   return (
-    <StaticWebSandpack
+    <VanillaSandpack
       files={files}
       options={{
         editorWidthPercentage: 55,
