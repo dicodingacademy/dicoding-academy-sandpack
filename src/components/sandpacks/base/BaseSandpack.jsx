@@ -34,7 +34,7 @@ function BaseSandpack({ template, files, options }) {
 }
 
 BaseSandpack.propTypes = {
-  template: PropTypes.oneOf(['react', 'vue', 'svelte', 'angular', 'vanilla', 'node']).isRequired,
+  template: PropTypes.oneOf(['react', 'vue', 'svelte', 'angular', 'vanilla', 'node', 'static']).isRequired,
   files: PropTypes.any.isRequired,
   options: PropTypes.any,
 };
