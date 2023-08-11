@@ -1,5 +1,5 @@
 import React from 'react';
-import BufferAndStringLength01 from './1-buffer-and-string-length';
+import BufferAndStringLength01 from './01-buffer-and-string-length';
 
 const a610Routes = [
   {
