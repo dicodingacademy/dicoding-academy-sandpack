@@ -11,6 +11,7 @@ import HomePage from './pages/HomePage';
 
 import './styles/global.css';
 import { a610Routes } from './embeds/a610';
+import { a163Routes } from './embeds/a163';
 
 const root = createRoot(document.getElementById('root'));
 
@@ -26,6 +27,7 @@ const appRouter = createBrowserRouter([
   ...a123Routes,
   ...a315Routes,
   ...a610Routes,
+  ...a163Routes,
 ]);
 
 root.render(
