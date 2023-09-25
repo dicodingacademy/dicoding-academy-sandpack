@@ -4,6 +4,8 @@ import BaseSandpack from './base/BaseSandpack';
 
 const shouldNotChangeFiles = {
   'package.json': {
+    hidden: true,
+    readOnly: true,
     code: `\
 {
   "name": "litelement",
@@ -24,20 +26,21 @@ const shouldNotChangeFiles = {
   },
   "keywords": []
 }`,
-    hidden: true,
   },
   'sandbox.config.json': {
+    hidden: true,
+    readOnly: true,
     code: `\
 {
   "infiniteLoopProtection": true,
   "hardReloadOnChange": true,
   "view": "browser"
 }
-
 `,
-    hidden: true,
   },
   '.babelrc': {
+    hidden: true,
+    readOnly: true,
     code: `\
 {
   "presets": [
@@ -56,19 +59,19 @@ const shouldNotChangeFiles = {
     "transform-class-properties"
   ]
 }
-    `,
-    hidden: true,
+`,
   },
 };
 
 const changableFiles = {
   'index.html': {
+    hidden: false,
     code: `\
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Parcel Sandbox</title>
     <meta charset="UTF-8" />
+    <title>Lit Sandbox</title>
   </head>
 
   <body>
@@ -77,19 +80,20 @@ const changableFiles = {
     <script src="src/index.js"></script>
   </body>
 </html>
-    `,
-    hidden: false,
+`,
   },
   'src/index.js': {
+    hidden: false,
+    active: true,
     code: `\
-import { LitElement, html, css } from "lit";
+import { LitElement, html, css } from 'lit';
 
 class HelloWorld extends LitElement {
   static styles = css\`
     :host {
       font-family: sans-serif;
     }
-    
+
     h1 {
       color: red;
     }
@@ -97,15 +101,13 @@ class HelloWorld extends LitElement {
 
   render() {
     return html\`
-     <h1>Hello, World!</h1>
+      <h1>Hello, World!</h1>
     \`;
   }
 }
 
-customElements.define("hello-world", HelloWorld);
-
+customElements.define('hello-world', HelloWorld);
 `,
-    hidden: false,
   },
 };
 
