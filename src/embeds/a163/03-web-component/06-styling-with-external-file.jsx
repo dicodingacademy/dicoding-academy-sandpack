@@ -76,7 +76,7 @@ class MyParagraph extends HTMLElement {
 
   updateStyle() {
     this._style.textContent = \`
-      ${this.localName} {
+      \${this.localName} {
         color: \${this._color};
         font-size: \${this._size}px;
       }
