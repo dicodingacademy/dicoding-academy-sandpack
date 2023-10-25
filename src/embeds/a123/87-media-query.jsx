@@ -1,5 +1,5 @@
 import React from 'react';
-import StaticWebSandpackVertical from '../../components/sandpacks/StaticWebSandpackVertical';
+import StaticWebSandpack from '../../components/sandpacks/StaticWebSandpack';
 
 const files = {
   'index.html': {
@@ -91,7 +91,7 @@ main aside {
 }
 
 /* CSS rule dalam block @media di bawah akan diterapkan jika ukuran viewport di atas 600px */
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 400px) {
   h1 {
     color: red;
   }
@@ -102,7 +102,7 @@ main aside {
 }
 
 /* CSS rule dalam block @media di bawah akan diterapkan jika ukuran viewport di atas 992px */
-@media screen and (min-width: 992px) {
+@media screen and (min-width: 600px) {
   main {
     flex-direction: row;
   }
@@ -139,7 +139,9 @@ main aside {
 
 function MediaQuery87() {
   return (
-    <StaticWebSandpackVertical files={files} />
+    <StaticWebSandpack
+      files={files}
+    />
   );
 }
 
