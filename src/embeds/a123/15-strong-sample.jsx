@@ -3,15 +3,15 @@ import VanillaSandpack from '../../components/sandpacks/VanillaSandpack';
 
 const files = {
   'index.html': {
+    hidden: false,
+    active: true,
     code: `\
 <p>Kesehatan merupakan hal yang penting, jaga pola makan yang teratur dan <strong>jangan sampai makan tengah malam!</strong></p>
 `,
-    hidden: false,
-    active: true,
   },
   'index.js': {
-    code: '',
     hidden: true,
+    code: '',
   },
 };
 

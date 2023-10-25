@@ -3,6 +3,8 @@ import VanillaSandpack from '../../components/sandpacks/VanillaSandpack';
 
 const files = {
   'index.html': {
+    hidden: false,
+    active: true,
     code: `\
 <p>Hubungi kami di</p>
 <ul>
@@ -12,12 +14,10 @@ const files = {
   <li><a href="#address">Alamat</a></li>
 </ul>
 `,
-    hidden: false,
-    active: true,
   },
   'index.js': {
-    code: '',
     hidden: true,
+    code: '',
   },
 };
 

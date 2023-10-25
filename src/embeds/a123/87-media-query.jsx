@@ -1,8 +1,10 @@
 import React from 'react';
-import StaticWebSandpack from '../../components/sandpacks/StaticWebSandpack';
+import StaticWebSandpackVertical from '../../components/sandpacks/StaticWebSandpackVertical';
 
 const files = {
   'index.html': {
+    hidden: false,
+    active: true,
     code: `\
 <!DOCTYPE html>
 <html>
@@ -10,7 +12,7 @@ const files = {
     <meta charset="UTF-8" />
     <title>Judul Dokumen</title>
     
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <header>
@@ -71,10 +73,8 @@ const files = {
   </body>
 </html>
 `,
-    hidden: false,
-    active: true,
   },
-  'style.css': {
+  'styles.css': {
     code: `\
 body {
   font-family: sans-serif;
@@ -139,7 +139,7 @@ main aside {
 
 function MediaQuery87() {
   return (
-    <StaticWebSandpack files={files} />
+    <StaticWebSandpackVertical files={files} />
   );
 }
 

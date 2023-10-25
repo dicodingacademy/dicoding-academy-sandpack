@@ -3,6 +3,8 @@ import VanillaSandpack from '../../components/sandpacks/VanillaSandpack';
 
 const files = {
   'index.html': {
+    hidden: false,
+    active: true,
     code: `\
 <pre>
   SAJAK PUTIH
@@ -25,8 +27,6 @@ Antara kita Mati datang tidak membelah...
                   Karya: Chairil Anwar
 </pre>
 `,
-    hidden: false,
-    active: true,
   },
   'index.js': {
     code: '',

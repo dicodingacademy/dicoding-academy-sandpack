@@ -3,19 +3,20 @@ import VanillaSandpack from '../../components/sandpacks/VanillaSandpack';
 
 const files = {
   'index.html': {
+    hidden: false,
+    active: true,
     code: `\
 <ol start="7" reversed>
   <li>Langkah ketujuh</li>
   <li>Langkah kedelapan</li>
   <li>Langkah kesembilan</li>
   <li>Langkah selanjutnya</li>
-</ol>`,
-    hidden: false,
-    active: true,
+</ol>
+`,
   },
   'index.js': {
-    code: '',
     hidden: true,
+    code: '',
   },
 };
 

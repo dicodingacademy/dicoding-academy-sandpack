@@ -3,6 +3,8 @@ import StaticWebSandpack from '../../components/sandpacks/StaticWebSandpack';
 
 const files = {
   'index.html': {
+    hidden: false,
+    active: true,
     code: `\
 <!DOCTYPE html>
 <html>
@@ -10,19 +12,21 @@ const files = {
     <meta charset="UTF-8" />
     <title>Judul Dokumen</title>
     
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <div class="container">
-      <img src="https://i.imgur.com/cs2BJzw.jpg" width="200px" alt="dicoding" />
+      <img
+        src="https://raw.githubusercontent.com/dicodingacademy/a123-webdasar-labs/099-shared-files/shared-media/g-dicoding-logo.png"
+        alt="g Dicoding Logo"
+        width="200px"
+      />
     </div>
   </body>
 </html>
 `,
-    hidden: false,
-    active: true,
   },
-  'style.css': {
+  'styles.css': {
     code: `\
 .container {
   width: 800px;

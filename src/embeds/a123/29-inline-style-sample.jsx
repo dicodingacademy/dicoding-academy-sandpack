@@ -3,15 +3,15 @@ import StaticWebSandpack from '../../components/sandpacks/StaticWebSandpack';
 
 const files = {
   'index.html': {
+    hidden: false,
+    active: true,
     code: `\
 <h1 style="color: green; margin-top: 2em">Kota Bandung</h1>
 `,
-    hidden: false,
-    active: true,
   },
   'index.js': {
-    code: '',
     hidden: true,
+    code: '',
   },
 };
 
