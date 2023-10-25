@@ -3,6 +3,8 @@ import VanillaSandpack from '../../components/sandpacks/VanillaSandpack';
 
 const files = {
   'index.html': {
+    hidden: false,
+    active: true,
     code: `\
 <div>
   Text:
@@ -19,13 +21,12 @@ const files = {
 <div>
   Password:
   <input type="password" />
-</div>`,
-    hidden: false,
-    active: true,
+</div>
+`,
   },
   'index.js': {
-    code: '',
     hidden: true,
+    code: '',
   },
 };
 

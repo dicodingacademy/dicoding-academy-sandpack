@@ -3,6 +3,8 @@ import VanillaSandpack from '../../components/sandpacks/VanillaSandpack';
 
 const files = {
   'index.html': {
+    hidden: false,
+    active: true,
     code: `\
 <ul>
   <li>List item 1</li>
@@ -16,9 +18,8 @@ const files = {
     </ul>
   </li>
   <li>List item 4</li>
-</ul>`,
-    hidden: false,
-    active: true,
+</ul>
+`,
   },
   'index.js': {
     code: '',

@@ -3,6 +3,8 @@ import StaticWebSandpack from '../../components/sandpacks/StaticWebSandpack';
 
 const files = {
   'index.html': {
+    hidden: false,
+    active: true,
     code: `\
 <!DOCTYPE html>
 <html>
@@ -10,7 +12,7 @@ const files = {
     <meta charset="UTF-8" />
     <title>Judul Dokumen</title>
     
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <h3 class="fixed">Lorem ipsum dolor sit amet.</h3>
@@ -40,10 +42,8 @@ const files = {
   </body>
 </html>
 `,
-    hidden: false,
-    active: true,
   },
-  'style.css': {
+  'styles.css': {
     code: `\
 h3 {
   padding: 10px;

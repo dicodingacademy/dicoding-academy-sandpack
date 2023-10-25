@@ -3,18 +3,19 @@ import VanillaSandpack from '../../components/sandpacks/VanillaSandpack';
 
 const files = {
   'index.html': {
+    hidden: false,
+    active: true,
     code: `\
-<textarea>
+<textarea rows="6" cols="16">
 Belajar
 Dasar
 Pemrograman
 Web
 </textarea>
 `,
-    hidden: false,
-    active: true,
   },
   'index.js': {
+    hidden: true,
     code: `\
 const button = document.createElement("button");
 const paragraph = document.createElement("p");
@@ -31,7 +32,6 @@ button.addEventListener("click", () => {
 document.body.appendChild(button);
 document.body.appendChild(paragraph);
 `,
-    hidden: true,
   },
 };
 

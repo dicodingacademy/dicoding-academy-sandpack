@@ -3,6 +3,8 @@ import StaticWebSandpack from '../../components/sandpacks/StaticWebSandpack';
 
 const files = {
   'index.html': {
+    hidden: false,
+    active: true,
     code: `\
 <!DOCTYPE html>
 <html>
@@ -11,17 +13,15 @@ const files = {
     <title>Judul Dokumen</title>
 
     <!-- Impor berkas CSS Anda -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
   </head>
   <body>
     <h1>Kota Bandung</h1>
   </body>
 </html>
 `,
-    hidden: false,
-    active: true,
   },
-  'style.css': {
+  'styles.css': {
     code: `\
 h1 {
   color: green;
@@ -30,8 +30,8 @@ h1 {
 `,
   },
   'index.js': {
-    code: '',
     hidden: true,
+    code: '',
   },
 };
 

@@ -3,6 +3,8 @@ import VanillaSandpack from '../../components/sandpacks/VanillaSandpack';
 
 const files = {
   'index.html': {
+    hidden: false,
+    active: true,
     code: `\
 <h1>Pemenang Piala Dunia Tiga Tahun Terakhir</h1>
 
@@ -33,8 +35,6 @@ const files = {
   </tr>
 </table>
 `,
-    hidden: false,
-    active: true,
   },
   'index.js': {
     code: '',

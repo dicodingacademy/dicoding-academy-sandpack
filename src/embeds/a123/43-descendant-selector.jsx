@@ -3,14 +3,16 @@ import StaticWebSandpack from '../../components/sandpacks/StaticWebSandpack';
 
 const files = {
   'index.html': {
+    hidden: false,
+    active: true,
     code: `\
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Judul Dokumen</title>
+    <title>Descendant Selector</title>
     
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <div>
@@ -29,10 +31,8 @@ const files = {
   </body>
 </html>
 `,
-    hidden: false,
-    active: true,
   },
-  'style.css': {
+  'styles.css': {
     code: `\
 /* Rule akan diterapkan pada elemen header yang berada tepat setelah elemen img */
 div p {

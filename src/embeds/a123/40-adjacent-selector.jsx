@@ -3,6 +3,8 @@ import StaticWebSandpack from '../../components/sandpacks/StaticWebSandpack';
 
 const files = {
   'index.html': {
+    hidden: false,
+    active: true,
     code: `\
 <!DOCTYPE html>
 <html>
@@ -10,7 +12,7 @@ const files = {
     <meta charset="UTF-8" />
     <title>Judul Dokumen</title>
     
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <p>
@@ -18,8 +20,8 @@ const files = {
       elemen paragraf ini.
     </p>
     <img
-      src="https://i.imgur.com/cs2BJzw.jpg"
-      alt="Dicoding logo"
+      src="https://raw.githubusercontent.com/dicodingacademy/a123-webdasar-labs/099-shared-files/shared-media/g-dicoding-logo.png"
+      alt="g Dicoding Logo"
       width="400px"
     />
     <p>
@@ -35,10 +37,8 @@ const files = {
   </body>
 </html>
 `,
-    hidden: false,
-    active: true,
   },
-  'style.css': {
+  'styles.css': {
     code: `\
 /* Rule akan diterapkan pada elemen paragraf yang berada tepat setelah elemen img */
 img + p {

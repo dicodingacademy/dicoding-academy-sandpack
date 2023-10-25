@@ -3,6 +3,8 @@ import VanillaSandpack from '../../components/sandpacks/VanillaSandpack';
 
 const files = {
   'index.html': {
+    hidden: false,
+    active: true,
     code: `\
 <p>
   Ini adalah periode perang saudara. Pesawat ruang angkasa pemberontak, menyerang dari pangkalan
@@ -13,12 +15,10 @@ const files = {
   yang cukup untuk menghancurkan seluruh planet.
 </p>
 `,
-    hidden: false,
-    active: true,
   },
   'index.js': {
-    code: '',
     hidden: true,
+    code: '',
   },
 };
 
