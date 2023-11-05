@@ -34,7 +34,7 @@ const files = {
     active: true,
     code: `\
 .container {
-  max-width: 60%;
+  max-width: 80%;
 
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -61,7 +61,12 @@ const files = {
 
 function PositionManageItemPosition12() {
   return (
-    <StaticWebSandpack files={files} />
+    <StaticWebSandpack
+      files={files}
+      options={{
+        editorWidthPercentage: 55,
+      }}
+    />
   );
 }
 

@@ -22,10 +22,10 @@ const files = {
             id="name"
             name="name"
             required
-            minlength="2"
+            minlength="1"
             aria-describedby="nameValidation"
           />
-          <p id="nameValidation" class="validation-message">Minimal 2 karakter.</p>
+          <p id="nameValidation" class="validation-message">Minimal 1 karakter.</p>
         </div>
 
         <div class="form-group">

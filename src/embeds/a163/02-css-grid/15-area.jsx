@@ -95,15 +95,15 @@ footer {
   background-color: lightgrey;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 400px) {
   .grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr;
     grid-template-rows: 1fr 5fr 2fr 2fr;
     grid-template-areas:
-      'header  header  header'
-      'content content content'
-      'sidebar sidebar sidebar'
-      'footer  footer  footer';
+      'header'
+      'content'
+      'sidebar'
+      'footer';
   }
 }
 `,
@@ -112,7 +112,12 @@ footer {
 
 function Area15() {
   return (
-    <StaticWebSandpack files={files} />
+    <StaticWebSandpack
+      files={files}
+      options={{
+        editorWidthPercentage: 55,
+      }}
+    />
   );
 }
 
