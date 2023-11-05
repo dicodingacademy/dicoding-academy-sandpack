@@ -34,7 +34,7 @@ const files = {
     active: true,
     code: `\
 .container {
-  max-width: 60%;
+  max-width: 80%;
 
   display: grid;
   grid-template-columns:
@@ -70,7 +70,12 @@ const files = {
 
 function PositionSpan14() {
   return (
-    <StaticWebSandpack files={files} />
+    <StaticWebSandpack
+      files={files}
+      options={{
+        editorWidthPercentage: 55,
+      }}
+    />
   );
 }
 

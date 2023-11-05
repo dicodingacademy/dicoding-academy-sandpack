@@ -71,7 +71,12 @@ const files = {
 
 function AlignmentJustifyItems16() {
   return (
-    <StaticWebSandpack files={files} />
+    <StaticWebSandpack
+      files={files}
+      options={{
+        editorWidthPercentage: 55,
+      }}
+    />
   );
 }
 

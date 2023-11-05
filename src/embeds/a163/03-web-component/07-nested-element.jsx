@@ -84,9 +84,7 @@ class BlogList extends HTMLElement {
   }
 
   setBlogList(value) {
-    this._blogList.splice(0, this._blogList.length);
-
-    value.forEach((item) => this._blogList.push(item));
+    this._blogList = value;
 
     // Render ulang setelah \`blogList\` di-update
     this.render();
@@ -110,7 +108,7 @@ class BlogList extends HTMLElement {
   render() {
     this.updateStyle();
 
-    const blogItems = this._blogList.map((item) => {
+    const blogItemElements = this._blogList.map((item) => {
       const blog = document.createElement('blog-item');
       blog.setBlog(item);
 
@@ -118,7 +116,7 @@ class BlogList extends HTMLElement {
     });
 
     this.innerHTML = '';
-    this.append(this._style, ...blogItems);
+    this.append(this._style, ...blogItemElements);
   }
 }
 

@@ -50,7 +50,12 @@ const files = {
 
 function FlexCanWrap23A() {
   return (
-    <StaticWebSandpack files={files} />
+    <StaticWebSandpack
+      files={files}
+      options={{
+        editorWidthPercentage: 55,
+      }}
+    />
   );
 }
 
