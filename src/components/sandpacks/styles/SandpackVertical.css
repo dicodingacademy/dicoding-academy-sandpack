@@ -1,0 +1,5 @@
+.sp-layout > .sp-stack {
+  --sp-layout-height: 49.86vh;
+
+  min-width: 100%;
+}
