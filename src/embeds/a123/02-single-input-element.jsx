@@ -3,13 +3,15 @@ import VanillaSandpack from '../../components/sandpacks/VanillaSandpack';
 
 const files = {
   'index.html': {
-    code: '<input type="text" />',
     hidden: false,
     active: true,
+    code: `\
+<input type="text" />
+`,
   },
   'index.js': {
-    code: '',
     hidden: true,
+    code: '',
   },
 };
 

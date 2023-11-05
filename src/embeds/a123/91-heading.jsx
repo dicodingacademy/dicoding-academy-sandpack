@@ -3,6 +3,8 @@ import VanillaSandpack from '../../components/sandpacks/VanillaSandpack';
 
 const files = {
   'index.html': {
+    hidden: false,
+    active: true,
     code: `\
 <h1>Bandung</h1>
 
@@ -32,8 +34,6 @@ const files = {
   Memiliki beberapa teleskop, antara lain, Refraktor Ganda Zeiss, Schmidt Bimasakti, Refraktor Bamberg, Cassegrain GOTO, dan Teleskop Surya.
 </p>
 `,
-    hidden: false,
-    active: true,
   },
   'index.js': {
     code: '',

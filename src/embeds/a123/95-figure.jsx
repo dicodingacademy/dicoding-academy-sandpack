@@ -3,6 +3,8 @@ import VanillaSandpack from '../../components/sandpacks/VanillaSandpack';
 
 const files = {
   'index.html': {
+    hidden: false,
+    active: true,
     code: `\
 <p>
   Dicoding adalah sebuah perusahaan startup yang bertujuan mengembangkan ekosistem developer di
@@ -11,7 +13,11 @@ const files = {
 </p>
 
 <figure>
-  <img src="https://i.imgur.com/cs2BJzw.jpg" alt="dicoding" width="200px" />
+  <img
+    src="https://raw.githubusercontent.com/dicodingacademy/a123-webdasar-labs/099-shared-files/shared-media/g-dicoding-logo.png"
+    alt="g Dicoding Logo"
+    width="200px"
+  />
   <figcaption>Dicoding</figcaption>
 </figure>
 
@@ -22,8 +28,6 @@ const files = {
   modul online-nya juga hadir dalam bentuk buku berjudul sama yang telah mendapatkan ijin dan ISBN.
 </p>
 `,
-    hidden: false,
-    active: true,
   },
   'index.js': {
     code: '',
