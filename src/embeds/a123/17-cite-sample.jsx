@@ -3,15 +3,15 @@ import VanillaSandpack from '../../components/sandpacks/VanillaSandpack';
 
 const files = {
   'index.html': {
+    hidden: false,
+    active: true,
     code: `\
 <p>Informasi selengkapnya bisa Anda dapatkan di <cite><a href="https://dicoding.com">dicoding.com</a></cite>.</p>
 `,
-    hidden: false,
-    active: true,
   },
   'index.js': {
-    code: '',
     hidden: true,
+    code: '',
   },
 };
 

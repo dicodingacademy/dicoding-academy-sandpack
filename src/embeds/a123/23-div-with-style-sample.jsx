@@ -3,6 +3,8 @@ import VanillaSandpack from '../../components/sandpacks/VanillaSandpack';
 
 const files = {
   'index.html': {
+    hidden: false,
+    active: true,
     code: `\
 <!DOCTYPE html>
 <html>
@@ -10,7 +12,6 @@ const files = {
     <title>Div Element</title>
     <link rel="stylesheet" href="styles.css">
   </head>
-
   <body>
     <div class="shadowbox">
       <p>
@@ -22,14 +23,15 @@ const files = {
   </body>
 </html>
 `,
-    hidden: false,
-    active: true,
   },
   'index.js': {
-    code: 'import "./styles.css";',
     hidden: true,
+    code: `
+import './styles.css';
+`,
   },
   'styles.css': {
+    hidden: false,
     code: `\
 .shadowbox {
   width: 15em;
@@ -39,7 +41,6 @@ const files = {
   background-image: linear-gradient(180deg, #fff, #ddd 40%, #ccc);
 }
 `,
-    hidden: false,
   },
 };
 

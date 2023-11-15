@@ -2,9 +2,19 @@ import React from 'react';
 import LitSandpack from '../../components/sandpacks/LitSandpack';
 
 const files = {
+  'styles.css': {
+    hidden: true,
+    code: '',
+  },
+  'index.js': {
+    hidden: true,
+    code: '',
+  },
   'index.html': {
+    hidden: false,
     code: `\
 <!DOCTYPE html>
+<html lang="en">
   <body>
     <my-element>
       <h1>Dicoding</h1>
@@ -12,10 +22,12 @@ const files = {
 
     <script src="src/index.js"></script>
   </body>
-</html>`,
-    hidden: false,
+</html>
+`,
   },
   'src/index.js': {
+    hidden: false,
+    active: true,
     code: `\
 import { LitElement, html } from 'lit';
  
@@ -37,8 +49,7 @@ class MyElement extends LitElement {
 }
  
 customElements.define('my-element', MyElement);
-    `,
-    hidden: false,
+`,
   },
 };
 

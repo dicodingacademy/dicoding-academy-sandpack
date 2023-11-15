@@ -3,6 +3,8 @@ import VanillaSandpack from '../../components/sandpacks/VanillaSandpack';
 
 const files = {
   'index.html': {
+    hidden: false,
+    active: true,
     code: `\
 <figure>
   <pre>
@@ -26,12 +28,10 @@ const files = {
   <figcaption>Sajak Putih oleh Charil Anwar</figcaption>
 </figure>
 `,
-    hidden: false,
-    active: true,
   },
   'index.js': {
-    code: '',
     hidden: true,
+    code: '',
   },
 };
 

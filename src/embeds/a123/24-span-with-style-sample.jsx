@@ -3,6 +3,8 @@ import VanillaSandpack from '../../components/sandpacks/VanillaSandpack';
 
 const files = {
   'index.html': {
+    hidden: false,
+    active: true,
     code: `\
 <style>
   .phone {
@@ -16,12 +18,10 @@ const files = {
   <li>Gilang: <span class="phone">08333xxx</span></li>
 </ul>
 `,
-    hidden: false,
-    active: true,
   },
   'index.js': {
-    code: '',
     hidden: true,
+    code: '',
   },
 };
 

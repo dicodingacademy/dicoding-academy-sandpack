@@ -1,18 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Sandpack } from '@codesandbox/sandpack-react';
 import { useSearchParams } from 'react-router-dom';
-import { githubLight, sandpackDark } from '@codesandbox/sandpack-themes';
+import { Sandpack } from '@codesandbox/sandpack-react';
+import { githubLight, monokaiPro, sandpackDark } from '@codesandbox/sandpack-themes';
 
 function BaseSandpack({ template, files, options }) {
   const [searchParams] = useSearchParams();
-  const height = searchParams.get('height') || '99vh';
+  const height = searchParams.get('height') || '99.5vh';
   const console = Boolean(searchParams.get('console')) || false;
   const themeName = searchParams.get('theme') || 'light';
 
   const theme = {
     light: { ...githubLight, font: { ...githubLight.font, size: '14.4px' } },
     dark: { ...sandpackDark, font: { ...sandpackDark.font, size: '14.4px' } },
+    monokai: { ...monokaiPro, font: { ...monokaiPro.font, size: '14.4px' } },
   };
 
   return (
@@ -34,7 +35,7 @@ function BaseSandpack({ template, files, options }) {
 }
 
 BaseSandpack.propTypes = {
-  template: PropTypes.oneOf(['react', 'vue', 'svelte', 'angular', 'vanilla', 'node']).isRequired,
+  template: PropTypes.oneOf(['react', 'vue', 'svelte', 'angular', 'vanilla', 'node', 'static']).isRequired,
   files: PropTypes.any.isRequired,
   options: PropTypes.any,
 };

@@ -2,7 +2,16 @@ import React from 'react';
 import LitSandpack from '../../components/sandpacks/LitSandpack';
 
 const files = {
+  'styles.css': {
+    hidden: true,
+    code: '',
+  },
+  'index.js': {
+    hidden: true,
+    code: '',
+  },
   'index.html': {
+    hidden: true,
     code: `\
 <!DOCTYPE html>
 <html lang="en">
@@ -13,9 +22,10 @@ const files = {
   </body>
 </html>
 `,
-    hidden: true,
   },
   'src/index.js': {
+    hidden: false,
+    active: true,
     code: `\
 import { LitElement, html, css } from 'lit';
  
@@ -27,13 +37,12 @@ class MyElement extends LitElement {
   \`;
  
   render() {
-    return html\`<p>Saya hijau!</p>\`;
+    return html\` <p>Saya hijau!</p> \`;
   }
 }
 
-customElements.define('my-element', MyElement);`,
-    hidden: false,
-    active: true,
+customElements.define('my-element', MyElement);
+`,
   },
 };
 

@@ -3,17 +3,18 @@ import VanillaSandpack from '../../components/sandpacks/VanillaSandpack';
 
 const files = {
   'index.html': {
-    code: `\
-<img
-  src="https://raw.githubusercontent.com/dicodingacademy/BelajarDasarPemrogramanWeb/099-shared-files/dicoding-logo.png" 
-  alt="dicoding">
-`,
     hidden: false,
     active: true,
+    code: `\
+<img
+  src="https://raw.githubusercontent.com/dicodingacademy/a123-webdasar-labs/099-shared-files/shared-media/dicoding-logo.jpg" 
+  alt="Dicoding Logo"
+>
+`,
   },
   'index.js': {
-    code: '',
     hidden: true,
+    code: '',
   },
 };
 

@@ -6,9 +6,12 @@ import { a403Routes } from './embeds/a403';
 import { a418Routes } from './embeds/a418';
 import { a565Routes } from './embeds/a565';
 import { a123Routes } from './embeds/a123';
+import { a315Routes } from './embeds/a315';
 import HomePage from './pages/HomePage';
 
 import './styles/global.css';
+import { a610Routes } from './embeds/a610';
+import { a163Routes } from './embeds/a163';
 
 const root = createRoot(document.getElementById('root'));
 
@@ -22,6 +25,9 @@ const appRouter = createBrowserRouter([
   ...a418Routes,
   ...a565Routes,
   ...a123Routes,
+  ...a315Routes,
+  ...a610Routes,
+  ...a163Routes,
 ]);
 
 root.render(
