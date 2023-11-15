@@ -6,7 +6,7 @@ import { githubLight, monokaiPro, sandpackDark } from '@codesandbox/sandpack-the
 
 function BaseSandpack({ template, files, options }) {
   const [searchParams] = useSearchParams();
-  const height = searchParams.get('height') || '99.8439vh';
+  const height = searchParams.get('height') || '99.5vh';
   const console = Boolean(searchParams.get('console')) || false;
   const themeName = searchParams.get('theme') || 'light';
 
