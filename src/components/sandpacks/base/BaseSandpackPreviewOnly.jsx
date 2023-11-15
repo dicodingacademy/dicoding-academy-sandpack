@@ -10,7 +10,7 @@ function BaseSandpackPreviewOnly({ template, files, options }) {
   import('../styles/SandpackPreviewOnly.css');
 
   const [searchParams] = useSearchParams();
-  const height = searchParams.get('height') || '99.838vh';
+  const height = searchParams.get('height') || '99.5vh';
   const themeName = searchParams.get('theme') || 'light';
 
   const theme = {
