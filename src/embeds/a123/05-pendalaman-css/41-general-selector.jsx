@@ -1,5 +1,5 @@
 import React from 'react';
-import StaticWebSandpack from '../../../components/sandpacks/StaticWebSandpack.jsx';
+import StaticWebSandpack from '../../../components/sandpacks/StaticWebSandpack';
 
 const files = {
   'index.html': {
@@ -21,7 +21,7 @@ const files = {
     </p>
     <img
       src="https://raw.githubusercontent.com/dicodingacademy/a123-webdasar-labs/099-shared-files/shared-media/g-dicoding-logo.png"
-      alt="Dicoding logo"
+      alt="Logo Dicoding"
       width="400px"
     />
     <p>
@@ -46,7 +46,7 @@ const files = {
   },
   'styles.css': {
     code: `\
-/* Rule akan diterapkan pada elemen header yang berada tepat setelah elemen img */
+/* Rule akan diterapkan pada semua elemen <p> yang susunannya terletak setelah elemen <img> */
 img ~ p {
   color: green;
 }

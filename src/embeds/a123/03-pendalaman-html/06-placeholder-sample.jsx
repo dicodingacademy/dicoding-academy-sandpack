@@ -1,5 +1,5 @@
 import React from 'react';
-import VanillaSandpack from '../../../components/sandpacks/VanillaSandpack.jsx';
+import VanillaSandpack from '../../../components/sandpacks/VanillaSandpack';
 
 const files = {
   'index.html': {

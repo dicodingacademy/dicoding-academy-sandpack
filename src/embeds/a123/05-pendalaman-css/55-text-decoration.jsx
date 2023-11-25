@@ -1,5 +1,5 @@
 import React from 'react';
-import StaticWebSandpack from '../../../components/sandpacks/StaticWebSandpack.jsx';
+import StaticWebSandpack from '../../../components/sandpacks/StaticWebSandpack';
 
 const files = {
   'index.html': {
