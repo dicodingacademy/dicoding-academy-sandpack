@@ -67,7 +67,7 @@ class MyParagraph extends HTMLElement {
     super();
 
     // Menambahkan shadow root
-    this._shadow = this.attachShadow({ mode: 'open' });
+    this._shadowRoot = this.attachShadow({ mode: 'open' });
 
     this._color = this.getAttribute('color');
     this._size = this.getAttribute('size');
@@ -91,7 +91,7 @@ class MyParagraph extends HTMLElement {
   render() {
     this.updateStyle();
 
-    this._shadow.innerHTML = \`
+    this._shadowRoot.innerHTML = \`
       \${this._style.outerHTML}
 
       <p>

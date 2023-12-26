@@ -46,10 +46,6 @@ const files = {
 </html>
 `,
   },
-  'main.css': {
-    hidden: false,
-    code: ``,
-  },
   'common.css': {
     hidden: false,
     code: `\
