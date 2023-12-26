@@ -21,8 +21,8 @@ const files = {
         <label for="cvc">
           Kode validasi kartu
           <popup-info
-            img="img/alt.png"
-            description="Card Validation Code (CVC) Anda adalah fitur keamanan tambahan - ada di 3 atau 4 nomor terakhir pada sisi belakang kartu Anda."
+            img="https://raw.githubusercontent.com/dicodingacademy/a163-bfwd-labs/099-shared-files/info.png"
+            description="Card Validation Code (CVC) Anda adalah fitur keamanan tambahan – ada di 3 atau 4 nomor terakhir pada sisi belakang kartu Anda."
           ></popup-info>
         </label><br />
         <input name="cvc" id="cvc" />
@@ -54,6 +54,8 @@ import './popup-info.js';
     active: true,
     code: `\
 class PopUpInfo extends HTMLElement {
+  _defaultIcon = 'https://raw.githubusercontent.com/dicodingacademy/a163-bfwd-labs/099-shared-files/info-default.png';
+
   constructor() {
     super();
 
@@ -116,7 +118,7 @@ class PopUpInfo extends HTMLElement {
 
       <span class="wrapper">
         <span class="icon" tabindex="0">
-          <img src="\${this._imgUrl}" alt="Popup Icon" />
+          <img src="\${this._imgUrl || this._defaultIcon}" alt="Popup Icon" />
         </span>
         <span class="info">\${this._description}</span>
       </span>
