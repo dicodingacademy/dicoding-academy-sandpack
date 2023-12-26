@@ -1,13 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useSearchParams } from 'react-router-dom';
-import { Sandpack } from '@codesandbox/sandpack-react';
-import { githubLight, monokaiPro, sandpackDark } from '@codesandbox/sandpack-themes';
+import {
+  SandpackCodeEditor,
+  SandpackLayout, SandpackPreview, SandpackProvider,
+} from '@codesandbox/sandpack-react';
+import { githubLight, sandpackDark, monokaiPro } from '@codesandbox/sandpack-themes';
 
-function BaseSandpack({ template, files, options }) {
+function BaseSandpackVertical({ template, files, options }) {
+  import('../styles/SandpackVertical.css');
+
   const [searchParams] = useSearchParams();
-  const height = searchParams.get('height') || '99.5vh';
-  const console = Boolean(searchParams.get('console')) || false;
   const themeName = searchParams.get('theme') || 'light';
 
   const theme = {
@@ -17,31 +20,37 @@ function BaseSandpack({ template, files, options }) {
   };
 
   return (
-    <Sandpack
+    <SandpackProvider
       template={template}
       theme={theme[themeName]}
       files={files}
       options={{
-        editorHeight: height,
         showLineNumbers: true,
-        showConsole: console,
         showConsoleButton: true,
-        editorWidthPercentage: 65,
-        resizablePanels: true,
         ...options,
       }}
-    />
+    >
+      <SandpackLayout>
+        <SandpackCodeEditor
+          showTabs
+          showLineNumbers
+        />
+        <SandpackPreview
+          showRefreshButton
+        />
+      </SandpackLayout>
+    </SandpackProvider>
   );
 }
 
-BaseSandpack.propTypes = {
+BaseSandpackVertical.propTypes = {
   template: PropTypes.oneOf(['react', 'vue', 'svelte', 'angular', 'vanilla', 'node', 'static']).isRequired,
   files: PropTypes.any.isRequired,
   options: PropTypes.any,
 };
 
-BaseSandpack.defaultProps = {
+BaseSandpackVertical.defaultProps = {
   options: {},
 };
 
-export default BaseSandpack;
+export default BaseSandpackVertical;
