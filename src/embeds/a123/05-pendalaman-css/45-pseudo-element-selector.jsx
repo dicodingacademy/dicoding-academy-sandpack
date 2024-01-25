@@ -37,8 +37,8 @@ blockquote::after {
 `,
   },
   'index.js': {
-    code: '',
     hidden: true,
+    code: '',
   },
 };
 

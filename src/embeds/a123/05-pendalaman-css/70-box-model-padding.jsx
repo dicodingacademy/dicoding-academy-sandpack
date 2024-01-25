@@ -41,8 +41,8 @@ p.example {
 `,
   },
   'index.js': {
-    code: '',
     hidden: true,
+    code: '',
   },
 };
 

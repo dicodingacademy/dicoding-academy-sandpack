@@ -15,8 +15,8 @@ const files = {
 `,
   },
   'index.js': {
-    code: '',
     hidden: true,
+    code: '',
   },
 };
 

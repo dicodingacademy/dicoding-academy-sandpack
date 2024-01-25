@@ -66,8 +66,8 @@ h1 {
 `,
   },
   'index.js': {
-    code: '',
     hidden: true,
+    code: '',
   },
 };
 
