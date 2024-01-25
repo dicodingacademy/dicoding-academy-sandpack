@@ -55,8 +55,8 @@ a[href$='.org'] {
 }`,
   },
   'index.js': {
-    code: '',
     hidden: true,
+    code: '',
   },
 };
 

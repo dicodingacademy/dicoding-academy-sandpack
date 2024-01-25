@@ -53,8 +53,8 @@ img ~ p {
 `,
   },
   'index.js': {
-    code: '',
     hidden: true,
+    code: '',
   },
 };
 

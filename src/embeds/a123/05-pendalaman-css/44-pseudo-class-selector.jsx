@@ -15,7 +15,12 @@ const files = {
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <a href="https://www.google.com/">Kunjungi Halaman Google</a>
+    <p>
+      Dapatkan pekerjaan impian di 
+      <a target="_blank" href="https://jobs.dicoding.com/">
+        Dicoding Jobs
+      </a>.
+    </p>
   </body>
 </html>
 `,
@@ -44,8 +49,8 @@ a:active {
 `,
   },
   'index.js': {
-    code: '',
     hidden: true,
+    code: '',
   },
 };
 

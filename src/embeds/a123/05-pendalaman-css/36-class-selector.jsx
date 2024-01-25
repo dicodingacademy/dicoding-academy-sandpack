@@ -33,8 +33,8 @@ p.fancy {
 }`,
   },
   'index.js': {
-    code: '',
     hidden: true,
+    code: '',
   },
 };
 

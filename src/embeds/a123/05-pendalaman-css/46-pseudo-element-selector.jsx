@@ -36,8 +36,8 @@ p::first-letter {
 `,
   },
   'index.js': {
-    code: '',
     hidden: true,
+    code: '',
   },
 };
 

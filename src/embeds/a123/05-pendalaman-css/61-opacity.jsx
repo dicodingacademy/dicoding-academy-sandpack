@@ -46,8 +46,8 @@ p.opacity-100 {
 `,
   },
   'index.js': {
-    code: '',
     hidden: true,
+    code: '',
   },
 };
 

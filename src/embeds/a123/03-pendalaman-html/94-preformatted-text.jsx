@@ -29,8 +29,8 @@ Antara kita Mati datang tidak membelah...
 `,
   },
   'index.js': {
-    code: '',
     hidden: true,
+    code: '',
   },
 };
 
