@@ -69,11 +69,7 @@ const files = {
 
     <hr>
 
-    <blog-list>
-      <blog-item></blog-item>
-      <blog-item></blog-item>
-      <blog-item></blog-item>
-    </blog-list>
+    <blog-list></blog-list>
 
     <script src="main.js"></script>
   </body>
@@ -83,7 +79,9 @@ const files = {
   'styles.css': {
     hidden: false,
     readOnly: false,
-    code: '',
+    code: `\
+/* Silakan buat styling milik Anda sendiri untuk bereksplorasi */
+`,
   },
   'main.js': {
     hidden: false,
@@ -122,7 +120,7 @@ class BlogList extends HTMLElement {
     this.updateStyle();
 
     const slot = document.createElement('slot');
-    slot.textContent = \`
+    slot.innerHTML = \`
       <blog-item></blog-item>
       <blog-item></blog-item>
       <blog-item></blog-item>
