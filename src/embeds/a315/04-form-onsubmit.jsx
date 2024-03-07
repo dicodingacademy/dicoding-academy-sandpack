@@ -3,6 +3,8 @@ import StaticWebSandpack from '../../components/sandpacks/StaticWebSandpack';
 
 const files = {
   'index.html': {
+    hidden: false,
+    active: true,
     code: `\
 <!DOCTYPE html>
 <html>
@@ -47,10 +49,9 @@ const files = {
   </body>
 </html>
 `,
-    hidden: false,
-    active: true,
   },
   'styles.css': {
+    hidden: false,
     code: `\
 .contents {
   position: fixed;
@@ -66,9 +67,9 @@ const files = {
   text-align: left;
 }
 `,
-    hidden: false,
   },
   'index.js': {
+    hidden: false,
     code: `\
 const submitAction = document.getElementById('formDataDiri');
 
@@ -81,7 +82,6 @@ submitAction.addEventListener('submit', function (event) {
   event.preventDefault();
 });
 `,
-    hidden: false,
   },
 };
 

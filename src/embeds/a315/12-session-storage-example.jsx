@@ -3,6 +3,8 @@ import StaticWebSandpack from '../../components/sandpacks/StaticWebSandpack';
 
 const files = {
   'index.html': {
+    hidden: false,
+    active: true,
     code: `\
 <!DOCTYPE html>
 <html>
@@ -27,10 +29,9 @@ const files = {
   </body>
 </html>
 `,
-    hidden: false,
-    active: true,
   },
   'styles.css': {
+    hidden: false,
     code: `\
 .contents {
   border: 2px solid black;
@@ -48,9 +49,9 @@ const files = {
   margin-bottom: 15px;
 }
 `,
-    hidden: false,
   },
   'index.js': {
+    hidden: false,
     code: `\
 const sessionStorageKey = 'PRESS_FREQUENCY';
 
@@ -85,7 +86,6 @@ if (typeof Storage !== 'undefined') {
   alert('Browser yang Anda gunakan tidak mendukung Web Storage');
 }
 `,
-    hidden: false,
   },
 };
 

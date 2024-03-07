@@ -3,6 +3,8 @@ import VanillaSandpack from '../../components/sandpacks/VanillaSandpack';
 
 const files = {
   'index.html': {
+    hidden: true,
+    active: false,
     code: `\
 <!DOCTYPE html>
 <html>
@@ -14,12 +16,10 @@ const files = {
   </body>
 </html>
 `,
-    hidden: true,
-    active: false,
   },
   'styles.css': {
-    code: '',
     hidden: true,
+    code: '',
   },
   'index.js': {
     code: `\
@@ -27,8 +27,6 @@ const files = {
 // let name = prompt('Silakan masukkan nama Anda!', 'John Doe');
 // console.log(name);
 `,
-    hidden: false,
-    active: true,
   },
 };
 

@@ -3,21 +3,21 @@ import StaticWebSandpack from '../../components/sandpacks/StaticWebSandpack';
 
 const files = {
   'index.html': {
+    hidden: false,
+    active: true,
     code: `\
 <button onClick="alert('Halo! Apa Kabar')">
   Tekan Aku
 </button>
 `,
-    hidden: false,
-    active: true,
   },
   'styles.css': {
-    code: '',
     hidden: true,
+    code: '',
   },
   'index.js': {
-    code: '',
     hidden: true,
+    code: '',
   },
 };
 

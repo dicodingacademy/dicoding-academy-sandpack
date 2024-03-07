@@ -3,6 +3,8 @@ import StaticWebSandpack from '../../components/sandpacks/StaticWebSandpack';
 
 const files = {
   'index.html': {
+    hidden: false,
+    active: true,
     code: `\
 <!DOCTYPE html>
 <html>
@@ -20,16 +22,14 @@ const files = {
   </body>
 </html>
 `,
-    hidden: false,
-    active: true,
   },
   'styles.css': {
-    code: '',
     hidden: true,
+    code: '',
   },
   'index.js': {
-    code: '',
     hidden: true,
+    code: '',
   },
 };
 
