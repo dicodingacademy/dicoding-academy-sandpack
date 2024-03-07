@@ -35,7 +35,7 @@ const files = {
           <fieldset class="additional-form-group" id="additionalForm">
             <legend>Data Keluarga</legend>
             <div class="form-group">
-              <label for="wifeName">Apa nama istri Anda?</label>
+              <label for="wifeName">Siapa nama istri Anda?</label>
               <input type="text" id="wifeName" name="wifeName" />
             </div>
             <div class="form-group">
@@ -58,7 +58,9 @@ const files = {
   },
   'main.css': {
     hidden: false,
-    code: '',
+    code: `\
+/* Silakan buat styling milik Anda sendiri untuk bereksplorasi */
+`,
   },
   'common.css': {
     hidden: false,
@@ -184,9 +186,7 @@ if (isMarried) {
 };
 
 function JavaScriptConditionalForm33() {
-  return (
-    <StaticWebSandpack files={files} />
-  );
+  return <StaticWebSandpack files={files} />;
 }
 
 export default JavaScriptConditionalForm33;

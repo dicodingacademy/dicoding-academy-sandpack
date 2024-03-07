@@ -28,7 +28,9 @@ const files = {
   },
   'main.css': {
     hidden: false,
-    code: '',
+    code: `\
+/* Silakan buat styling milik Anda sendiri untuk bereksplorasi */
+`,
   },
   'main.js': {
     hidden: false,

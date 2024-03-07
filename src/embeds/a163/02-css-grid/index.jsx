@@ -25,6 +25,7 @@ import FlexCanWrap23A from './23a-flex-can-wrap';
 import GridCanWrap23B from './23b-grid-can-wrap';
 import FlexConfiguration24A from './24a-flex-configuration';
 import GridConfiguration24B from './24b-grid-configuration';
+import FlexBasisSimulation25 from './25-flex-basis-simulation';
 
 const a163CSSGrid02Routes = [
   {
@@ -130,6 +131,10 @@ const a163CSSGrid02Routes = [
   {
     path: '/a163/02-css-grid/24b-grid-configuration',
     element: <GridConfiguration24B />,
+  },
+  {
+    path: '/a163/02-css-grid/25-flex-basis-simulation',
+    element: <FlexBasisSimulation25 />,
   },
 ];
 

@@ -13,7 +13,7 @@ const files = {
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <h1>Ini adalah konten &lt;h1&gt; dalam shadow DOM</h1>
+    <h1>Ini adalah konten &lt;h1&gt; dalam light DOM</h1>
 
     <script src="main.js"></script>
   </body>

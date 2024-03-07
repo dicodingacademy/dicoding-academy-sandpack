@@ -46,7 +46,12 @@ const files = {
 
 function GridCanWrap23B() {
   return (
-    <StaticWebSandpack files={files} />
+    <StaticWebSandpack
+      files={files}
+      options={{
+        editorWidthPercentage: 55,
+      }}
+    />
   );
 }
 

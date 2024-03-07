@@ -56,7 +56,12 @@ const files = {
 
 function FlexConfiguration24A() {
   return (
-    <StaticWebSandpack files={files} />
+    <StaticWebSandpack
+      files={files}
+      options={{
+        editorWidthPercentage: 55,
+      }}
+    />
   );
 }
 
