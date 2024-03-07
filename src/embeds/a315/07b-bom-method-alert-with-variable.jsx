@@ -3,6 +3,8 @@ import StaticWebSandpack from '../../components/sandpacks/StaticWebSandpack';
 
 const files = {
   'index.html': {
+    hidden: true,
+    active: false,
     code: `\
 <!DOCTYPE html>
 <html>
@@ -14,12 +16,10 @@ const files = {
   </body>
 </html>
 `,
-    hidden: true,
-    active: false,
   },
   'styles.css': {
-    code: '',
     hidden: true,
+    code: '',
   },
   'index.js': {
     code: `\
@@ -28,8 +28,6 @@ let message = 'Halo, user!';
 // Silakan aktifkan kode di bawah ini dengan hapus komentar untuk melihat hasilnya
 // alert(message);
 `,
-    hidden: false,
-    active: true,
   },
 };
 

@@ -3,6 +3,8 @@ import StaticWebSandpack from '../../components/sandpacks/StaticWebSandpack';
 
 const files = {
   'index.html': {
+    hidden: false,
+    active: true,
     code: `\
 <!DOCTYPE html>
 <html>
@@ -87,10 +89,9 @@ const files = {
   </body>
 </html>
 `,
-    hidden: false,
-    active: true,
   },
   'styles.css': {
+    hidden: false,
     code: `\
 .contents {
   padding: 8px;
@@ -112,9 +113,9 @@ const files = {
   visibility: hidden;
 }
 `,
-    hidden: false,
   },
   'index.js': {
+    hidden: false,
     code: `\
 document.addEventListener('DOMContentLoaded', function () {
   const inputMaxLengthOnLoad = document.getElementById('inputNama').maxLength;
@@ -140,7 +141,6 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 `,
-    hidden: false,
   },
 };
 

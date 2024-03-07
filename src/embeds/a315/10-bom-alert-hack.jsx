@@ -3,6 +3,8 @@ import VanillaSandpack from '../../components/sandpacks/VanillaSandpack';
 
 const files = {
   'index.html': {
+    hidden: true,
+    active: false,
     code: `\
 <!DOCTYPE html>
 <html>
@@ -14,12 +16,10 @@ const files = {
   </body>
 </html>
 `,
-    hidden: true,
-    active: false,
   },
   'styles.css': {
-    code: '',
     hidden: true,
+    code: '',
   },
   'index.js': {
     code: `\
@@ -35,8 +35,6 @@ function alert(nama) {
 // 2. Output di bawah akan tetap tercetak pada console browser
 // window.alert('Chewbacca'); // Output: Hati-hati, Chewbacca
 `,
-    hidden: false,
-    active: true,
   },
 };
 

@@ -3,6 +3,8 @@ import StaticWebSandpack from '../../components/sandpacks/StaticWebSandpack';
 
 const files = {
   'index.html': {
+    hidden: false,
+    active: true,
     code: `\
 <!DOCTYPE html>
 <html>
@@ -16,20 +18,18 @@ const files = {
   </body>
 </html>
 `,
-    hidden: false,
-    active: true,
   },
   'styles.css': {
-    code: '',
     hidden: true,
+    code: '',
   },
   'scripts/welcome.js': {
+    hidden: false,
     code: `\
 // Silakan aktifkan kode di bawah ini dengan hapus komentar untuk melihat hasilnya
 // const tamu = prompt('Siapakah Anda?');
 // alert('Selamat datang, ' + tamu + '!');
 `,
-    hidden: false,
   },
 };
 
