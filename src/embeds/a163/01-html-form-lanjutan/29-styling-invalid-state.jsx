@@ -33,7 +33,7 @@ const files = {
     hidden: false,
     code: `\
 input:invalid {
-  border: 1px solid red;
+  border: 1.5px solid red;
 }
 `,
   },

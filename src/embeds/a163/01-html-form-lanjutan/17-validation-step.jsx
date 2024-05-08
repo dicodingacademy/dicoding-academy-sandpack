@@ -7,7 +7,7 @@ const files = {
     active: true,
     code: `\
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
   <head>
     <title>Step Validation</title>
 

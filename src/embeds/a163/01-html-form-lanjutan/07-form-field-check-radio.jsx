@@ -126,6 +126,8 @@ button {
 input[type='radio'],
 input[type='checkbox'] {
   display: inline-block;
+
+  width: auto;
 }
 
 input[type='radio'] ~ label,
