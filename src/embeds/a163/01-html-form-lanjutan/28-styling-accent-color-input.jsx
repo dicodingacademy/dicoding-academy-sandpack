@@ -76,9 +76,9 @@ const files = {
               required
               list="sizeList"
               oninput="
-                nextElementSibling.value = this.value == 1 ? 
-                'Kecil' : this.value == 2 ? 
-                'Sedang' : 'Besar'
+                nextElementSibling.value =
+                  this.value == 1 ? 'Kecil' : 
+                  this.value == 2 ? 'Sedang' : 'Besar'
               "
             />
             <output id="sizeOutput">Sedang</output>

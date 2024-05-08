@@ -22,8 +22,8 @@ const files = {
           type="text"
           id="username"
           name="username"
-          required
           pattern="^(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$"
+          required
           autocomplete="off"
         />
       </div>

@@ -4,31 +4,33 @@ import StaticWebSandpack from '../../../components/sandpacks/StaticWebSandpack';
 const files = {
   'index.html': {
     hidden: false,
-    active: true,
     code: `\
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Judul Dokumen</title>
+    <title>Attribute Selector</title>
     
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <ul>
-      <ul>
-        <li><a href="#internal">Internal link</a></li>
-        <li><a href="http://example.com">Example link</a></li>
-        <li><a href="#InSensitive">Insensitive internal link</a></li>
-        <li><a href="http://example.org">Example org link</a></li>
-      </ul>
+      <li><a href="#internal">Internal link</a></li>
+      <li><a href="http://example.com">Example link</a></li>
+      <li><a href="#InSensitive">Insensitive internal link</a></li>
+      <li><a href="http://example.org">Example org link</a></li>
     </ul>
   </body>
 </html>
 `,
   },
   'styles.css': {
+    active: true,
     code: `\
+ul {
+  font-size: 18px;
+}
+
 /* <a> element yang menerapkan href attribute */
 a[href] {
   color: blue;
@@ -52,7 +54,8 @@ a[href*='insensitive' i] {
 /* <a> element yang menerapkan nilai pada href dengan akhiran ".org" */
 a[href$='.org'] {
   color: red;
-}`,
+}
+`,
   },
   'index.js': {
     hidden: true,

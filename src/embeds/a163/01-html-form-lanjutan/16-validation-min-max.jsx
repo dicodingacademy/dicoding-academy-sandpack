@@ -32,7 +32,6 @@ const files = {
           value="1"
           min="1"
           max="10"
-          step="2"
           required
           autocomplete="off"
         />
