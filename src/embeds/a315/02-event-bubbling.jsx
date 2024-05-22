@@ -9,7 +9,7 @@ const files = {
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8">
     <title>Bubbling World</title>
     
     <link rel="stylesheet" href="styles.css" >

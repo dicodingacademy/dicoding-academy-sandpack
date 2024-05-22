@@ -9,10 +9,10 @@ const files = {
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8">
     <title>Form World</title>
 
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
     <div class="contents">
@@ -22,15 +22,15 @@ const files = {
         <form id="formDataDiri" autocomplete="off">
           <div class="form-element" id="fieldName">
             <label for="inputNama">Nama Panggilan:</label>
-            <br />
+            <br>
             <input
               id="inputNama"
               type="text"
               name="nama"
               placeholder="Nama panggilan Anda"
               maxlength="15"
-            />
-            <br />
+            >
+            <br>
             <label id="notifikasiSisaKarakter">
               Sisa karakter: <span id="sisaKarakter"></span>
             </label>
@@ -38,41 +38,41 @@ const files = {
 
           <div class="form-element" id="fieldCopy">
             <label for="inputCopy"><i>Copy</i> tulisan ini:</label>
-            <br />
+            <br>
             <input
               id="inputCopy"
               type="text"
               name="copy"
               value="Hello World!"
               readonly
-            />
-            <br />
+            >
+            <br>
           </div>
 
           <div class="form-element" id="fieldPaste">
             <label for="inputPaste"><i>Paste</i> tulisan di sini:</label>
-            <br />
+            <br>
             <input
               id="inputPaste"
               type="text"
               name="paste"
               placeholder="Paste sesuatu di sini"
-            />
-            <br />
+            >
+            <br>
           </div>
 
           <div class="form-element" id="fieldCaptcha">
             <label for="inputCaptcha">Tulis <i>captcha</i> berikut.</label>
-            <br />
-            <img src="https://i.ibb.co/yy59QPB/Captcha.png" alt="Captcha" />
-            <br />
+            <br>
+            <img src="https://i.ibb.co/yy59QPB/Captcha.png" alt="Captcha">
+            <br>
             <input
               id="inputCaptcha"
               type="text"
               name="captcha"
               placeholder="Tulis captcha di sini"
-            />
-            <br />
+            >
+            <br>
             <p>
               Tekan Enter pada keyboard jika sudah selesai menulis
               <i>captcha</i>
@@ -85,7 +85,7 @@ const files = {
               type="submit"
               value="Submit Data"
               disabled
-            />
+            >
           </div>
         </form>
       </div>

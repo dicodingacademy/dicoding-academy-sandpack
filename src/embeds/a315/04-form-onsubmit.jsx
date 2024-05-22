@@ -9,7 +9,7 @@ const files = {
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8">
     <title>Form World</title>
 
     <link rel="stylesheet" href="styles.css" >
@@ -21,23 +21,27 @@ const files = {
       <div class="formContent">
         <form id="formDataDiri">
           <div class="form-element">
-            <label for="inputNama">Nama:</label><br />
-            <input id="inputNama" type="text" name="nama" placeholder="Nama Anda" required /><br />
+            <label for="inputNama">Nama:</label>
+            <br>
+            <input id="inputNama" type="text" name="nama" placeholder="Nama Anda" required>
+            <br>
           </div>
 
           <div class="form-element">
-            <label for="inputDomisili">Domisili:</label><br />
+            <label for="inputDomisili">Domisili:</label>
+            <br>
             <input
               id="inputDomisili"
               type="text"
               name="domisili"
               placeholder="Domisili Anda"
               required
-            /><br />
+            >
+            <br>
           </div>
 
           <div class="form-element">
-            <input id="submitButton" type="submit" value="Submit Data" />
+            <input id="submitButton" type="submit" value="Submit Data">
           </div>
         </form>
       </div>
