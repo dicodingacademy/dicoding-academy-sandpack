@@ -53,7 +53,7 @@ const files = {
           <div class="form-element" id="fieldCaptcha">
             <label for="inputCaptcha">Tulis <i>captcha</i> berikut.</label>
             <br>
-            <img src="https://i.ibb.co/yy59QPB/Captcha.png" alt="Captcha">
+            <img src="https://raw.githubusercontent.com/dicodingacademy/a315-web-pemula-labs/shared-files/captcha.png" alt="Captcha">
             <br>
             <input
               id="inputCaptcha"
