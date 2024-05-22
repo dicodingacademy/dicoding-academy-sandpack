@@ -4,7 +4,9 @@ import BaseSandpack from './base/BaseSandpack';
 
 const defaultFiles = {
   'index.js': {
-    code: 'console.log(\'Hello, World\');',
+    code: `\
+console.log('Hello, world!');
+`,
   },
 };
 
