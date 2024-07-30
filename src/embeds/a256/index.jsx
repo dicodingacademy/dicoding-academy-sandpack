@@ -11,6 +11,7 @@ import FSReadFilePromisify09 from './09-fs-readfile-promisify';
 import ChainingPromise10 from './10-chaining-promise';
 import AsyncAwaitSample11 from './11-async-await-sample';
 import WeakMap12 from './12-weakmap';
+import { a256GerbangDuniaJavaScript01Routes } from './01-gerbang-dunia-javascript/index';
 
 const a256Routes = [
   {
@@ -61,6 +62,8 @@ const a256Routes = [
     path: '/a256/12-weakmap',
     element: <WeakMap12 />,
   },
+
+  ...a256GerbangDuniaJavaScript01Routes,
 ];
 
 export { a256Routes };
