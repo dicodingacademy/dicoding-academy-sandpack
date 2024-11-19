@@ -8,6 +8,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { a123Routes } from './embeds/a123';
 import { a315Routes } from './embeds/a315';
 import { a163Routes } from './embeds/a163';
+import { a219WebIntermediateRoutes } from './embeds/a219-web-intermediate';
 import { a565Routes } from './embeds/a565';
 import { a219Routes } from './embeds/a219';
 
@@ -33,6 +34,7 @@ const appRouter = createBrowserRouter([
   ...a123Routes,
   ...a315Routes,
   ...a163Routes,
+  ...a219WebIntermediateRoutes,
   ...a565Routes,
   ...a219Routes,
 
