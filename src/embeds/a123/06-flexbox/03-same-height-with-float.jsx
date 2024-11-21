@@ -20,7 +20,7 @@ const files = {
         <section tabindex="0" id="productList" class="product-list">
           <article tabindex="0" class="product-item">
             <header class="product__image">
-              <img src="https://source.unsplash.com/1200x700/?imac" alt="iMac" width="100%" />
+              <img src="https://academy-sandpack.dicoding.dev/assets/imac.jpg" alt="iMac" width="100%" />
             </header>
             <main>
               <h5 class="product__title">Computer</h5>
@@ -39,7 +39,7 @@ const files = {
           <article tabindex="0" class="product-item">
             <header class="product__image">
               <img
-                src="https://source.unsplash.com/1200x700/?iphone"
+                src="https://academy-sandpack.dicoding.dev/assets/iphone.jpg"
                 alt="iphone"
                 width="100%"
               />
