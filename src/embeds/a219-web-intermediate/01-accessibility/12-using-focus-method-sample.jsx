@@ -10,27 +10,33 @@ const files = {
 <head>
   <meta charset="UTF-8">
   <title>focus() Method Sample</title>
-  
+
   <link rel="stylesheet" href="styles.css">
 
   <script defer src="index.js"></script>
 </head>
 <body>
   <section>
-    <h1 tabindex="0" class="section-title"><code>focus()</code> Method Sample</h1>
-    <button id="get-focus">Focus to &lt;textarea&gt;</button>
+    <h1 class="section-title"><code>focus()</code> Method Sample</h1>
 
-    <form class="form">
+    <div class="container">
       <div>
-        <label for="your-think">What do you think?</label>
-        <textarea 
-          id="your-think"
-          placeholder="Contoh: I am feel so happy"
-        ></textarea>
+        <button id="get-focus">Focus to &lt;textarea&gt;</button>
       </div>
 
-      <button>Save</button>
-    </form>
+      <form class="form">
+        <div>
+          <label for="your-think">What do you think?</label>
+          <textarea
+            id="your-think"
+            class="your-think"
+            placeholder="Contoh: I am feel so happy"
+          ></textarea>
+        </div>
+  
+        <button>Save</button>
+      </form>
+    </div>
   </section>
 </body>
 </html>
@@ -38,6 +44,10 @@ const files = {
   },
   'styles.css': {
     code: `\
+* {
+  box-sizing: border-box;
+}
+
 :root {
   font-family: segoe UI, system-ui, -apple-system, sans-serif;
 }
@@ -51,10 +61,14 @@ const files = {
   text-align: center;
 }
 
+.container {
+  max-width: 400px;
+  margin-inline: auto;
+}
+
 /* FORM */
 .form {
-  width: 400px;
-  margin-inline: auto;
+  margin-block-start: 20px;
   padding: 16px;
   background-color: white;
   border-radius: 8px;
@@ -73,7 +87,8 @@ label {
   font-size: 1rem;
 }
 
-input {
+input,
+textarea {
   width: 100%;
   padding: 8px 12px;
   border: 2px solid #74a0c4;
@@ -83,7 +98,8 @@ input {
   font-size: 1rem;
   font-weight: bold;
 }
-input:focus-visible {
+input:focus-visible,
+textarea:focus-visible {
   outline: 4px dashed orange;
 }
 
@@ -110,17 +126,15 @@ button:focus-visible {
 `,
   },
   'index.js': {
-    hidden: true,
     code: `\
-const getFocusButton = document.getElementById('get-focus');
-const yourThinkTextarea = document.getElementById('your-think');
+const yourThinkTextarea = document.getElementById('your-think')
 
-getFocusButton.onclick = () => {
+document.getElementById('get-focus').onclick = () => {
   yourThinkTextarea.focus();
 }
 
 yourThinkTextarea.onfocus = (event) => {
-  event.currentTarget.value = 'Yay, I’m focused, and that makes me very happy!';
+  event.currentTarget.value = 'Yay, I’m focused. That makes me very happy!';
 }
 `,
   },
