@@ -15,20 +15,22 @@ const files = {
 </head>
 <body>
   <section>
-    <h1 tabindex="0" class="section-title"><code>autofocus</code> Attribute Sample</h1>
+    <h1 class="section-title"><code>autofocus</code> Attribute Sample</h1>
 
-    <form class="form">
-      <div>
-        <label for="username">Username</label>
-        <input id="username" placeholder="Contoh: John Doe" autofocus />
-      </div>
-      <div>
-        <label for="password">Password</label>
-        <input id="password" type="password" placeholder="********" />
-      </div>
-
-      <button>Login</button>
-    </form>
+    <div class="container">
+      <form class="form">
+        <div>
+          <label for="username">Username</label>
+          <input id="username" placeholder="Contoh: John Doe" autofocus>
+        </div>
+        <div>
+          <label for="password">Password</label>
+          <input id="password" type="password" placeholder="********">
+        </div>
+  
+        <button>Login</button>
+      </form>
+    </div>
   </section>
 </body>
 </html>
@@ -36,6 +38,10 @@ const files = {
   },
   'styles.css': {
     code: `\
+* {
+  box-sizing: border-box;
+}
+
 :root {
   font-family: segoe UI, system-ui, -apple-system, sans-serif;
 }
@@ -49,10 +55,14 @@ const files = {
   text-align: center;
 }
 
+.container {
+  max-width: 400px;
+  margin-inline: auto;
+}
+
 /* FORM */
 .form {
-  width: 400px;
-  margin-inline: auto;
+  margin-block-start: 20px;
   padding: 16px;
   background-color: white;
   border-radius: 8px;
@@ -71,7 +81,8 @@ label {
   font-size: 1rem;
 }
 
-input {
+input,
+textarea {
   width: 100%;
   padding: 8px 12px;
   border: 2px solid #74a0c4;
@@ -81,7 +92,8 @@ input {
   font-size: 1rem;
   font-weight: bold;
 }
-input:focus-visible {
+input:focus-visible,
+textarea:focus-visible {
   outline: 4px dashed orange;
 }
 
