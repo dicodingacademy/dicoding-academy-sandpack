@@ -48,7 +48,6 @@ a {
   color: #000000;
 }
 
-/* Jangan lakukan hal ini! Ini akan menghilangkan focus indicator style dari bawaan browser */
 a:focus-visible {
   outline: none;
 }
