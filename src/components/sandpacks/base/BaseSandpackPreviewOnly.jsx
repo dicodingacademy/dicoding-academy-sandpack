@@ -6,7 +6,13 @@ import {
 } from '@codesandbox/sandpack-react';
 import { githubLight, monokaiPro, sandpackDark } from '@codesandbox/sandpack-themes';
 
-function BaseSandpackPreviewOnly({ template, files, options }) {
+function BaseSandpackPreviewOnly({
+  template,
+  files,
+  options,
+  showRefreshButton,
+  showOpenInCodeSandbox,
+}) {
   import('../styles/SandpackPreviewOnly.css');
 
   const [searchParams] = useSearchParams();
@@ -32,7 +38,8 @@ function BaseSandpackPreviewOnly({ template, files, options }) {
     >
       <SandpackLayout>
         <SandpackPreview
-          showRefreshButton
+          showRefreshButton={showRefreshButton}
+          showOpenInCodeSandbox={showOpenInCodeSandbox}
         />
       </SandpackLayout>
     </SandpackProvider>
@@ -43,10 +50,14 @@ BaseSandpackPreviewOnly.propTypes = {
   template: PropTypes.oneOf(['react', 'vue', 'svelte', 'angular', 'vanilla', 'node', 'static']).isRequired,
   files: PropTypes.any.isRequired,
   options: PropTypes.any,
+  showRefreshButton: PropTypes.bool,
+  showOpenInCodeSandbox: PropTypes.bool,
 };
 
 BaseSandpackPreviewOnly.defaultProps = {
   options: {},
+  showRefreshButton: true,
+  showOpenInCodeSandbox: true,
 };
 
 export default BaseSandpackPreviewOnly;
