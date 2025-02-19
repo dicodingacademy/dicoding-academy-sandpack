@@ -21,6 +21,7 @@ import { a256Routes } from './embeds/a256';
 import { a610Routes } from './embeds/a610';
 
 import HomePage from './pages/HomePage';
+import { a134Routes } from './embeds/a134-demo/index';
 
 const root = createRoot(document.getElementById('root'));
 
@@ -45,6 +46,9 @@ const appRouter = createBrowserRouter([
   /* Back-end learning path */
   ...a256Routes,
   ...a610Routes,
+
+  /* Demo */
+  ...a134Routes,
 ]);
 
 root.render(
