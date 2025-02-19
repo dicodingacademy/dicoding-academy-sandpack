@@ -3,39 +3,38 @@ import StaticWebSandpack from '../../../components/sandpacks/StaticWebSandpack';
 
 const files = {
   'index.html': {
-    active: true,
     code: `\
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>focus() Method Sample</title>
-
+  <title>focus() Method Demo</title>
   <link rel="stylesheet" href="styles.css">
-
   <script defer src="index.js"></script>
 </head>
 <body>
   <section>
-    <h1 class="section-title"><code>focus()</code> Method Sample</h1>
+    <h1 class="section-title">focus() Method Demo</h1>
 
     <div class="container">
-      <div>
-        <button id="get-focus">Focus to &lt;textarea&gt;</button>
-      </div>
-
-      <form class="form">
-        <div>
-          <label for="your-think">What do you think?</label>
-          <textarea
-            id="your-think"
-            class="your-think"
-            placeholder="Contoh: I am feel so happy"
-          ></textarea>
+      <form id="demoForm" class="form">
+        <div class="form-group">
+          <label for="name">Your Name</label>
+          <input
+            type="text"
+            id="name"
+            class="form-input"
+            placeholder="Enter your name"
+          />
+          <span class="error-message" id="nameError"></span>
         </div>
-  
-        <button>Save</button>
+
+        <button type="submit">Submit</button>
       </form>
+
+      <button id="focusButton" class="focus-button">
+        Click to Focus Name Input
+      </button>
     </div>
   </section>
 </body>
@@ -46,96 +45,145 @@ const files = {
     code: `\
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 :root {
   font-family: segoe UI, system-ui, -apple-system, sans-serif;
+  --primary-color: #74a0c4;
+  --error-color: #dc2626;
+  --text-color: #1f2937;
+  --bg-color: #f3f4f6;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.5;
 }
 
 .section-title {
-  padding: 16px;
-
-  color: #74a0c4;
+  padding: 2rem 1rem;
+  color: var(--primary-color);
   font-size: 2.5rem;
   font-weight: bold;
   text-align: center;
 }
 
 .container {
-  max-width: 400px;
+  max-width: 600px;
   margin-inline: auto;
+  padding: 0 1rem;
 }
 
-/* FORM */
 .form {
-  margin-block-start: 20px;
-  padding: 16px;
   background-color: white;
-  border-radius: 8px;
-
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  margin-bottom: 1rem;
 }
-.form > div:not([hidden]) ~ div:not([hidden]) {
-  margin-block-start: 15px;
+
+.form-group {
+  margin-bottom: 1.5rem;
 }
 
 label {
-  display: inline-block;
-  margin: 10px 0;
-
-  color: #74a0c4;
-  font-size: 1rem;
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--primary-color);
 }
 
-input,
-textarea {
+.form-input {
   width: 100%;
-  padding: 8px 12px;
-  border: 2px solid #74a0c4;
-  border-radius: 4px;
-
-  color: #74a0c4;
+  padding: 0.75rem;
+  border: 2px solid var(--primary-color);
+  border-radius: 0.375rem;
   font-size: 1rem;
-  font-weight: bold;
+  transition: all 0.2s ease;
 }
-input:focus-visible,
-textarea:focus-visible {
+
+.form-input:focus {
   outline: 4px dashed orange;
+  border-color: var(--primary-color);
+}
+
+.form-input.error {
+  border-color: var(--error-color);
+}
+
+.error-message {
+  display: block;
+  margin-top: 0.5rem;
+  color: var(--error-color);
+  font-size: 0.875rem;
 }
 
 button {
   width: 100%;
-  margin-block-start: 30px !important;
-  padding: 8px 12px;
-  border: none;
-  border-radius: 4px;
-
-  background-color: #74a0c4;
-
+  padding: 0.75rem 1.5rem;
+  background-color: var(--primary-color);
   color: white;
-  font-family: sans-serif;
-  font-size: 1rem;
-  font-weight: bold;
-  text-align: center;
-
+  font-weight: 600;
+  border: none;
+  border-radius: 0.375rem;
   cursor: pointer;
+  transition: background-color 0.2s ease;
 }
-button:focus-visible {
+
+button:hover {
+  background-color: #5b87ab;
+}
+
+button:focus {
   outline: 4px dashed orange;
+}
+
+.focus-button {
+  background-color: var(--primary-color);
+}
+
+.focus-button:hover {
+  background-color: #5b87ab;
 }
 `,
   },
   'index.js': {
+    active: true,
     code: `\
-const yourThinkTextarea = document.getElementById('your-think')
+document.addEventListener('DOMContentLoaded', () => {
+  const nameInput = document.getElementById('name');
+  const form = document.getElementById('demoForm');
+  const focusButton = document.getElementById('focusButton');
+  const errorMessage = document.getElementById('nameError');
 
-document.getElementById('get-focus').onclick = () => {
-  yourThinkTextarea.focus();
-}
+  // Contoh 1: Manual focus using button
+  focusButton.addEventListener('click', () => {
+    nameInput.focus();
+  });
 
-yourThinkTextarea.onfocus = (event) => {
-  event.currentTarget.value = 'Yay, I’m focused. That makes me very happy!';
-}
+  // Contoh 2: Automatic focus on validation error
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    if (nameInput.value.trim() === '') {
+      nameInput.classList.add('error');
+      errorMessage.textContent = 'Please enter your name';
+      nameInput.focus();
+    } else {
+      alert('Form submitted successfully!');
+      form.reset();
+    }
+  });
+
+  // Clear error when typing
+  nameInput.addEventListener('input', () => {
+    nameInput.classList.remove('error');
+    errorMessage.textContent = '';
+  });
+});
 `,
   },
 };
