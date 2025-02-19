@@ -48,9 +48,15 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  display: flex;
   align-items: center;
   justify-content: center;
+}
+
+#app {
+ display: flex;
+ min-height: 100vh;
+ align-items: center;
+ justify-content: center;
 }
 
 .container {
@@ -135,12 +141,6 @@ body {
 
 .reset-button:hover {
   background: #3730a3;
-}
-
-@media (max-width: 1024px) {
-  .card {
-    flex: 0 0 calc(50% - 1rem);
-  }
 }
 
 @media (max-width: 640px) {
