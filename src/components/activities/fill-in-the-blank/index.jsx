@@ -40,7 +40,7 @@ function FillInTheBlank({ template, answers }) {
   };
 
   const renderTemplate = () => {
-    const parts = template.split(/\{(\d+)\}/);
+    const parts = template.split(/\{(\d+)}/);
     return parts.map((part, index) => {
       if (index % 2 === 0) {
         return <span key={index}>{part}</span>;
