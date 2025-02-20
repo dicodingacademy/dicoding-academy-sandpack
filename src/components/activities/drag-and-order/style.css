@@ -1,0 +1,34 @@
+.drag-drop {
+  background-color: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--border-color);
+  width: 100%;
+  max-width: 24rem;
+  margin: 0 auto;
+}
+
+.draggable-item {
+  padding: 1rem;
+  background-color: var(--bg-color);
+  margin-bottom: 1rem;
+  border-radius: 0.25rem;
+  cursor: move;
+  transition: all 0.2s ease;
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+}
+
+.draggable-item.dragging {
+  opacity: 0.5;
+  background-color: var(--primary-color);
+  color: var(--bg-color);
+}
+
+.buttons {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}

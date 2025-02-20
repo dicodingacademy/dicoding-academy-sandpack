@@ -1,14 +1,14 @@
 import React from 'react';
-import FlashCardSandpack from '../../components/sandpacks/FlashCardSandpack';
+import Flashcard from '../../components/activities/flashcards';
 
 function FlashcardDemo() {
   const cards = [
-    { term: '<p>HTML</p>', description: '<p>Kode <em>mark-up</em> yang menyusun struktur website</p>' },
-    { term: '<p>CSS</p>', description: '<p>bahasa yang digunakan untuk mengatur tampilan dan tata letak elemen pada halaman web</p>' },
-    { term: '<p>JavaScript</p>', description: '<p>bahasa pemrograman untuk membuat web interaktif dan dinamis.</p>' },
+    { front: '<p>HTTP</p>', back: '<p>Protokol yang digunakan untuk komunikasi antara klien dan server di web.</p>' },
+    { front: '<p>GET</p>', back: '<p>Metode HTTP untuk mengambil data dari server.</p>' },
+    { front: '<p>POST</p>', back: '<p>Metode HTTP untuk mengirim data ke server.</p>' },
   ];
 
-  return <FlashCardSandpack cards={cards} />;
+  return <Flashcard cards={cards} />;
 }
 
 export default FlashcardDemo;
