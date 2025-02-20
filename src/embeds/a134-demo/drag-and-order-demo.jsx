@@ -6,7 +6,7 @@ function DragAndOrderDemo() {
 
   return (
     <div>
-      <DragAndOrder items={items} storageKey="a314-02" />
+      <DragAndOrder items={items} storageKey="a314-01" />
     </div>
   );
 }

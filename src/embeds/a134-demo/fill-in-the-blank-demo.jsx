@@ -6,7 +6,7 @@ function FillInTheBlankDemo() {
   const answers = ['html', 'head', 'body'];
 
   return (
-    <FillInTheBlank template={template} answers={answers} />
+    <FillInTheBlank template={template} answers={answers} storageKey="a134-02" />
   );
 }
 
