@@ -103,6 +103,7 @@ function DragAndOrder({ items, storageKey, hint }) {
         <div className="hint">
           <p>
             Hint:
+            {' '}
             {hint}
           </p>
         </div>
