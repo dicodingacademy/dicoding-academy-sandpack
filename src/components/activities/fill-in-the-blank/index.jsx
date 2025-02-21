@@ -103,6 +103,7 @@ function FillInTheBlank({
         <div className="hint">
           <p>
             Hint:
+            {' '}
             {hint}
           </p>
         </div>
