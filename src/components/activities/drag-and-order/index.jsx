@@ -4,15 +4,16 @@ import ActivitiesContainer from '../commons/ActivitiesContainer';
 
 import './style.css';
 
-function DragAndOrder({ items, storageKey }) {
+function DragAndOrder({ items, storageKey, hint }) {
   const [orderedItems, setOrderedItems] = useState([]);
   const [isDragging, setIsDragging] = useState(false);
   const [draggedItem, setDraggedItem] = useState(null);
   const [isCorrect, setIsCorrect] = useState(null);
+  const [attempts, setAttempts] = useState(0);
+  const [showHint, setShowHint] = useState(false);
 
   useEffect(() => {
     const savedOrder = localStorage.getItem(storageKey);
-
     if (savedOrder) {
       setOrderedItems(JSON.parse(savedOrder));
     } else {
@@ -46,6 +47,14 @@ function DragAndOrder({ items, storageKey }) {
   const checkOrder = () => {
     const isOrderCorrect = orderedItems.every((item, index) => item === items[index]);
     setIsCorrect(isOrderCorrect);
+
+    if (!isOrderCorrect) {
+      const newAttempts = attempts + 1;
+      setAttempts(newAttempts);
+      if (newAttempts >= 3) {
+        setShowHint(true);
+      }
+    }
   };
 
   const resetOrder = () => {
@@ -53,6 +62,8 @@ function DragAndOrder({ items, storageKey }) {
     setOrderedItems(shuffledItems);
     localStorage.setItem(storageKey, JSON.stringify(shuffledItems));
     setIsCorrect(null);
+    setAttempts(0);
+    setShowHint(false);
   };
 
   return (
@@ -83,12 +94,20 @@ function DragAndOrder({ items, storageKey }) {
         </div>
 
         {isCorrect !== null && (
-          <div className={`feedback ${isCorrect ? 'success' : 'error'}`}>
-            {isCorrect ? 'Correct order!' : 'Try again!'}
-          </div>
+        <div className={`feedback ${isCorrect ? 'success' : 'error'}`}>
+          {isCorrect ? 'Correct order!' : 'Try again!'}
+        </div>
+        )}
+
+        {showHint && !isCorrect && (
+        <div className="hint">
+          <p>
+            Hint:
+            {hint}
+          </p>
+        </div>
         )}
       </div>
-
     </ActivitiesContainer>
   );
 }
@@ -97,6 +116,7 @@ function DragAndOrder({ items, storageKey }) {
 DragAndOrder.propTypes = {
   items: PropTypes.arrayOf(PropTypes.string).isRequired,
   storageKey: PropTypes.string.isRequired,
+  hint: PropTypes.string.isRequired,
 };
 
 export default DragAndOrder;
