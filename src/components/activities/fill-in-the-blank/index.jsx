@@ -5,9 +5,13 @@ import ActivitiesContainer from '../commons/ActivitiesContainer';
 
 import './style.css';
 
-function FillInTheBlank({ template, answers, storageKey }) {
+function FillInTheBlank({
+  template, answers, storageKey, hint,
+}) {
   const [userAnswers, setUserAnswers] = useState([]);
   const [isCorrect, setIsCorrect] = useState(null);
+  const [attempts, setAttempts] = useState(0);
+  const [showHint, setShowHint] = useState(false);
 
   useEffect(() => {
     const savedAnswers = localStorage.getItem(storageKey);
@@ -26,15 +30,27 @@ function FillInTheBlank({ template, answers, storageKey }) {
   };
 
   const checkAnswers = () => {
-    const isAllCorrect = userAnswers.every(
+    const results = userAnswers.map(
       (answer, index) => answer.toLowerCase() === answers[index].toLowerCase(),
     );
+
+    const isAllCorrect = results.every((result) => result);
     setIsCorrect(isAllCorrect);
+
+    if (!isAllCorrect) {
+      const newAttempts = attempts + 1;
+      setAttempts(newAttempts);
+      if (newAttempts >= 3) {
+        setShowHint(true);
+      }
+    }
   };
 
   const resetAnswers = () => {
     const emptyAnswers = new Array(answers.length).fill('');
     setUserAnswers(emptyAnswers);
+    setAttempts(0);
+    setShowHint(false);
     localStorage.setItem(storageKey, JSON.stringify(emptyAnswers));
     setIsCorrect(null);
   };
@@ -48,14 +64,15 @@ function FillInTheBlank({ template, answers, storageKey }) {
       const answerIndex = parseInt(part, 10) - 1;
       const expectedLength = answers[answerIndex].length;
       return (
-        <input
-          key={index}
-          type="text"
-          value={userAnswers[answerIndex] || ''}
-          onChange={(e) => handleInputChange(answerIndex, e.target.value)}
-          style={{ width: `${expectedLength * 0.75}em` }}
-          maxLength={expectedLength + 5}
-        />
+        <div key={index} className="input-container">
+          <input
+            type="text"
+            value={userAnswers[answerIndex] || ''}
+            onChange={(e) => handleInputChange(answerIndex, e.target.value)}
+            style={{ width: `${expectedLength * 0.85}em` }}
+            maxLength={expectedLength + 5}
+          />
+        </div>
       );
     });
   };
@@ -77,9 +94,19 @@ function FillInTheBlank({ template, answers, storageKey }) {
         </div>
 
         {isCorrect !== null && (
-          <div className={`feedback ${isCorrect ? 'success' : 'error'}`}>
-            {isCorrect ? 'All answers are correct!' : 'Try again!'}
-          </div>
+        <div className={`feedback ${isCorrect ? 'success' : 'error'}`}>
+          {isCorrect ? 'All answers are correct!' : 'Try again!'}
+        </div>
+        )}
+
+        {showHint && !isCorrect && (
+        <div className="hint">
+          <p>
+            Hint:
+            {' '}
+            {hint}
+          </p>
+        </div>
         )}
       </div>
     </ActivitiesContainer>
@@ -91,6 +118,7 @@ FillInTheBlank.propTypes = {
   template: PropTypes.string.isRequired,
   answers: PropTypes.arrayOf(PropTypes.string).isRequired,
   storageKey: PropTypes.string.isRequired,
+  hint: PropTypes.string.isRequired,
 };
 
 export default FillInTheBlank;
