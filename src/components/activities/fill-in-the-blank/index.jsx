@@ -69,7 +69,7 @@ function FillInTheBlank({
             type="text"
             value={userAnswers[answerIndex] || ''}
             onChange={(e) => handleInputChange(answerIndex, e.target.value)}
-            style={{ width: `${expectedLength * 0.75}em` }}
+            style={{ width: `${expectedLength * 0.85}em` }}
             maxLength={expectedLength + 5}
           />
         </div>
