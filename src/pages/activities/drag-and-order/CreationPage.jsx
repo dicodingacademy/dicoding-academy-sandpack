@@ -31,7 +31,7 @@ function DragAndOrderCreationPage() {
     };
 
     const data = btoa(JSON.stringify(rawData));
-    const code = `<iframe src="${window.location.protocol}://${window.location.host}/activities/drag-and-order?data=${data}" width="870" height="400"></iframe>`;
+    const code = `<iframe src="${window.location.protocol}//${window.location.host}/activities/drag-and-order?data=${data}" width="870" height="400"></iframe>`;
     setEmbedCode(code);
   };
 

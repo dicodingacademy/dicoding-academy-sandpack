@@ -27,7 +27,7 @@ function FlashcardsCreationPage() {
 
   const generateEmbedCode = () => {
     const data = btoa(JSON.stringify(cards));
-    const code = `<iframe src="${window.location.protocol}://${window.location.host}/activities/flashcard?data=${data}" width="870" height="300"></iframe>`;
+    const code = `<iframe src="${window.location.protocol}//${window.location.host}/activities/flashcard?data=${data}" width="870" height="300"></iframe>`;
     setEmbedCode(code);
   };
 
