@@ -14,12 +14,16 @@ function FillInTheBlank({
   const [showHint, setShowHint] = useState(false);
 
   useEffect(() => {
-    const savedAnswers = localStorage.getItem(storageKey);
-    if (savedAnswers) {
-      setUserAnswers(JSON.parse(savedAnswers));
-    } else {
-      setUserAnswers(new Array(answers.length).fill(''));
+    if (storageKey !== 'temporary') {
+      const savedAnswers = localStorage.getItem(storageKey);
+
+      if (savedAnswers) {
+        setUserAnswers(JSON.parse(savedAnswers));
+        return;
+      }
     }
+
+    setUserAnswers(new Array(answers.length).fill(''));
   }, [answers.length]);
 
   const handleInputChange = (index, value) => {
@@ -62,7 +66,7 @@ function FillInTheBlank({
         return <span key={index}>{part}</span>;
       }
       const answerIndex = parseInt(part, 10) - 1;
-      const expectedLength = answers[answerIndex].length;
+      const expectedLength = answers[answerIndex]?.length;
       return (
         <div key={index} className="input-container">
           <input
@@ -117,8 +121,12 @@ function FillInTheBlank({
 FillInTheBlank.propTypes = {
   template: PropTypes.string.isRequired,
   answers: PropTypes.arrayOf(PropTypes.string).isRequired,
-  storageKey: PropTypes.string.isRequired,
+  storageKey: PropTypes.string,
   hint: PropTypes.string.isRequired,
+};
+
+FillInTheBlank.defaultProps = {
+  storageKey: 'temporary',
 };
 
 export default FillInTheBlank;

@@ -13,12 +13,16 @@ function DragAndOrder({ items, storageKey, hint }) {
   const [showHint, setShowHint] = useState(false);
 
   useEffect(() => {
-    const savedOrder = localStorage.getItem(storageKey);
-    if (savedOrder) {
-      setOrderedItems(JSON.parse(savedOrder));
-    } else {
-      setOrderedItems([...items].sort(() => Math.random() - 0.5));
+    if (storageKey !== 'temporary') {
+      const savedOrder = localStorage.getItem(storageKey);
+
+      if (savedOrder) {
+        setOrderedItems(JSON.parse(savedOrder));
+        return;
+      }
     }
+
+    setOrderedItems([...items].sort(() => Math.random() - 0.5));
   }, [items]);
 
   const handleDragStart = (e, item) => {
@@ -116,8 +120,12 @@ function DragAndOrder({ items, storageKey, hint }) {
 // implement proptypes
 DragAndOrder.propTypes = {
   items: PropTypes.arrayOf(PropTypes.string).isRequired,
-  storageKey: PropTypes.string.isRequired,
+  storageKey: PropTypes.string,
   hint: PropTypes.string.isRequired,
+};
+
+DragAndOrder.defaultProps = {
+  storageKey: 'temporary',
 };
 
 export default DragAndOrder;
