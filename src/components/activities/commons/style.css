@@ -11,7 +11,8 @@
 
 :root[data-theme="dark"] {
   --bg-color: #18181b;
-  --card-bg: #27272a;
+  --card-bg: #27272A;
+  --flipped-card-bg: #0C9BAB;
   --text-color: #e5e7eb;
   --text-muted: #9ca3af;
   --border-color: #374151;
@@ -19,7 +20,8 @@
 
 :root[data-theme="light"] {
   --bg-color: #FAFAFA;
-  --card-bg: #f3f4f6;
+  --card-bg: #FFFFFF;
+  --flipped-card-bg: #0C9BAB;
   --text-color: #3F3F46;
   --text-muted: #6b7280;
   --border-color: #E4E4E7;

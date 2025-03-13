@@ -1,34 +1,40 @@
+import './style.css';
+
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import ActivitiesContainer from '../commons/ActivitiesContainer';
 
-// drag-and-drop style
-import './style.css';
-
-function Flashcard({ front, back }) {
+function FlashcardItem({ front, back }) {
   const [isFlipped, setIsFlipped] = useState(false);
+
+  const flipCard = () => {
+    setIsFlipped(!isFlipped);
+  };
+
+  const flipCardUsingKeyboard = (event) => {
+    if (event.key === 'Enter') {
+      setIsFlipped(!isFlipped);
+    }
+
+    if (event.key === ' ') {
+      setIsFlipped(!isFlipped);
+    }
+  };
 
   return (
     <div
-      className={`flashcard ${isFlipped ? 'flipped' : ''}`}
-      onClick={() => setIsFlipped(!isFlipped)}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter') {
-          setIsFlipped(!isFlipped);
-        }
-
-        if (e.key === ' ') {
-          setIsFlipped(!isFlipped);
-        }
-      }}
       role="button"
       tabIndex={0}
+      aria-label={`Flip ${front} card.`}
+      className={`flashcards-item ${isFlipped ? 'flipped' : ''}`}
+      onClick={() => flipCard()}
+      onKeyDown={(event) => flipCardUsingKeyboard(event)}
     >
-      <div className="flashcard-inner">
-        <div className="flashcard-front">
+      <div className="flashcards-item__inner">
+        <div className="flashcards-item__inner__front">
           <div dangerouslySetInnerHTML={{ __html: front }} />
         </div>
-        <div className="flashcard-back">
+        <div className="flashcards-item__inner__back">
           <div dangerouslySetInnerHTML={{ __html: back }} />
         </div>
       </div>
@@ -36,17 +42,23 @@ function Flashcard({ front, back }) {
   );
 }
 
-Flashcard.propTypes = {
+FlashcardItem.propTypes = {
   front: PropTypes.string.isRequired,
   back: PropTypes.string.isRequired,
 };
 
-function Flashcards({ cards }) {
+export default function Flashcards({ instructionsText, cards }) {
   return (
     <ActivitiesContainer>
+      <p className="activities__instructions">{instructionsText || 'Klik kartu untuk melihat jawabannya.'}</p>
+
       <div className="flashcards">
         {cards.map((card) => (
-          <Flashcard key={card.front} front={card.front} back={card.back} />
+          <FlashcardItem
+            key={card.front.toLowerCase().split(' ').join('')}
+            front={card.front}
+            back={card.back}
+          />
         ))}
       </div>
     </ActivitiesContainer>
@@ -54,6 +66,7 @@ function Flashcards({ cards }) {
 }
 
 Flashcards.propTypes = {
+  instructionsText: PropTypes.string,
   cards: PropTypes.arrayOf(
     PropTypes.shape({
       front: PropTypes.string.isRequired,
@@ -61,5 +74,3 @@ Flashcards.propTypes = {
     }),
   ).isRequired,
 };
-
-export default Flashcards;
