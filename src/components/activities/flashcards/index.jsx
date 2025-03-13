@@ -55,7 +55,7 @@ export default function Flashcards({ instructionsText, cards }) {
       <div className="flashcards">
         {cards.map((card) => (
           <FlashcardItem
-            key={card.front.toLowerCase().split(' ').join('')}
+            key={card.id}
             front={card.front}
             back={card.back}
           />
@@ -69,6 +69,7 @@ Flashcards.propTypes = {
   instructionsText: PropTypes.string,
   cards: PropTypes.arrayOf(
     PropTypes.shape({
+      id: PropTypes.string.isRequired,
       front: PropTypes.string.isRequired,
       back: PropTypes.string.isRequired,
     }),

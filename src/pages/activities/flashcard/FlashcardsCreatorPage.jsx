@@ -7,24 +7,27 @@ import Flashcards from '../../../components/activities/flashcards';
 
 export default function FlashcardsCreatorPage() {
   const [cards, setCards] = useState([
-    { id: +new Date(), front: '', back: '' },
+    { id: `card-${+new Date()}`, front: '', back: '' },
   ]);
 
   const [embedCode, setEmbedCode] = useState('');
 
   const addCard = () => {
-    const newCard = { id: +new Date(), front: '', back: '' };
+    const newCard = { id: `card-${+new Date()}`, front: '', back: '' };
     setCards([...cards, newCard]);
   };
 
   const removeCard = (cardId) => {
-    setCards(cards.filter((card) => card.id !== cardId));
+    setCards((prevCards) => prevCards.filter((prevCard) => prevCard.id !== cardId));
   };
 
-  const updateCard = (index, field, value) => {
-    const newCards = [...cards];
-    newCards[index] = { ...newCards[index], [field]: value };
-    setCards(newCards);
+  const updateCard = (card, field, value) => {
+    setCards((prevCards) => prevCards.map((prevCard) => {
+      if (prevCard.id === card.id) {
+        return { ...prevCard, [field]: value };
+      }
+      return prevCard;
+    }));
   };
 
   const generateEmbedCode = () => {
@@ -36,28 +39,30 @@ export default function FlashcardsCreatorPage() {
   return (
     <div className="creation-container">
       <div className="creation-form">
-        <h2>Flashcard Generator</h2>
+        <h2>Flashcards Generator</h2>
 
         <div className="cards-form">
-          {cards.map((card, index) => (
+          {cards.map((card) => (
             <div key={card.id} className="card-input">
               <div className="input-group">
-                <label htmlFor={`front-${card.id}`}>Front:</label>
-                <textarea
-                  id={`front-${card.id}`}
-                  value={card.front}
-                  placeholder="Enter your front content"
-                  onChange={(event) => updateCard(index, 'front', event.target.value)}
-                />
+                <label>
+                  <div>Front:</div>
+                  <textarea
+                    value={card.front}
+                    placeholder="Enter your front content"
+                    onChange={(event) => updateCard(card, 'front', event.target.value)}
+                  />
+                </label>
               </div>
               <div className="input-group">
-                <label htmlFor={`back-${card.id}`}>Back:</label>
-                <textarea
-                  id={`back-${card.id}`}
-                  value={card.back}
-                  placeholder="Enter your back content"
-                  onChange={(event) => updateCard(index, 'back', event.target.value)}
-                />
+                <label>
+                  <div>Back:</div>
+                  <textarea
+                    value={card.back}
+                    placeholder="Enter your back content"
+                    onChange={(event) => updateCard(card, 'back', event.target.value)}
+                  />
+                </label>
               </div>
               {cards.length > 1 && (
                 <button
@@ -71,19 +76,21 @@ export default function FlashcardsCreatorPage() {
             </div>
           ))}
         </div>
-        <button type="button" className="btn btn-primary add-btn" onClick={() => addCard()}>
-          Add New Card
-        </button>
-        <button type="button" className="btn btn-primary generate-embed-btn" onClick={() => generateEmbedCode()}>
-          Generate Embed Code
-        </button>
+
+        <div className="creation-form__buttons">
+          <button type="button" className="btn btn-primary add-btn" onClick={() => addCard()}>
+            Add New Card
+          </button>
+          <button type="button" className="btn btn-primary generate-embed-btn" onClick={() => generateEmbedCode()}>
+            Generate Embed Code
+          </button>
+        </div>
 
         <div className="embed-code">
-          <p>Embed Code:</p>
-          <textarea
-            readOnly
-            value={embedCode}
-          />
+          <label>
+            <div>Embed Code:</div>
+            <textarea value={embedCode} readOnly />
+          </label>
         </div>
       </div>
 
