@@ -4,12 +4,16 @@ import '../creation-style.css';
 
 import React, { useState } from 'react';
 import Flashcards from '../../../components/activities/flashcards';
+import { generateIframe } from '../../../utils';
+import useInput from '../../../hooks/useInput';
 
 export default function FlashcardsCreatorPage() {
   const [cards, setCards] = useState([
     { id: `card-${+new Date()}`, front: '', back: '' },
   ]);
 
+  const [width, onWidthChange] = useInput('100%');
+  const [height, onHeightChange] = useInput('600');
   const [embedCode, setEmbedCode] = useState('');
 
   const addCard = () => {
@@ -32,8 +36,14 @@ export default function FlashcardsCreatorPage() {
 
   const generateEmbedCode = () => {
     const data = btoa(JSON.stringify(cards));
-    const code = `<iframe src="${window.location.protocol}//${window.location.host}/activities/flashcard?data=${data}" width="870" height="300"></iframe>`;
-    setEmbedCode(code);
+
+    const generatedIframe = generateIframe(
+      `${window.location.protocol}//${window.location.host}/activities/flashcards?data=${data}`,
+      'Dicoding Learning Activities',
+      height,
+      width,
+    );
+    setEmbedCode(generatedIframe);
   };
 
   return (
@@ -81,16 +91,36 @@ export default function FlashcardsCreatorPage() {
           <button type="button" className="btn btn-primary add-btn" onClick={() => addCard()}>
             Add New Card
           </button>
-          <button type="button" className="btn btn-primary generate-embed-btn" onClick={() => generateEmbedCode()}>
-            Generate Embed Code
-          </button>
         </div>
 
         <div className="embed-code">
-          <label>
-            <div>Embed Code:</div>
-            <textarea value={embedCode} readOnly />
-          </label>
+          <div>
+            <label>
+              <span>Width</span>
+              <div>
+                <input value={width} onChange={(event) => onWidthChange(event)} />
+              </div>
+            </label>
+          </div>
+          <div>
+            <label>
+              <span>Height</span>
+              <div>
+                <input value={height} onChange={(event) => onHeightChange(event)} />
+              </div>
+            </label>
+          </div>
+
+          <button type="button" className="btn btn-primary generate-embed-btn" onClick={() => generateEmbedCode()}>
+            Generate Embed Code
+          </button>
+
+          <div>
+            <span>Embed Code:</span>
+            <div>
+              <textarea value={embedCode} readOnly />
+            </div>
+          </div>
         </div>
       </div>
 
