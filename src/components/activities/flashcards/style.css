@@ -2,6 +2,7 @@
   margin-block: 20px;
   font-size: 1rem;
   font-weight: 400;
+  color: var(--text-color);
 }
 
 /* Flashcard styles */
@@ -22,7 +23,7 @@
 }
 
 .flashcards-item__inner {
-  border: 1px solid #E4E4E7;
+  border: 1px solid var(--card-border-color);
 
   position: relative;
   width: 100%;
