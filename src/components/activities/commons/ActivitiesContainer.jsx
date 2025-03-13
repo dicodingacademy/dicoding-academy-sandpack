@@ -5,14 +5,20 @@ import PropTypes from 'prop-types';
 import { Sun, Moon } from 'lucide-react';
 
 export default function ActivitiesContainer({ children, title = 'Komponen Interaktif' }) {
+  const iconDarkUrl = '/assets/learning-activities-dark-icon.png';
+  const iconLightUrl = '/assets/learning-activities-light-icon.png';
+
   const [theme, setTheme] = useState(() => {
     const savedTheme = localStorage.getItem('theme');
-    return savedTheme || 'dark';
+    return savedTheme || 'light';
   });
+  const [iconUrl, setIconUrl] = useState(iconDarkUrl);
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme.toString());
     localStorage.setItem('theme', theme.toString());
+
+    setIconUrl(theme.toString() === 'light' ? iconDarkUrl : iconLightUrl);
   }, [theme]);
 
   const toggleTheme = () => {
@@ -25,7 +31,12 @@ export default function ActivitiesContainer({ children, title = 'Komponen Intera
         <div className="activities__header">
           <div>
             <h5 className="activities__title">
-              <img src="/assets/learning-activities-icon.png" alt="Learning activities icon" width={20} height={20} />
+              <img
+                src={iconUrl}
+                alt="Learning activities icon"
+                width={20}
+                height={20}
+              />
               <span>{title}</span>
             </h5>
           </div>
