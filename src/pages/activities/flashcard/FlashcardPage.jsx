@@ -1,31 +1,26 @@
 import React from 'react';
 import { useSearchParams } from 'react-router-dom';
 import Flashcards from '../../../components/activities/flashcards';
+import ActivitiesError from '../../../components/activities/commons/ActivitiesError';
 
-function FlashcardPage() {
+export default function FlashcardPage() {
   const [searchParam] = useSearchParams();
 
   const dataParam = searchParam.get('data');
 
   if (!dataParam) {
-    return (<p>failed to show activities</p>);
+    return <ActivitiesError />;
   }
 
   try {
-    const cards = JSON.parse(
-      atob(dataParam),
-    );
+    const cards = JSON.parse(atob(dataParam));
 
     if (!Array.isArray(cards)) {
-      return (<p>failed to show activities</p>);
+      return <ActivitiesError />;
     }
 
-    return (
-      <Flashcards cards={cards} />
-    );
+    return <Flashcards cards={cards} />;
   } catch {
-    return (<p>failed to show activities</p>);
+    return <ActivitiesError />;
   }
 }
-
-export default FlashcardPage;
