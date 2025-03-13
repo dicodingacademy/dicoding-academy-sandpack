@@ -8,32 +8,32 @@ const files = {
     code: `\
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Judul Dokumen</title>
+<head>
+  <meta charset="UTF-8" />
+  <title>CSS Inheritance Example</title>
 
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <header>
-      <h1>Inheritance di CSS</h1>
-    </header>
-    <main>
-      <h2>Lorem Ipsum</h2>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Inheritance di CSS</h1>
+  </header>
+  <main>
+    <h2>Lorem Ipsum</h2>
 
-      <article>
-        <h3>Lorem, ipsum dolor.</h3>
-        <p>
-          Pellentesque venenatis mi sit amet erat tincidunt auctor. Curabitur tincidunt tellus ac
-          convallis dictum. Morbi luctus leo eget leo luctus elementum. Cras at ligula eu elit
-          blandit venenatis.
-        </p>
-      </article>
-    </main>
-    <footer>
-      <p>Hak Cipta &copy; 2023</p>
-    </footer>
-  </body>
+    <article>
+      <h3>Lorem, ipsum dolor.</h3>
+      <p>
+        Pellentesque venenatis mi sit amet erat tincidunt auctor. Curabitur tincidunt tellus ac
+        convallis dictum. Morbi luctus leo eget leo luctus elementum. Cras at ligula eu elit
+        blandit venenatis.
+      </p>
+    </article>
+  </main>
+  <footer>
+    <p>Hak Cipta &copy; 2023</p>
+  </footer>
+</body>
 </html>
 `,
   },
@@ -41,6 +41,10 @@ const files = {
     code: `\
 body {
   font-family: sans-serif;
+}
+
+footer {
+  color: white;
 }
 `,
   },
