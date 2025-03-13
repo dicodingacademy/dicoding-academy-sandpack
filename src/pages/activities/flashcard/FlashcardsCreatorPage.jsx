@@ -1,22 +1,24 @@
-/* eslint-disable react/no-array-index-key,jsx-a11y/label-has-associated-control */
-import React, { useState } from 'react';
-import Flashcards from '../../../components/activities/flashcards';
+/* eslint-disable jsx-a11y/label-has-associated-control */
 
 import '../creation-style.css';
 
-function FlashcardsCreationPage() {
+import React, { useState } from 'react';
+import Flashcards from '../../../components/activities/flashcards';
+
+export default function FlashcardsCreatorPage() {
   const [cards, setCards] = useState([
-    { front: '', back: '' },
+    { id: +new Date(), front: '', back: '' },
   ]);
 
   const [embedCode, setEmbedCode] = useState('');
 
   const addCard = () => {
-    setCards([...cards, { front: '', back: '' }]);
+    const newCard = { id: +new Date(), front: '', back: '' };
+    setCards([...cards, newCard]);
   };
 
-  const removeCard = (index) => {
-    setCards(cards.filter((_, i) => i !== index));
+  const removeCard = (cardId) => {
+    setCards(cards.filter((card) => card.id !== cardId));
   };
 
   const updateCard = (index, field, value) => {
@@ -34,33 +36,34 @@ function FlashcardsCreationPage() {
   return (
     <div className="creation-container">
       <div className="creation-form">
-        <h2>Generate Flashcards</h2>
+        <h2>Flashcard Generator</h2>
+
         <div className="cards-form">
           {cards.map((card, index) => (
-            <div key={index} className="card-input">
+            <div key={card.id} className="card-input">
               <div className="input-group">
-                <label htmlFor={`front-${index}`}>Front:</label>
+                <label htmlFor={`front-${card.id}`}>Front:</label>
                 <textarea
-                  id={`front-${index}`}
+                  id={`front-${card.id}`}
                   value={card.front}
-                  onChange={(e) => updateCard(index, 'front', e.target.value)}
-                  placeholder="Enter front content"
+                  placeholder="Enter your front content"
+                  onChange={(event) => updateCard(index, 'front', event.target.value)}
                 />
               </div>
               <div className="input-group">
-                <label htmlFor={`back-${index}`}>Back:</label>
+                <label htmlFor={`back-${card.id}`}>Back:</label>
                 <textarea
-                  id={`back-${index}`}
+                  id={`back-${card.id}`}
                   value={card.back}
-                  onChange={(e) => updateCard(index, 'back', e.target.value)}
-                  placeholder="Enter back content"
+                  placeholder="Enter your back content"
+                  onChange={(event) => updateCard(index, 'back', event.target.value)}
                 />
               </div>
               {cards.length > 1 && (
                 <button
                   type="button"
-                  onClick={() => removeCard(index)}
                   className="btn btn-secondary remove-btn"
+                  onClick={() => removeCard(card.id)}
                 >
                   Remove Card
                 </button>
@@ -68,10 +71,10 @@ function FlashcardsCreationPage() {
             </div>
           ))}
         </div>
-        <button type="button" onClick={addCard} className="btn btn-primary add-btn">
+        <button type="button" className="btn btn-primary add-btn" onClick={() => addCard()}>
           Add New Card
         </button>
-        <button type="button" onClick={generateEmbedCode} className="btn btn-primary generate-embed-btn">
+        <button type="button" className="btn btn-primary generate-embed-btn" onClick={() => generateEmbedCode()}>
           Generate Embed Code
         </button>
 
@@ -91,5 +94,3 @@ function FlashcardsCreationPage() {
     </div>
   );
 }
-
-export default FlashcardsCreationPage;

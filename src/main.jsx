@@ -21,13 +21,15 @@ import { a256Routes } from './embeds/a256';
 import { a610Routes } from './embeds/a610';
 
 import HomePage from './pages/HomePage';
+
+// Learning activities
 import { a134Routes } from './embeds/a134-demo/index';
-import FlashcardsCreationPage from './pages/activities/flashcard/CreationPage';
-import DragAndOrderCreationPage from './pages/activities/drag-and-order/CreationPage';
-import FillInBlankCreationPage from './pages/activities/fill-in-the-blank/CreationPage';
-import DragAndOrderPage from './pages/activities/drag-and-order/DragAndOrderPage';
-import FillInTheBlankPage from './pages/activities/fill-in-the-blank/FillInTheBlankPage';
+import FlashcardsCreatorPage from './pages/activities/flashcard/FlashcardsCreatorPage';
 import FlashcardPage from './pages/activities/flashcard/FlashcardPage';
+import FillInBlankCreationPage from './pages/activities/fill-in-the-blank/CreationPage';
+import FillInTheBlankPage from './pages/activities/fill-in-the-blank/FillInTheBlankPage';
+import DragAndOrderCreationPage from './pages/activities/drag-and-order/CreationPage';
+import DragAndOrderPage from './pages/activities/drag-and-order/DragAndOrderPage';
 
 const root = createRoot(document.getElementById('root'));
 
@@ -38,7 +40,7 @@ const appRouter = createBrowserRouter([
   },
   {
     path: '/activities/flashcard/create',
-    element: <FlashcardsCreationPage />,
+    element: <FlashcardsCreatorPage />,
   },
   {
     path: '/activities/flashcard',
