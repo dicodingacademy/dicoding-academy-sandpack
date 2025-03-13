@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import Flashcards from '../../../components/activities/flashcards';
 import ActivitiesError from '../../../components/activities/commons/ActivitiesError';
 
-export default function FlashcardPage() {
+export default function FlashcardsPage() {
   const [searchParam] = useSearchParams();
 
   const dataParam = searchParam.get('data');

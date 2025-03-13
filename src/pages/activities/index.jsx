@@ -1,6 +1,6 @@
 import React from 'react';
 import FlashcardsCreatorPage from './flashcards/FlashcardsCreatorPage';
-import FlashcardPage from './flashcards/FlashcardPage';
+import FlashcardsPage from './flashcards/FlashcardsPage';
 import DragAndOrderCreationPage from './drag-and-orders/CreationPage';
 import DragAndOrderPage from './drag-and-orders/DragAndOrderPage';
 import FillInBlankCreationPage from './fill-in-the-blanks/CreationPage';
@@ -9,7 +9,7 @@ import FillInTheBlankPage from './fill-in-the-blanks/FillInTheBlankPage';
 export const activitiesRoutes = [
   {
     path: '/activities/flashcards',
-    element: <FlashcardPage />,
+    element: <FlashcardsPage />,
   },
   {
     path: '/activities/flashcards/create',
