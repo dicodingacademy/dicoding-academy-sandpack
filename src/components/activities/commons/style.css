@@ -151,6 +151,22 @@
   margin-block: 20px;
 }
 
+/* Activities container - Error */
+.activities__error {
+  margin-block: 20px;
+  padding: 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+
+  background-color: var(--bg-color);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
 @media all and (width > 400px) {
   .activities__header {
     flex-direction: row;
