@@ -5,15 +5,15 @@ import FillInTheBlankDemo from './fill-in-the-blank-demo';
 
 const a134Routes = [
   {
-    path: '/a134/flashcard-demo',
+    path: '/a134/flashcards-demo',
     element: <FlashcardDemo />,
   },
   {
-    path: '/a134/drag-and-order-demo',
+    path: '/a134/drag-and-orders-demo',
     element: <DragAndOrderDemo />,
   },
   {
-    path: '/a134/fill-in-the-blank-demo',
+    path: '/a134/fill-in-the-blanks-demo',
     element: <FillInTheBlankDemo />,
   },
 ];

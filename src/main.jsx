@@ -20,47 +20,14 @@ import { a418Routes } from './embeds/a418';
 import { a256Routes } from './embeds/a256';
 import { a610Routes } from './embeds/a610';
 
+import { a134Routes } from './embeds/a134-demo';
+import { activitiesRoutes } from './pages/activities';
 import HomePage from './pages/HomePage';
-
-// Learning activities
-import { a134Routes } from './embeds/a134-demo/index';
-import FlashcardsCreatorPage from './pages/activities/flashcard/FlashcardsCreatorPage';
-import FlashcardPage from './pages/activities/flashcard/FlashcardPage';
-import FillInBlankCreationPage from './pages/activities/fill-in-the-blank/CreationPage';
-import FillInTheBlankPage from './pages/activities/fill-in-the-blank/FillInTheBlankPage';
-import DragAndOrderCreationPage from './pages/activities/drag-and-order/CreationPage';
-import DragAndOrderPage from './pages/activities/drag-and-order/DragAndOrderPage';
-
-const root = createRoot(document.getElementById('root'));
 
 const appRouter = createBrowserRouter([
   {
     path: '/',
     element: <HomePage />,
-  },
-  {
-    path: '/activities/flashcard/create',
-    element: <FlashcardsCreatorPage />,
-  },
-  {
-    path: '/activities/flashcard',
-    element: <FlashcardPage />,
-  },
-  {
-    path: '/activities/drag-and-order/create',
-    element: <DragAndOrderCreationPage />,
-  },
-  {
-    path: '/activities/drag-and-order',
-    element: <DragAndOrderPage />,
-  },
-  {
-    path: '/activities/fill-in-the-blank/create',
-    element: <FillInBlankCreationPage />,
-  },
-  {
-    path: '/activities/fill-in-the-blank',
-    element: <FillInTheBlankPage />,
   },
 
   /* Front-end learning path */
@@ -79,10 +46,10 @@ const appRouter = createBrowserRouter([
   ...a256Routes,
   ...a610Routes,
 
-  /* Demo */
+  /* Learning activities */
+  ...activitiesRoutes,
   ...a134Routes,
 ]);
 
-root.render(
-  <RouterProvider router={appRouter} />,
-);
+const root = createRoot(document.getElementById('root'));
+root.render(<RouterProvider router={appRouter} />);
