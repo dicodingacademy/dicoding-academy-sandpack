@@ -16,19 +16,19 @@ export const activitiesRoutes = [
     element: <FlashcardsCreatorPage />,
   },
   {
-    path: '/activities/drag-and-orders',
+    path: '/activities/drag-and-order',
     element: <DragAndOrderPage />,
   },
   {
-    path: '/activities/drag-and-orders/create',
+    path: '/activities/drag-and-order/create',
     element: <DragAndOrderCreationPage />,
   },
   {
-    path: '/activities/fill-in-the-blanks',
+    path: '/activities/fill-in-the-blank',
     element: <FillInTheBlankPage />,
   },
   {
-    path: '/activities/fill-in-the-blanks/create',
+    path: '/activities/fill-in-the-blank/create',
     element: <FillInBlankCreationPage />,
   },
 ];

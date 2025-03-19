@@ -32,9 +32,11 @@ function FlashcardItem({ front, back }) {
     >
       <div className="flashcards-item__inner">
         <div className="flashcards-item__inner__front">
+          {/* eslint-disable-next-line react/no-danger */}
           <div dangerouslySetInnerHTML={{ __html: front }} />
         </div>
         <div className="flashcards-item__inner__back">
+          {/* eslint-disable-next-line react/no-danger */}
           <div dangerouslySetInnerHTML={{ __html: back }} />
         </div>
       </div>
