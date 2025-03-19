@@ -8,29 +8,30 @@ const files = {
     code: `\
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Bubbling World</title>
-    
-    <link rel="stylesheet" href="styles.css" >
-  </head>
-  <body>
-    <div onclick="alert('ELEMEN LANGIT')" align="center">
-      LANGIT
-      <div onclick="alert('ELEMEN LUAR')" align="center">
-        LUAR
-        <div onclick="alert('ELEMEN TENGAH')" align="center">
-          TENGAH
-          <div onclick="alert('ELEMEN DALAM')" align="center">DALAM</div>
+<head>
+  <meta charset="UTF-8">
+  <title>Bubbling World</title>
+  
+  <link rel="stylesheet" href="styles.css" >
+</head>
+<body>
+  <div onclick="alert('ELEMEN LANGIT')" align="center">
+    LANGIT
+    <div onclick="alert('ELEMEN LUAR')" align="center">
+      LUAR
+      <div onclick="alert('ELEMEN TENGAH')" align="center">
+        TENGAH
+        <div onclick="alert('ELEMEN DALAM')" align="center">
+          DALAM
         </div>
       </div>
     </div>
-  </body>
+  </div>
+</body>
 </html>
 `,
   },
   'styles.css': {
-    hidden: true,
     code: `\
 body div {
   width: 60%;
@@ -42,7 +43,6 @@ body div {
 `,
   },
   'index.js': {
-    hidden: true,
     code: '',
   },
 };
