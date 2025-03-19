@@ -8,31 +8,32 @@ const files = {
     code: `\
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Capturing World</title>
-    
-    <link rel="stylesheet" href="styles.css" >
-  </head>
-  <body>
-    <div align="center" id="langit">
-      LANGIT
-      <div align="center" id="luar">
-        LUAR
-        <div align="center" id="tengah">
-          TENGAH
-          <div align="center" id="dalam">DALAM</div>
+<head>
+  <meta charset="UTF-8">
+  <title>Capturing World</title>
+  
+  <link rel="stylesheet" href="styles.css" >
+</head>
+<body>
+  <div align="center" id="langit">
+    LANGIT
+    <div align="center" id="luar">
+      LUAR
+      <div align="center" id="tengah">
+        TENGAH
+        <div align="center" id="dalam">
+          DALAM
         </div>
       </div>
     </div>
+  </div>
 
-    <script src="index.js"></script>
-  </body>
+  <script src="index.js"></script>
+</body>
 </html>
 `,
   },
   'styles.css': {
-    hidden: true,
     code: `\
 body div {
   width: 60%;
@@ -44,15 +45,14 @@ body div {
 `,
   },
   'index.js': {
-    hidden: false,
     code: `\
-const divs = document.getElementsByTagName('div');
+const divs = Array.from(document.getElementsByTagName('div'));
 
-for (let el of divs) {
-  el.addEventListener('click', function () {
-    alert('ELEMEN ' + el.getAttribute('id').toUpperCase());
-  });
-}
+divs.forEach((div) => {
+  div.addEventListener('click', () => {
+    alert(\`ELEMEN \${div.getAttribute('id').toUpperCase()}\`);
+  }, true);
+});
 `,
   },
 };
