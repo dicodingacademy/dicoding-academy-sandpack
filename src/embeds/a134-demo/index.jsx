@@ -9,11 +9,11 @@ const a134Routes = [
     element: <FlashcardDemo />,
   },
   {
-    path: '/a134/drag-and-orders-demo',
+    path: '/a134/drag-and-order-demo',
     element: <DragAndOrderDemo />,
   },
   {
-    path: '/a134/fill-in-the-blanks-demo',
+    path: '/a134/fill-in-the-blank-demo',
     element: <FillInTheBlankDemo />,
   },
 ];
