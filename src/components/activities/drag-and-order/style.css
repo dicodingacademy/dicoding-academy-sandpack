@@ -1,7 +1,7 @@
 .drag-drop {
   padding: 24px;
   border: 1px solid var(--border-color);
-  border-radius: 0.5rem;
+  border-radius: 4px;
   background-color: var(--drag-and-drop-bg);
 }
 
@@ -30,12 +30,12 @@
 
   padding: 14px 12px;
   border: 1px solid var(--border-color);
-  border-radius: 0.25rem;
+  border-radius: 4px;
   background-color: var(--bg-color);
 
   color: var(--text-color);
 
-  transition: all 0.2s ease;
+  transition: all 200ms ease;
   cursor: move;
 }
 
