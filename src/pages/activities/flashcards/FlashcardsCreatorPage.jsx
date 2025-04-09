@@ -2,7 +2,7 @@
 
 import '../creation-style.css';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Flashcards from '../../../components/activities/flashcards';
 import { generateIframe } from '../../../utils';
 import useInput from '../../../hooks/useInput';
@@ -18,6 +18,11 @@ export default function FlashcardsCreatorPage() {
 
   const [height, onHeightChange] = useInput('600');
   const [embedCode, setEmbedCode] = useState('');
+
+  useEffect(() => {
+    const activitiesContainer = document.querySelector('.activities-container');
+    onHeightChange(activitiesContainer.offsetHeight.toString());
+  }, [cards]);
 
   const addCard = () => {
     const newCard = { id: generateId(), front: '', back: '' };
@@ -119,6 +124,7 @@ export default function FlashcardsCreatorPage() {
 
       <div className="creation-preview">
         <h2>Preview</h2>
+
         <Flashcards cards={cards} />
       </div>
     </div>

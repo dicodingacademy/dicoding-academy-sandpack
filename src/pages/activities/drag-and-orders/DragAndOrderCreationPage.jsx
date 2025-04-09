@@ -2,7 +2,7 @@
 
 import '../creation-style.css';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import DragAndOrder from '../../../components/activities/drag-and-order';
 import { generateIframe } from '../../../utils';
 import useInput from '../../../hooks/useInput';
@@ -19,6 +19,15 @@ export default function DragAndOrderCreationPage() {
 
   const [height, onHeightChange] = useInput('600');
   const [embedCode, setEmbedCode] = useState('');
+
+  useEffect(() => {
+    const activitiesContainer = document.querySelector('.activities-container');
+
+    const hintBoxHeight = 55 * 2;
+    const heightCount = activitiesContainer.offsetHeight + hintBoxHeight;
+
+    onHeightChange(heightCount.toString());
+  }, [items]);
 
   function addNewItem() {
     const newItem = { id: generateId(), text: '' };
