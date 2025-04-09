@@ -12,7 +12,6 @@ export default function FlashcardsCreatorPage() {
     { id: `card-${+new Date()}`, front: '', back: '' },
   ]);
 
-  const [width, onWidthChange] = useInput('100%');
   const [height, onHeightChange] = useInput('600');
   const [embedCode, setEmbedCode] = useState('');
 
@@ -37,13 +36,11 @@ export default function FlashcardsCreatorPage() {
   const generateEmbedCode = () => {
     const data = btoa(JSON.stringify(cards));
 
-    const generatedIframe = generateIframe(
+    setEmbedCode(generateIframe(
       `${window.location.protocol}//${window.location.host}/activities/flashcards?data=${data}`,
       'Dicoding Learning Activities',
       height,
-      width,
-    );
-    setEmbedCode(generatedIframe);
+    ));
   };
 
   return (
@@ -94,14 +91,6 @@ export default function FlashcardsCreatorPage() {
         </div>
 
         <div className="embed-code">
-          <div>
-            <label>
-              <span>Width</span>
-              <div>
-                <input value={width} onChange={(event) => onWidthChange(event)} />
-              </div>
-            </label>
-          </div>
           <div>
             <label>
               <span>Height</span>
