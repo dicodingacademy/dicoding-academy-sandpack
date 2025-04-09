@@ -7,16 +7,20 @@ import Flashcards from '../../../components/activities/flashcards';
 import { generateIframe } from '../../../utils';
 import useInput from '../../../hooks/useInput';
 
+function generateId() {
+  return `card-${performance.now()}`;
+}
+
 export default function FlashcardsCreatorPage() {
   const [cards, setCards] = useState([
-    { id: `card-${+new Date()}`, front: '', back: '' },
+    { id: generateId(), front: '', back: '' },
   ]);
 
   const [height, onHeightChange] = useInput('600');
   const [embedCode, setEmbedCode] = useState('');
 
   const addCard = () => {
-    const newCard = { id: `card-${+new Date()}`, front: '', back: '' };
+    const newCard = { id: generateId(), front: '', back: '' };
     setCards([...cards, newCard]);
   };
 
