@@ -3,6 +3,7 @@ import './style.css';
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import ActivitiesContainer from '../commons/ActivitiesContainer';
+import { cn } from '../../../utils';
 
 function FlashcardItem({ front, back }) {
   const [isFlipped, setIsFlipped] = useState(false);
@@ -26,7 +27,7 @@ function FlashcardItem({ front, back }) {
       role="button"
       tabIndex={0}
       aria-label={`Flip ${front} card.`}
-      className={`flashcards-item ${isFlipped ? 'flipped' : ''}`}
+      className={cn('flashcards-item', { flipped: isFlipped })}
       onClick={() => flipCard()}
       onKeyDown={(event) => flipCardUsingKeyboard(event)}
     >

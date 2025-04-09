@@ -3,26 +3,22 @@ import './style.css';
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Sun, Moon } from 'lucide-react';
+import { useTheme } from '../../../contexts/ThemeContext';
 
 export default function ActivitiesContainer({ children, title = 'Komponen Interaktif' }) {
-  const iconDarkUrl = '/assets/learning-activities-dark-icon.png';
   const iconLightUrl = '/assets/learning-activities-light-icon.png';
+  const iconDarkUrl = '/assets/learning-activities-dark-icon.png';
 
-  const [theme, setTheme] = useState(() => {
-    const savedTheme = localStorage.getItem('theme');
-    return savedTheme || 'light';
-  });
+  const { theme, changeTheme } = useTheme();
+
   const [iconUrl, setIconUrl] = useState(iconDarkUrl);
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme.toString());
-    localStorage.setItem('theme', theme.toString());
-
-    setIconUrl(theme.toString() === 'light' ? iconDarkUrl : iconLightUrl);
+    setIconUrl(theme.toString() === 'light' ? iconLightUrl : iconDarkUrl);
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === 'dark' ? 'light' : 'dark'));
+    changeTheme(theme.toString() === 'light' ? 'dark' : 'light');
   };
 
   return (

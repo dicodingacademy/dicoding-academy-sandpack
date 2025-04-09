@@ -1,131 +1,205 @@
+import './style.css';
+
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import ActivitiesContainer from '../commons/ActivitiesContainer';
+import { useTheme } from '../../../contexts/ThemeContext';
+import { cn } from '../../../utils';
 
-import './style.css';
+export default function DragAndOrder({
+  items,
+  hintText,
+  instructionsText = 'Urutkan baris berikut sesuai urutan yang benar.',
+  storageKey = 'temporary',
+}) {
+  const { theme } = useTheme();
 
-function DragAndOrder({ items, storageKey, hint }) {
+  const draggedItemIconUrl = '/assets/icon-park-outline-drag.png';
+
+  const validIconDarkUrl = '/assets/checklist-dark.png';
+  const validIconLightUrl = '/assets/checklist.png';
+  const [validIconUrl, setValidIconUrl] = useState(validIconLightUrl);
+
+  const invalidIconDarkUrl = '/assets/close-dark.png';
+  const invalidIconLightUrl = '/assets/close.png';
+  const [invalidIconUrl, setInvalidIconUrl] = useState(invalidIconLightUrl);
+
   const [orderedItems, setOrderedItems] = useState([]);
   const [isDragging, setIsDragging] = useState(false);
   const [draggedItem, setDraggedItem] = useState(null);
-  const [isCorrect, setIsCorrect] = useState(null);
-  const [attempts, setAttempts] = useState(0);
+
+  const [isAlreadyChecked, setIsAlreadyChecked] = useState(false);
+  const [isCorrect, setIsCorrect] = useState(false);
+  const [attemptsCount, setAttemptsCount] = useState(0);
   const [showHint, setShowHint] = useState(false);
+
+  useEffect(() => {
+    setValidIconUrl(theme.toString() === 'light' ? validIconLightUrl : validIconDarkUrl);
+    setInvalidIconUrl(theme.toString() === 'light' ? invalidIconLightUrl : invalidIconDarkUrl);
+  }, [theme]);
+
+  function reset() {
+    const shuffledItems = [...items].sort(() => Math.random() - 0.5);
+    localStorage.setItem(storageKey, JSON.stringify(shuffledItems));
+
+    setOrderedItems(shuffledItems.map((item) => ({ ...item, isMatched: false })));
+
+    setIsAlreadyChecked(false);
+    setIsCorrect(false);
+    setAttemptsCount(0);
+    setShowHint(false);
+  }
 
   useEffect(() => {
     if (storageKey !== 'temporary') {
       const savedOrder = localStorage.getItem(storageKey);
 
       if (savedOrder) {
-        setOrderedItems(JSON.parse(savedOrder));
+        const parsedOrder = JSON
+          .parse(savedOrder)
+          .map((item, index) => {
+            const currentItem = items[index];
+            return { ...item, isMatched: item.id === currentItem.id };
+          });
+        setOrderedItems(parsedOrder);
+
         return;
       }
     }
 
-    setOrderedItems([...items].sort(() => Math.random() - 0.5));
-  }, [items]);
+    reset();
+  }, []);
 
-  const handleDragStart = (e, item) => {
+  useEffect(() => {
+    if (attemptsCount >= 3) {
+      setShowHint(true);
+    }
+  }, [attemptsCount]);
+
+  function handleDragStart(event, orderedItem) {
     setIsDragging(true);
-    setDraggedItem(item);
-    e.dataTransfer.setData('text/plain', item);
-  };
+    setDraggedItem(orderedItem);
+    event.dataTransfer.setData('text/plain', orderedItem);
+  }
 
-  const handleDragOver = (e) => {
-    e.preventDefault();
-  };
+  function handleDragOver(event) {
+    event.preventDefault();
+  }
 
-  const handleDrop = (e, targetIndex) => {
-    e.preventDefault();
+  function handleDrop(event, targetIndex) {
+    event.preventDefault();
+
     setIsDragging(false);
 
-    const newItems = [...orderedItems];
     const draggedIndex = orderedItems.indexOf(draggedItem);
+    const newItems = [...orderedItems];
     newItems.splice(draggedIndex, 1);
     newItems.splice(targetIndex, 0, draggedItem);
 
     setOrderedItems(newItems);
     localStorage.setItem(storageKey, JSON.stringify(newItems));
-  };
+  }
 
-  const checkOrder = () => {
-    const isOrderCorrect = orderedItems.every((item, index) => item === items[index]);
+  function checkOrder() {
+    const checkedReorderItems = orderedItems.map((orderedItem, index) => {
+      const currentItem = items[index];
+      return { ...orderedItem, isMatched: orderedItem.id === currentItem.id };
+    });
+    setOrderedItems(checkedReorderItems);
+
+    setIsAlreadyChecked(true);
+
+    const isOrderCorrect = checkedReorderItems.every(({ isMatched }) => isMatched);
     setIsCorrect(isOrderCorrect);
 
     if (!isOrderCorrect) {
-      const newAttempts = attempts + 1;
-      setAttempts(newAttempts);
-      if (newAttempts >= 3) {
-        setShowHint(true);
-      }
+      setAttemptsCount((prevState) => prevState + 1);
+      return;
     }
-  };
 
-  const resetOrder = () => {
-    const shuffledItems = [...items].sort(() => Math.random() - 0.5);
-    setOrderedItems(shuffledItems);
-    localStorage.setItem(storageKey, JSON.stringify(shuffledItems));
-    setIsCorrect(null);
-    setAttempts(0);
-    setShowHint(false);
-  };
+    // eslint-disable-next-line no-alert
+    alert('Selamat! Anda telah menyelesaikan tugas ini.');
+  }
 
   return (
     <ActivitiesContainer>
-      <div className="drag-drop">
-        <div>
-          {orderedItems.map((item, index) => (
-            <div
-              key={item}
-              draggable
-              onDragStart={(e) => handleDragStart(e, item)}
-              onDragOver={handleDragOver}
-              onDrop={(e) => handleDrop(e, index)}
-              className={`draggable-item ${isDragging ? 'dragging' : ''}`}
-            >
-              {item}
-            </div>
-          ))}
-        </div>
+      <>
+        <p className="activities__instructions">{instructionsText}</p>
 
-        <div className="buttons">
-          <button type="button" onClick={checkOrder} className="btn btn-primary">
-            Check Order
-          </button>
-          <button type="button" onClick={resetOrder} className="btn btn-secondary">
-            Reset
-          </button>
+        <div className="drag-drop">
+          <div className="draggable-items">
+            {orderedItems.map((orderedItem, index) => (
+              <div
+                key={orderedItem.id}
+                className={cn('draggable-item', {
+                  'draggable-item__dragging': isDragging,
+                  'draggable-item__valid': isAlreadyChecked && orderedItem.isMatched,
+                  'draggable-item__invalid': isAlreadyChecked && !orderedItem.isMatched,
+                })}
+              >
+                <button
+                  type="button"
+                  className="draggable-item__button"
+                  draggable
+                  onDragStart={(event) => handleDragStart(event, orderedItem)}
+                  onDragOver={(event) => handleDragOver(event)}
+                  onDrop={(event) => handleDrop(event, index)}
+                >
+                  <img src={draggedItemIconUrl} alt="Draggable Item" width={25} height={25} />
+                </button>
+                <div
+                  role="button"
+                  tabIndex="0"
+                  className="draggable-item__text"
+                  draggable
+                  onDragStart={(event) => handleDragStart(event, orderedItem)}
+                  onDragOver={(event) => handleDragOver(event)}
+                  onDrop={(event) => handleDrop(event, index)}
+                >
+                  <span>{orderedItem.text}</span>
+                  {isAlreadyChecked && (
+                    <img
+                      src={orderedItem.isMatched ? validIconUrl : invalidIconUrl}
+                      alt={orderedItem.isMatched ? 'Valid Icon' : 'Invalid Icon'}
+                      width={20}
+                      height={20}
+                    />
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
-
-        {isCorrect !== null && (
-        <div className={`feedback ${isCorrect ? 'success' : 'error'}`}>
-          {isCorrect ? 'Correct order!' : 'Try again!'}
-        </div>
-        )}
 
         {showHint && !isCorrect && (
-        <div className="hint">
-          <p>
-            Hint:
-            {' '}
-            {hint}
-          </p>
-        </div>
+          <div className="hint">
+            <div><strong>Petunjuk:</strong></div>
+            <p>{hintText.trim()}</p>
+          </div>
         )}
-      </div>
+
+        <div className="buttons">
+          <button type="button" className="btn btn-secondary" onClick={() => reset()}>
+            Reset
+          </button>
+          <button type="button" className="btn btn-primary" onClick={() => checkOrder()}>
+            Periksa urutan
+          </button>
+        </div>
+      </>
     </ActivitiesContainer>
   );
 }
 
 // implement proptypes
 DragAndOrder.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.string).isRequired,
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      text: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
+  hintText: PropTypes.string.isRequired,
+  instructionsText: PropTypes.string,
   storageKey: PropTypes.string,
-  hint: PropTypes.string.isRequired,
 };
-
-DragAndOrder.defaultProps = {
-  storageKey: 'temporary',
-};
-
-export default DragAndOrder;

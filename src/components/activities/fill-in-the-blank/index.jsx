@@ -1,9 +1,11 @@
 /* eslint-disable react/no-array-index-key */
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import ActivitiesContainer from '../commons/ActivitiesContainer';
 
 import './style.css';
+
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { cn } from '../../../utils';
+import ActivitiesContainer from '../commons/ActivitiesContainer';
 
 function FillInTheBlank({
   template, answers, storageKey, hint,
@@ -98,7 +100,7 @@ function FillInTheBlank({
         </div>
 
         {isCorrect !== null && (
-        <div className={`feedback ${isCorrect ? 'success' : 'error'}`}>
+        <div className={cn('feedback', { success: isCorrect, error: !isCorrect })}>
           {isCorrect ? 'All answers are correct!' : 'Try again!'}
         </div>
         )}
