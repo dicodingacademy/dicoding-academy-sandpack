@@ -3,6 +3,7 @@ import './style.css';
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import ActivitiesContainer from '../commons/ActivitiesContainer';
+import { useTheme } from '../../../contexts/ThemeContext';
 
 export default function DragAndOrder({
   items,
@@ -10,6 +11,8 @@ export default function DragAndOrder({
   instructionsText = 'Urutkan baris berikut sesuai urutan yang benar.',
   storageKey = 'temporary',
 }) {
+  const { theme } = useTheme();
+
   const draggedItemIconUrl = '/assets/icon-park-outline-drag.png';
 
   const validIconDarkUrl = '/assets/checklist-dark.png';
@@ -28,6 +31,11 @@ export default function DragAndOrder({
   const [isCorrect, setIsCorrect] = useState(false);
   const [attemptsCount, setAttemptsCount] = useState(0);
   const [showHint, setShowHint] = useState(false);
+
+  useEffect(() => {
+    setValidIconUrl(theme.toString() === 'light' ? validIconLightUrl : validIconDarkUrl);
+    setInvalidIconUrl(theme.toString() === 'light' ? invalidIconLightUrl : invalidIconDarkUrl);
+  }, [theme]);
 
   function reset() {
     const shuffledItems = [...items].sort(() => Math.random() - 0.5);

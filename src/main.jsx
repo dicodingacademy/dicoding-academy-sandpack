@@ -23,6 +23,7 @@ import { a610Routes } from './embeds/a610';
 import { a134Routes } from './embeds/a134-demo';
 import { activitiesRoutes } from './pages/activities';
 import HomePage from './pages/HomePage';
+import { ThemeProvider } from './contexts/ThemeContext';
 
 const appRouter = createBrowserRouter([
   {
@@ -52,4 +53,10 @@ const appRouter = createBrowserRouter([
 ]);
 
 const root = createRoot(document.getElementById('root'));
-root.render(<RouterProvider router={appRouter} />);
+root.render(
+  <React.StrictMode>
+    <ThemeProvider>
+      <RouterProvider router={appRouter} />
+    </ThemeProvider>
+  </React.StrictMode>,
+);
