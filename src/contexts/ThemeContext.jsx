@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 
 const STORAGE_KEY_NAME = 'theme';
 
-const ThemeContext = React.createContext(null);
+const ThemeContext = React.createContext({
+  theme: 'light',
+  changeTheme: () => {},
+});
 
 export function useTheme() {
   return useContext(ThemeContext);
@@ -20,7 +23,7 @@ export function ThemeProvider({ children }) {
   useEffect(() => {
     document
       .documentElement
-      .setAttribute('data-theme', theme === 'dark' ? 'dark' : 'light');
+      .setAttribute('data-theme', theme.toString() === 'light' ? 'light' : 'dark');
     localStorage.setItem(STORAGE_KEY_NAME, theme.toString());
   }, [theme]);
 
