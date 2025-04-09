@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import ActivitiesContainer from '../commons/ActivitiesContainer';
 import { useTheme } from '../../../contexts/ThemeContext';
+import { cn } from '../../../utils';
 
 export default function DragAndOrder({
   items,
@@ -130,11 +131,11 @@ export default function DragAndOrder({
             {orderedItems.map((orderedItem, index) => (
               <div
                 key={orderedItem.id}
-                className={[
-                  'draggable-item',
-                  isDragging ? 'draggable-item__dragging' : '',
-                  isAlreadyChecked ? (orderedItem.isMatched ? 'draggable-item__valid' : 'draggable-item__invalid') : '',
-                ].filter(Boolean).join(' ')}
+                className={cn('draggable-item', {
+                  'draggable-item__dragging': isDragging,
+                  'draggable-item__valid': isAlreadyChecked && orderedItem.isMatched,
+                  'draggable-item__invalid': isAlreadyChecked && !orderedItem.isMatched,
+                })}
               >
                 <button
                   type="button"

@@ -42,6 +42,7 @@
   "dependencies": {
     "@codesandbox/sandpack-react": "^2.6.9",
     "@codesandbox/sandpack-themes": "^2.0.21",
+    "clsx": "^2.1.1",
     "lucide-react": "^0.479.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
