@@ -25,13 +25,18 @@
 }
 .draggable-item__text {
   flex-grow: 1;
+  display: flex;
+  justify-content: space-between;
+
   padding: 14px 12px;
-  background-color: var(--bg-color);
-  border-radius: 0.25rem;
-  cursor: move;
-  transition: all 0.2s ease;
   border: 1px solid var(--border-color);
+  border-radius: 0.25rem;
+  background-color: var(--bg-color);
+
   color: var(--text-color);
+
+  transition: all 0.2s ease;
+  cursor: move;
 }
 
 .draggable-item.draggable-item__dragging {
@@ -49,8 +54,9 @@
 }
 
 .buttons {
-  margin-top: 20px;
   display: flex;
-  gap: 15px;
   justify-content: end;
+  gap: 15px;
+
+  margin-top: 20px;
 }

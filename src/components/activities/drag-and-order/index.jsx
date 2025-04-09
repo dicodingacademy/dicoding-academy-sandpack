@@ -10,28 +10,56 @@ export default function DragAndOrder({
   instructionsText = 'Urutkan baris berikut sesuai urutan yang benar.',
   storageKey = 'temporary',
 }) {
+  const draggedItemIconUrl = '/assets/icon-park-outline-drag.png';
+
+  const validIconDarkUrl = '/assets/checklist-dark.png';
+  const validIconLightUrl = '/assets/checklist.png';
+  const [validIconUrl, setValidIconUrl] = useState(validIconLightUrl);
+
+  const invalidIconDarkUrl = '/assets/close-dark.png';
+  const invalidIconLightUrl = '/assets/close.png';
+  const [invalidIconUrl, setInvalidIconUrl] = useState(invalidIconLightUrl);
+
   const [orderedItems, setOrderedItems] = useState([]);
   const [isDragging, setIsDragging] = useState(false);
   const [draggedItem, setDraggedItem] = useState(null);
+
+  const [isAlreadyChecked, setIsAlreadyChecked] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
   const [attemptsCount, setAttemptsCount] = useState(0);
   const [showHint, setShowHint] = useState(false);
+
+  function reset() {
+    const shuffledItems = [...items].sort(() => Math.random() - 0.5);
+    localStorage.setItem(storageKey, JSON.stringify(shuffledItems));
+
+    setOrderedItems(shuffledItems.map((item) => ({ ...item, isMatched: false })));
+
+    setIsAlreadyChecked(false);
+    setIsCorrect(false);
+    setAttemptsCount(0);
+    setShowHint(false);
+  }
 
   useEffect(() => {
     if (storageKey !== 'temporary') {
       const savedOrder = localStorage.getItem(storageKey);
 
       if (savedOrder) {
-        setOrderedItems(JSON.parse(savedOrder));
+        const parsedOrder = JSON
+          .parse(savedOrder)
+          .map((item, index) => {
+            const currentItem = items[index];
+            return { ...item, isMatched: item.id === currentItem.id };
+          });
+        setOrderedItems(parsedOrder);
+
         return;
       }
     }
 
-    setOrderedItems(() => {
-      const shuffledItems = [...items].sort(() => Math.random() - 0.5);
-      return shuffledItems;
-    });
-  }, [items]);
+    reset();
+  }, []);
 
   useEffect(() => {
     if (attemptsCount >= 3) {
@@ -64,10 +92,15 @@ export default function DragAndOrder({
   }
 
   function checkOrder() {
-    const isOrderCorrect = orderedItems.every((orderedItem, index) => {
-      const firstItem = items[index];
-      return orderedItem.text === firstItem.text;
+    const checkedReorderItems = orderedItems.map((orderedItem, index) => {
+      const currentItem = items[index];
+      return { ...orderedItem, isMatched: orderedItem.id === currentItem.id };
     });
+    setOrderedItems(checkedReorderItems);
+
+    setIsAlreadyChecked(true);
+
+    const isOrderCorrect = checkedReorderItems.every(({ isMatched }) => isMatched);
     setIsCorrect(isOrderCorrect);
 
     if (!isOrderCorrect) {
@@ -77,17 +110,6 @@ export default function DragAndOrder({
 
     // eslint-disable-next-line no-alert
     alert('Selamat! Anda telah menyelesaikan tugas ini.');
-  }
-
-  function resetOrder() {
-    const shuffledItems = [...items].sort(() => Math.random() - 0.5);
-
-    setOrderedItems(shuffledItems);
-    localStorage.setItem(storageKey, JSON.stringify(shuffledItems));
-
-    setIsCorrect(false);
-    setAttemptsCount(0);
-    setShowHint(false);
   }
 
   return (
@@ -100,7 +122,11 @@ export default function DragAndOrder({
             {orderedItems.map((orderedItem, index) => (
               <div
                 key={orderedItem.id}
-                className={['draggable-item', isDragging ? 'draggable-item__dragging' : ''].join(' ')}
+                className={[
+                  'draggable-item',
+                  isDragging ? 'draggable-item__dragging' : '',
+                  isAlreadyChecked ? (orderedItem.isMatched ? 'draggable-item__valid' : 'draggable-item__invalid') : '',
+                ].filter(Boolean).join(' ')}
               >
                 <button
                   type="button"
@@ -110,12 +136,7 @@ export default function DragAndOrder({
                   onDragOver={(event) => handleDragOver(event)}
                   onDrop={(event) => handleDrop(event, index)}
                 >
-                  <img
-                    src="/assets/icon-park-outline-drag.png"
-                    alt="Draggable Item"
-                    width={25}
-                    height={25}
-                  />
+                  <img src={draggedItemIconUrl} alt="Draggable Item" width={25} height={25} />
                 </button>
                 <div
                   role="button"
@@ -126,14 +147,22 @@ export default function DragAndOrder({
                   onDragOver={(event) => handleDragOver(event)}
                   onDrop={(event) => handleDrop(event, index)}
                 >
-                  {orderedItem.text}
+                  <span>{orderedItem.text}</span>
+                  {isAlreadyChecked && (
+                    <img
+                      src={orderedItem.isMatched ? validIconUrl : invalidIconUrl}
+                      alt={orderedItem.isMatched ? 'Valid Icon' : 'Invalid Icon'}
+                      width={20}
+                      height={20}
+                    />
+                  )}
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        {showHint && (
+        {showHint && !isCorrect && (
           <div className="hint">
             <div><strong>Petunjuk:</strong></div>
             <p>{hintText.trim()}</p>
@@ -141,7 +170,7 @@ export default function DragAndOrder({
         )}
 
         <div className="buttons">
-          <button type="button" className="btn btn-secondary" onClick={() => resetOrder()}>
+          <button type="button" className="btn btn-secondary" onClick={() => reset()}>
             Reset
           </button>
           <button type="button" className="btn btn-primary" onClick={() => checkOrder()}>
