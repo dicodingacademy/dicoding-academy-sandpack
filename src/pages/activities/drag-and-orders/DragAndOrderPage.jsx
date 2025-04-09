@@ -1,36 +1,30 @@
 import React from 'react';
 import { useSearchParams } from 'react-router-dom';
 import DragAndOrder from '../../../components/activities/drag-and-order';
+import ActivitiesError from '../../../components/activities/commons/ActivitiesError';
 
-function DragAndOrderPage() {
+export default function DragAndOrderPage() {
   const [searchParams] = useSearchParams();
   const dataParam = searchParams.get('data');
 
   if (dataParam === null) {
-    return (<p>failed to show activities</p>);
+    return <ActivitiesError />;
   }
 
   try {
-    const data = JSON.parse(
-      atob(dataParam),
-    );
-
-    const { items, hint = '', storageKey } = data;
+    const jsonString = atob(dataParam);
+    const { items, hintText = '', storageKey } = JSON.parse(jsonString);
 
     if (!Array.isArray(items)) {
-      return (<p>failed to show activities</p>);
+      return <ActivitiesError />;
     }
 
     if (!storageKey) {
-      return (<p>failed to show activities</p>);
+      return <ActivitiesError />;
     }
 
-    return (
-      <DragAndOrder items={items} hint={hint} storageKey={storageKey} />
-    );
+    return <DragAndOrder items={items} hintText={hintText} storageKey={storageKey} />;
   } catch {
-    return (<p>failed to show activities</p>);
+    return <ActivitiesError />;
   }
 }
-
-export default DragAndOrderPage;

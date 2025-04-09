@@ -17,7 +17,6 @@ export default function DragAndOrderCreationPage() {
   ]);
   const [hintText, setHintText] = useState('');
 
-  const [width, onWidthChange] = useInput('100%');
   const [height, onHeightChange] = useInput('600');
   const [embedCode, setEmbedCode] = useState('');
 
@@ -47,13 +46,11 @@ export default function DragAndOrderCreationPage() {
     };
 
     const data = btoa(JSON.stringify(rawData));
-    const code = generateIframe(
+    setEmbedCode(generateIframe(
       `${window.location.protocol}//${window.location.host}/activities/drag-and-order?data=${data}`,
       'Dicoding Learning Activities',
       height,
-      width,
-    );
-    setEmbedCode(code);
+    ));
   }
 
   return (
@@ -103,14 +100,6 @@ export default function DragAndOrderCreationPage() {
         </div>
 
         <div className="embed-code">
-          <div>
-            <label>
-              <span>Width</span>
-              <div>
-                <input value={width} onChange={(event) => onWidthChange(event)} />
-              </div>
-            </label>
-          </div>
           <div>
             <label>
               <span>Height</span>
