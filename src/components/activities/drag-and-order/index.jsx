@@ -68,7 +68,7 @@ export default function DragAndOrder({
     }
 
     reset();
-  }, []);
+  }, [items]);
 
   useEffect(() => {
     if (attemptsCount >= 3) {

@@ -1,9 +1,16 @@
 import { useState } from 'react';
 
-function useInput(defaultValue = '') {
+export default function useInput(defaultValue = '') {
   const [value, setValue] = useState(defaultValue);
-  const onValueChange = (event) => setValue(event.target.value);
+
+  function onValueChange(event) {
+    if (typeof event === 'string') {
+      setValue(event);
+      return;
+    }
+
+    setValue(event.target.value);
+  }
+
   return [value, onValueChange];
 }
-
-export default useInput;

@@ -2,7 +2,7 @@
 
 import '../creation-style.css';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import DragAndOrder from '../../../components/activities/drag-and-order';
 import { generateIframe } from '../../../utils';
 import useInput from '../../../hooks/useInput';
@@ -17,9 +17,17 @@ export default function DragAndOrderCreationPage() {
   ]);
   const [hintText, setHintText] = useState('');
 
-  const [width, onWidthChange] = useInput('100%');
   const [height, onHeightChange] = useInput('600');
   const [embedCode, setEmbedCode] = useState('');
+
+  useEffect(() => {
+    const activitiesContainer = document.querySelector('.activities-container');
+
+    const hintBoxHeight = 55 * 2;
+    const heightCount = activitiesContainer.offsetHeight + hintBoxHeight;
+
+    onHeightChange(heightCount.toString());
+  }, [items]);
 
   function addNewItem() {
     const newItem = { id: generateId(), text: '' };
@@ -47,13 +55,11 @@ export default function DragAndOrderCreationPage() {
     };
 
     const data = btoa(JSON.stringify(rawData));
-    const code = generateIframe(
+    setEmbedCode(generateIframe(
       `${window.location.protocol}//${window.location.host}/activities/drag-and-order?data=${data}`,
       'Dicoding Learning Activities',
       height,
-      width,
-    );
-    setEmbedCode(code);
+    ));
   }
 
   return (
@@ -103,14 +109,6 @@ export default function DragAndOrderCreationPage() {
         </div>
 
         <div className="embed-code">
-          <div>
-            <label>
-              <span>Width</span>
-              <div>
-                <input value={width} onChange={(event) => onWidthChange(event)} />
-              </div>
-            </label>
-          </div>
           <div>
             <label>
               <span>Height</span>
