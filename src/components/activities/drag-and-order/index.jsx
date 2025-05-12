@@ -2,9 +2,10 @@ import './style.css';
 
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { Slide, toast, ToastContainer } from 'react-toastify';
 import ActivitiesContainer from '../commons/ActivitiesContainer';
 import { useTheme } from '../../../contexts/ThemeContext';
-import { cn } from '../../../utils';
+import { cn, toastOption } from '../../../utils';
 
 export default function DragAndOrder({
   items,
@@ -114,16 +115,17 @@ export default function DragAndOrder({
 
     if (!isOrderCorrect) {
       setAttemptsCount((prevState) => prevState + 1);
+      toast.error('Jawaban belum tepat. Coba lagi ya!', toastOption);
       return;
     }
 
-    // eslint-disable-next-line no-alert
-    alert('Selamat! Anda telah menyelesaikan tugas ini.');
+    toast.success('Jawaban benar!', toastOption);
   }
 
   return (
     <ActivitiesContainer>
       <>
+        <ToastContainer />
         <p className="activities__instructions">{instructionsText}</p>
 
         <div className="drag-drop">
