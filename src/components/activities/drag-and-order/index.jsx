@@ -2,7 +2,7 @@ import './style.css';
 
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Slide, toast, ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import ActivitiesContainer from '../commons/ActivitiesContainer';
 import { useTheme } from '../../../contexts/ThemeContext';
 import { cn, toastOption } from '../../../utils';
