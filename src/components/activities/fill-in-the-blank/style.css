@@ -2,16 +2,11 @@
   background-color: var(--card-bg);
   padding: 1.5rem;
   border-radius: 0.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border: 1px solid var(--border-color);
-  max-width: 32rem;
-  margin: 0 1rem;
-  position: relative;
 }
 
 .fill-blank-text {
   font-size: 1.25rem;
-  margin-bottom: 1.5rem;
   color: var(--text-color);
   line-height: 2;
 }
@@ -23,9 +18,9 @@
 
 .fill-blank input {
   padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border-color);
   background-color: var(--bg-color);
-  border: none;
-  border-bottom: 2px solid var(--primary-color);
   margin: 0 0.5rem;
   font-size: 1rem;
   outline: none;
@@ -36,6 +31,18 @@
 }
 
 .fill-blank input:focus {
-  border-bottom-color: var(--primary-hover);
-  background-color: var(--border-color);
+  border-color: #3F3F46;
 }
+
+.fill-blank .input-container.correct input {
+  border-color: #34D399;
+  background-color: #ECFDF5;
+  color: black;
+}
+
+.fill-blank .input-container.incorrect input {
+  border-color: #FB7185;
+  background-color: #FECDD3;
+  color: black;
+}
+

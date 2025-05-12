@@ -4,16 +4,18 @@ import './style.css';
 
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { cn } from '../../../utils';
+import { toast, ToastContainer } from 'react-toastify';
+import { toastOption } from '../../../utils';
 import ActivitiesContainer from '../commons/ActivitiesContainer';
 
 function FillInTheBlank({
-  template, answers, storageKey, hint,
+  template, answers, storageKey, hint, instructionsText,
 }) {
   const [userAnswers, setUserAnswers] = useState([]);
   const [isCorrect, setIsCorrect] = useState(null);
   const [attempts, setAttempts] = useState(0);
   const [showHint, setShowHint] = useState(false);
+  const [correctness, setCorrectness] = useState([]);
 
   useEffect(() => {
     if (storageKey !== 'temporary') {
@@ -40,16 +42,24 @@ function FillInTheBlank({
       (answer, index) => answer.toLowerCase() === answers[index].toLowerCase(),
     );
 
+    setCorrectness(results);
     const isAllCorrect = results.every((result) => result);
     setIsCorrect(isAllCorrect);
 
     if (!isAllCorrect) {
       const newAttempts = attempts + 1;
       setAttempts(newAttempts);
+
+      toast.error('Jawaban belum tepat. Coba lagi ya!', toastOption);
+
       if (newAttempts >= 3) {
         setShowHint(true);
       }
+
+      return;
     }
+
+    toast.success('Jawaban benar.', toastOption);
   };
 
   const resetAnswers = () => {
@@ -59,23 +69,43 @@ function FillInTheBlank({
     setShowHint(false);
     localStorage.setItem(storageKey, JSON.stringify(emptyAnswers));
     setIsCorrect(null);
+    setCorrectness([]);
   };
 
   const renderTemplate = () => {
     const parts = template.split(/\{(\d+)}/);
+    let inputIndex = 0;
+
     return parts.map((part, index) => {
       if (index % 2 === 0) {
         return <span key={index}>{part}</span>;
       }
       const answerIndex = parseInt(part, 10) - 1;
       const expectedLength = answers[answerIndex]?.length;
+
+      if (correctness.length > 1) {
+        const correct = correctness[inputIndex];
+        inputIndex += 1;
+        return (
+          <div key={index} className={`input-container ${correct ? 'correct' : 'incorrect'}`}>
+            <input
+              type="text"
+              value={userAnswers[answerIndex] || ''}
+              onChange={(e) => handleInputChange(answerIndex, e.target.value)}
+              style={{ width: `${expectedLength * 1}em` }}
+              maxLength={expectedLength + 5}
+            />
+          </div>
+        );
+      }
+
       return (
         <div key={index} className="input-container">
           <input
             type="text"
             value={userAnswers[answerIndex] || ''}
             onChange={(e) => handleInputChange(answerIndex, e.target.value)}
-            style={{ width: `${expectedLength * 0.85}em` }}
+            style={{ width: `${expectedLength * 1}em` }}
             maxLength={expectedLength + 5}
           />
         </div>
@@ -85,35 +115,31 @@ function FillInTheBlank({
 
   return (
     <ActivitiesContainer>
+      <ToastContainer />
+      <p className="activities__instructions">{instructionsText}</p>
       <div className="fill-blank">
         <div className="fill-blank-text">
           {renderTemplate()}
         </div>
+      </div>
 
-        <div className="buttons">
-          <button type="button" onClick={checkAnswers} className="btn btn-primary">
-            Check Answers
-          </button>
-          <button type="button" onClick={resetAnswers} className="btn btn-secondary">
-            Reset
-          </button>
-        </div>
-
-        {isCorrect !== null && (
-        <div className={cn('feedback', { success: isCorrect, error: !isCorrect })}>
-          {isCorrect ? 'All answers are correct!' : 'Try again!'}
-        </div>
-        )}
-
-        {showHint && !isCorrect && (
+      {showHint && !isCorrect && (
         <div className="hint">
           <p>
-            Hint:
+            <strong>Petunjuk:</strong>
             {' '}
             {hint}
           </p>
         </div>
-        )}
+      )}
+
+      <div className="buttons">
+        <button type="button" onClick={resetAnswers} className="btn btn-secondary">
+          Reset
+        </button>
+        <button type="button" onClick={checkAnswers} className="btn btn-primary">
+          Periksa jawaban
+        </button>
       </div>
     </ActivitiesContainer>
   );
@@ -125,10 +151,12 @@ FillInTheBlank.propTypes = {
   answers: PropTypes.arrayOf(PropTypes.string).isRequired,
   storageKey: PropTypes.string,
   hint: PropTypes.string.isRequired,
+  instructionsText: PropTypes.string,
 };
 
 FillInTheBlank.defaultProps = {
   storageKey: 'temporary',
+  instructionsText: 'Lengkapi kalimat berikut dengan kata yang tepat.',
 };
 
 export default FillInTheBlank;
