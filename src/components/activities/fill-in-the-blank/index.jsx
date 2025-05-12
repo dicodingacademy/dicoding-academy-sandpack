@@ -83,7 +83,7 @@ function FillInTheBlank({
       const answerIndex = parseInt(part, 10) - 1;
       const expectedLength = answers[answerIndex]?.length;
 
-      if (correctness.length > 1) {
+      if (correctness.length > 0) {
         const correct = correctness[inputIndex];
         inputIndex += 1;
         return (
