@@ -56,7 +56,7 @@ export default function DragAndOrderCreationPage() {
 
     const data = btoa(JSON.stringify(rawData));
     setEmbedCode(generateIframe(
-      `${window.location.protocol}//${window.location.host}/activities/drag-and-order?data=${data}`,
+      `${window.location.protocol}//${window.location.host}/activities/drag-and-order?data=${encodeURIComponent(data)}`,
       'Dicoding Learning Activities',
       height,
     ));

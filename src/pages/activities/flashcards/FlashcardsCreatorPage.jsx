@@ -46,7 +46,7 @@ export default function FlashcardsCreatorPage() {
     const data = btoa(JSON.stringify(cards));
 
     setEmbedCode(generateIframe(
-      `${window.location.protocol}//${window.location.host}/activities/flashcards?data=${data}`,
+      `${window.location.protocol}//${window.location.host}/activities/flashcards?data=${encodeURIComponent(data)}`,
       'Dicoding Learning Activities',
       height,
     ));
