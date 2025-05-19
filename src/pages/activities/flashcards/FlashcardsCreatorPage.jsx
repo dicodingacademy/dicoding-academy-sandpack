@@ -18,6 +18,7 @@ export default function FlashcardsCreatorPage() {
 
   const [height, onHeightChange] = useInput('600');
   const [embedCode, setEmbedCode] = useState('');
+  const [instruction, setInstruction] = useState('Klik kartu untuk melihat jawabannya.');
 
   useEffect(() => {
     const activitiesContainer = document.querySelector('.activities-container');
@@ -43,7 +44,7 @@ export default function FlashcardsCreatorPage() {
   };
 
   const generateEmbedCode = () => {
-    const data = btoa(JSON.stringify(cards));
+    const data = btoa(JSON.stringify({ cards, instruction }));
 
     setEmbedCode(generateIframe(
       `${window.location.protocol}//${window.location.host}/activities/flashcards?data=${encodeURIComponent(data)}`,
@@ -99,6 +100,17 @@ export default function FlashcardsCreatorPage() {
           </button>
         </div>
 
+        <div className="instruction-text">
+          <label>Instruction Text</label>
+          <div>
+            <input
+              value={instruction}
+              placeholder="Enter your instruction text"
+              onChange={(event) => setInstruction(event.target.value)}
+            />
+          </div>
+        </div>
+
         <div className="embed-code">
           <div>
             <label>
@@ -125,7 +137,7 @@ export default function FlashcardsCreatorPage() {
       <div className="creation-preview">
         <h2>Preview</h2>
 
-        <Flashcards cards={cards} />
+        <Flashcards cards={cards} instructionsText={instruction} />
       </div>
     </div>
   );
