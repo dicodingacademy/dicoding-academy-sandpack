@@ -7,6 +7,7 @@ function FillInBlankCreationPage() {
   const [answers, setAnswers] = useState(['']);
   const [hint, setHint] = useState('');
   const [embedCode, setEmbedCode] = useState('');
+  const [instruction, setInstruction] = useState('Lengkapi kalimat berikut dengan kata yang tepat.');
 
   const addAnswer = () => {
     setAnswers([...answers, '']);
@@ -40,6 +41,7 @@ function FillInBlankCreationPage() {
       answers,
       hint,
       storageKey: `fill-in-the-blank-${+new Date()}`,
+      instruction,
     };
 
     const data = btoa(JSON.stringify(rawData));
@@ -114,6 +116,11 @@ function FillInBlankCreationPage() {
             />
           </div>
 
+          <div className="input-group">
+            <label htmlFor="instruction">Instruksi:</label>
+            <input id="instruction" value={instruction} onChange={(e) => setInstruction(e.target.value)} />
+          </div>
+
           <button type="button" onClick={addAnswer} className="btn btn-primary add-btn">
             Add New Answer
           </button>
@@ -133,7 +140,12 @@ function FillInBlankCreationPage() {
 
       <div className="creation-preview">
         <h2>Preview</h2>
-        <FillInTheBlank template={template} answers={answers} hint={hint} />
+        <FillInTheBlank
+          template={template}
+          answers={answers}
+          hint={hint}
+          instructionText={instruction}
+        />
       </div>
     </div>
   );
