@@ -10,8 +10,8 @@ import { cn, toastOption } from '../../../utils';
 export default function DragAndOrder({
   items,
   hintText,
-  instructionsText = 'Urutkan baris berikut sesuai urutan yang benar.',
-  storageKey = 'temporary',
+  instructionText,
+  storageKey,
 }) {
   const { theme } = useTheme();
 
@@ -126,7 +126,7 @@ export default function DragAndOrder({
     <ActivitiesContainer>
       <>
         <ToastContainer />
-        <p className="activities__instructions">{instructionsText}</p>
+        <p className="activities__instructions">{instructionText}</p>
 
         <div className="drag-drop">
           <div className="draggable-items">
@@ -202,6 +202,11 @@ DragAndOrder.propTypes = {
     }),
   ).isRequired,
   hintText: PropTypes.string.isRequired,
-  instructionsText: PropTypes.string,
+  instructionText: PropTypes.string,
   storageKey: PropTypes.string,
+};
+
+DragAndOrder.defaultProps = {
+  instructionText: 'Drag and drop the items to the correct order',
+  storageKey: 'temporary',
 };
