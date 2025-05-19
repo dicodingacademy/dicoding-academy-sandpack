@@ -66,6 +66,13 @@
 
 .flashcards-item__inner__back {
   background-color: var(--flipped-card-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: #FFFFFF;
   transform: rotateY(180deg);
+}
+
+.flashcards-item__inner__front div, .flashcards-item__inner__back div {
+  max-height: 100%;
 }
