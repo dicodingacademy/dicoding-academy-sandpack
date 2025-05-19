@@ -16,7 +16,11 @@ function FillInTheBlankPage() {
     );
 
     const {
-      template, answers, hint = '', storageKey,
+      template,
+      answers,
+      hint = '',
+      storageKey,
+      instruction,
     } = data;
 
     if (!template) {
@@ -37,6 +41,7 @@ function FillInTheBlankPage() {
         answers={answers}
         hint={hint}
         storageKey={storageKey}
+        instructionText={instruction}
       />
     );
   } catch {
