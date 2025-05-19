@@ -53,7 +53,7 @@ FlashcardItem.propTypes = {
 export default function Flashcards({ instructionsText, cards }) {
   return (
     <ActivitiesContainer>
-      <p className="activities__instructions">{instructionsText || 'Klik kartu untuk melihat jawabannya.'}</p>
+      <p className="activities__instructions">{instructionsText}</p>
 
       <div className="flashcards">
         {cards.map((card) => (
@@ -77,4 +77,8 @@ Flashcards.propTypes = {
       back: PropTypes.string.isRequired,
     }),
   ).isRequired,
+};
+
+Flashcards.defaultProps = {
+  instructionsText: 'Klik kartu untuk melihat jawabannya.',
 };
