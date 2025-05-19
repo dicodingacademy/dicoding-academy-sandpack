@@ -13,7 +13,9 @@ export default function DragAndOrderPage() {
 
   try {
     const jsonString = atob(dataParam);
-    const { items, hintText = '', storageKey } = JSON.parse(jsonString);
+    const {
+      items, hintText = '', storageKey, instruction,
+    } = JSON.parse(jsonString);
 
     if (!Array.isArray(items)) {
       return <ActivitiesError />;
@@ -23,7 +25,14 @@ export default function DragAndOrderPage() {
       return <ActivitiesError />;
     }
 
-    return <DragAndOrder items={items} hintText={hintText} storageKey={storageKey} />;
+    return (
+      <DragAndOrder
+        items={items}
+        hintText={hintText}
+        storageKey={storageKey}
+        instructionText={instruction}
+      />
+    );
   } catch {
     return <ActivitiesError />;
   }
