@@ -13,13 +13,21 @@ export default function FlashcardsPage() {
   }
 
   try {
-    const cards = JSON.parse(atob(dataParam));
+    const data = JSON.parse(atob(dataParam));
+
+    if (Array.isArray(data)) {
+      return <Flashcards cards={data} />;
+    }
+
+    const { cards, instruction } = data;
 
     if (!Array.isArray(cards)) {
       return <ActivitiesError />;
     }
 
-    return <Flashcards cards={cards} />;
+    if (Array.isArray(cards)) {
+      return <Flashcards instructionsText={instruction} cards={cards} />;
+    }
   } catch {
     return <ActivitiesError />;
   }
