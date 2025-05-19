@@ -19,6 +19,7 @@ export default function DragAndOrderCreationPage() {
 
   const [height, onHeightChange] = useInput('600');
   const [embedCode, setEmbedCode] = useState('');
+  const [instruction, setInstruction] = useState('Drag and drop the items to the correct order.');
 
   useEffect(() => {
     const activitiesContainer = document.querySelector('.activities-container');
@@ -52,6 +53,7 @@ export default function DragAndOrderCreationPage() {
       items,
       hintText,
       storageKey: `drag-and-order-${performance.now()}`,
+      instruction,
     };
 
     const data = btoa(JSON.stringify(rawData));
@@ -102,6 +104,16 @@ export default function DragAndOrderCreationPage() {
           />
         </div>
 
+        <div className="input-group">
+          <label htmlFor="instruction">Instruksi:</label>
+          <input
+            id="instruction"
+            placeholder="Masukkan instruksi untuk membantu siswa."
+            value={instruction}
+            onChange={(event) => setInstruction(event.target.value)}
+          />
+        </div>
+
         <div className="creation-form__buttons">
           <button type="button" className="btn btn-primary add-btn" onClick={() => addNewItem()}>
             Add New Item
@@ -134,7 +146,7 @@ export default function DragAndOrderCreationPage() {
       <div className="creation-preview">
         <h2>Preview</h2>
 
-        <DragAndOrder items={items} hintText={hintText} />
+        <DragAndOrder items={items} hintText={hintText} instructionText={instruction} />
       </div>
     </div>
   );
