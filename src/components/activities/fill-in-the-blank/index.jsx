@@ -9,7 +9,7 @@ import { toastOption } from '../../../utils';
 import ActivitiesContainer from '../commons/ActivitiesContainer';
 
 function FillInTheBlank({
-  template, answers, storageKey, hint, instructionsText,
+  template, answers, storageKey, hint, instructionText,
 }) {
   const [userAnswers, setUserAnswers] = useState([]);
   const [isCorrect, setIsCorrect] = useState(null);
@@ -116,7 +116,7 @@ function FillInTheBlank({
   return (
     <ActivitiesContainer>
       <ToastContainer />
-      <p className="activities__instructions">{instructionsText}</p>
+      <p className="activities__instructions">{instructionText}</p>
       <div className="fill-blank">
         <div className="fill-blank-text">
           {renderTemplate()}
@@ -151,12 +151,12 @@ FillInTheBlank.propTypes = {
   answers: PropTypes.arrayOf(PropTypes.string).isRequired,
   storageKey: PropTypes.string,
   hint: PropTypes.string.isRequired,
-  instructionsText: PropTypes.string,
+  instructionText: PropTypes.string,
 };
 
 FillInTheBlank.defaultProps = {
   storageKey: 'temporary',
-  instructionsText: 'Lengkapi kalimat berikut dengan kata yang tepat.',
+  instructionText: 'Lengkapi kalimat berikut dengan kata yang tepat.',
 };
 
 export default FillInTheBlank;
