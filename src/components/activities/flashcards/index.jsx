@@ -55,7 +55,12 @@ export default function Flashcards({ instructionsText, cards }) {
     <ActivitiesContainer>
       <p className="activities__instructions">{instructionsText}</p>
 
-      <div className="flashcards">
+      <div
+        className="flashcards"
+        style={{
+          gridTemplateColumns: `repeat(${cards.length}, minmax(auto, 250px))`,
+        }}
+      >
         {cards.map((card) => (
           <FlashcardItem
             key={card.id}
