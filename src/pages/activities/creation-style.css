@@ -13,8 +13,8 @@ body {
 
   display: grid;
   align-items: start;
-  grid-template-columns: 1fr;
   gap: 15px;
+  grid-template-columns: 1fr 2fr;
 }
 
 /* creation Form */
@@ -22,9 +22,7 @@ body {
   padding: 1.5rem;
   border: 1px solid #e5e7eb;
   border-radius: 0.5rem;
-
   background-color: #ffffff;
-
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
@@ -38,7 +36,10 @@ body {
   position: sticky;
   top: 16px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  max-width: 1000px;
+  overflow: scroll;
 }
+
 .creation-preview .activities-container {
   min-height: auto;
 }
@@ -176,10 +177,4 @@ h3 {
   height: 100px;
   width: 100%;
   resize: vertical;
-}
-
-@media screen and (width > 800px) {
-  .creation-container {
-    grid-template-columns: 350px 2fr;
-  }
 }
