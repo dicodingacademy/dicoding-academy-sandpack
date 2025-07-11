@@ -3,6 +3,7 @@
 import '../creation-style.css';
 
 import React, { useEffect, useState } from 'react';
+import Editor, { Toolbar } from 'react-simple-wysiwyg';
 import Flashcards from '../../../components/activities/flashcards';
 import { generateIframe } from '../../../utils';
 import useInput from '../../../hooks/useInput';
@@ -63,22 +64,26 @@ export default function FlashcardsCreatorPage() {
             <div key={card.id} className="card-input">
               <div className="input-group">
                 <label>
-                  <div>Front:</div>
-                  <textarea
+                  <div>Front: </div>
+                  <Editor
+                    placeholder="CTRL + B = bold, CTRL + I = italic"
                     value={card.front}
-                    placeholder="Enter your front content"
                     onChange={(event) => updateCard(card, 'front', event.target.value)}
-                  />
+                  >
+                    <Toolbar />
+                  </Editor>
                 </label>
               </div>
               <div className="input-group">
                 <label>
                   <div>Back:</div>
-                  <textarea
+                  <Editor
                     value={card.back}
-                    placeholder="Enter your back content"
+                    placeholder="CTRL + B = bold, CTRL + I = italic"
                     onChange={(event) => updateCard(card, 'back', event.target.value)}
-                  />
+                  >
+                    <Toolbar />
+                  </Editor>
                 </label>
               </div>
               {cards.length > 1 && (

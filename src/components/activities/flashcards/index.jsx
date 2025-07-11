@@ -95,7 +95,6 @@ Flashcards.propTypes = {
       id: PropTypes.string.isRequired,
       front: PropTypes.string.isRequired,
       back: PropTypes.string.isRequired,
-      accentColor: PropTypes.string.isRequired,
     }),
   ).isRequired,
 };
