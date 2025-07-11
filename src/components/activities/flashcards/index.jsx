@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import ActivitiesContainer from '../commons/ActivitiesContainer';
 import { cn } from '../../../utils';
 
-function FlashcardItem({ front, back }) {
+function FlashcardItem({ front, back, accentColor }) {
   const [isFlipped, setIsFlipped] = useState(false);
 
   const flipCard = () => {
@@ -36,7 +36,13 @@ function FlashcardItem({ front, back }) {
           {/* eslint-disable-next-line react/no-danger */}
           <div dangerouslySetInnerHTML={{ __html: front }} />
         </div>
-        <div className="flashcards-item__inner__back">
+
+        <div
+          className="flashcards-item__inner__back"
+          style={{
+            backgroundColor: accentColor,
+          }}
+        >
           {/* eslint-disable-next-line react/no-danger */}
           <div dangerouslySetInnerHTML={{ __html: back }} />
         </div>
@@ -48,9 +54,17 @@ function FlashcardItem({ front, back }) {
 FlashcardItem.propTypes = {
   front: PropTypes.string.isRequired,
   back: PropTypes.string.isRequired,
+  accentColor: PropTypes.string.isRequired,
 };
 
 export default function Flashcards({ instructionsText, cards }) {
+  const accentColors = [
+    '#3B82F6',
+    '#F43F5E',
+    '#F59E0B',
+    '#10B981',
+
+  ];
   return (
     <ActivitiesContainer>
       <p className="activities__instructions">{instructionsText}</p>
@@ -61,11 +75,12 @@ export default function Flashcards({ instructionsText, cards }) {
           gridTemplateColumns: `repeat(${cards.length}, minmax(auto, 250px))`,
         }}
       >
-        {cards.map((card) => (
+        {cards.map((card, index) => (
           <FlashcardItem
             key={card.id}
             front={card.front}
             back={card.back}
+            accentColor={accentColors[index % accentColors.length]}
           />
         ))}
       </div>
