@@ -16,7 +16,7 @@ export default function FlashcardsCreatorPage() {
     { id: generateId(), front: '', back: '' },
   ]);
 
-  const [height, onHeightChange] = useInput('600');
+  const [height, onHeightChange] = useInput('550');
   const [embedCode, setEmbedCode] = useState('');
   const [instruction, setInstruction] = useState('Klik kartu untuk melihat jawabannya.');
 
@@ -94,15 +94,9 @@ export default function FlashcardsCreatorPage() {
           ))}
         </div>
 
-        <div className="creation-form__buttons">
-          <button type="button" className="btn btn-primary add-btn" onClick={() => addCard()}>
-            Add New Card
-          </button>
-        </div>
-
         <div className="instruction-text">
           <label>Instruction Text</label>
-          <div>
+          <div className="input-group">
             <input
               value={instruction}
               placeholder="Enter your instruction text"
@@ -111,16 +105,13 @@ export default function FlashcardsCreatorPage() {
           </div>
         </div>
 
-        <div className="embed-code">
-          <div>
-            <label>
-              <span>Height</span>
-              <div>
-                <input value={height} onChange={(event) => onHeightChange(event)} />
-              </div>
-            </label>
-          </div>
+        <div className="creation-form__buttons">
+          <button type="button" className="btn btn-primary add-btn" onClick={() => addCard()}>
+            Add New Card
+          </button>
+        </div>
 
+        <div className="embed-code">
           <button type="button" className="btn btn-primary generate-embed-btn" onClick={() => generateEmbedCode()}>
             Generate Embed Code
           </button>
