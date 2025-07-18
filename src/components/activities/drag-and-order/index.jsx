@@ -30,9 +30,7 @@ export default function DragAndOrder({
   const [draggedItem, setDraggedItem] = useState(null);
 
   const [isAlreadyChecked, setIsAlreadyChecked] = useState(false);
-  const [isCorrect, setIsCorrect] = useState(false);
   const [attemptsCount, setAttemptsCount] = useState(0);
-  const [showHint, setShowHint] = useState(false);
 
   useEffect(() => {
     setValidIconUrl(theme.toString() === 'light' ? validIconLightUrl : validIconDarkUrl);
@@ -46,9 +44,7 @@ export default function DragAndOrder({
     setOrderedItems(shuffledItems.map((item) => ({ ...item, isMatched: false })));
 
     setIsAlreadyChecked(false);
-    setIsCorrect(false);
     setAttemptsCount(0);
-    setShowHint(false);
   }
 
   useEffect(() => {
@@ -70,12 +66,6 @@ export default function DragAndOrder({
 
     reset();
   }, [items]);
-
-  useEffect(() => {
-    if (attemptsCount >= 3) {
-      setShowHint(true);
-    }
-  }, [attemptsCount]);
 
   function handleDragStart(event, orderedItem) {
     setIsDragging(true);
@@ -111,7 +101,10 @@ export default function DragAndOrder({
     setIsAlreadyChecked(true);
 
     const isOrderCorrect = checkedReorderItems.every(({ isMatched }) => isMatched);
-    setIsCorrect(isOrderCorrect);
+
+    if (attemptsCount > 3) {
+      toast.warn(`Pentunjuk: ${hintText}`, toastOption);
+    }
 
     if (!isOrderCorrect) {
       setAttemptsCount((prevState) => prevState + 1);
@@ -172,13 +165,6 @@ export default function DragAndOrder({
             ))}
           </div>
         </div>
-
-        {showHint && !isCorrect && (
-          <div className="hint">
-            <div><strong>Petunjuk:</strong></div>
-            <p>{hintText.trim()}</p>
-          </div>
-        )}
 
         <div className="buttons">
           <button type="button" className="btn btn-secondary" onClick={() => reset()}>
