@@ -12,9 +12,7 @@ function FillInTheBlank({
   template, answers, storageKey, hint, instructionText,
 }) {
   const [userAnswers, setUserAnswers] = useState([]);
-  const [isCorrect, setIsCorrect] = useState(null);
   const [attempts, setAttempts] = useState(0);
-  const [showHint, setShowHint] = useState(false);
   const [correctness, setCorrectness] = useState([]);
 
   useEffect(() => {
@@ -44,18 +42,17 @@ function FillInTheBlank({
 
     setCorrectness(results);
     const isAllCorrect = results.every((result) => result);
-    setIsCorrect(isAllCorrect);
 
     if (!isAllCorrect) {
       const newAttempts = attempts + 1;
       setAttempts(newAttempts);
 
-      toast.error('Jawaban belum tepat. Coba lagi ya!', toastOption);
-
       if (newAttempts >= 3) {
-        setShowHint(true);
+        toast.warn(`Petunjuk: ${hint}`, toastOption);
+        return;
       }
 
+      toast.error('Jawaban belum tepat. Coba lagi ya!', toastOption);
       return;
     }
 
@@ -66,9 +63,7 @@ function FillInTheBlank({
     const emptyAnswers = new Array(answers.length).fill('');
     setUserAnswers(emptyAnswers);
     setAttempts(0);
-    setShowHint(false);
     localStorage.setItem(storageKey, JSON.stringify(emptyAnswers));
-    setIsCorrect(null);
     setCorrectness([]);
   };
 
@@ -122,16 +117,6 @@ function FillInTheBlank({
           {renderTemplate()}
         </div>
       </div>
-
-      {showHint && !isCorrect && (
-        <div className="hint">
-          <p>
-            <strong>Petunjuk:</strong>
-            {' '}
-            {hint}
-          </p>
-        </div>
-      )}
 
       <div className="buttons">
         <button type="button" onClick={resetAnswers} className="btn btn-secondary">
