@@ -3,7 +3,9 @@
 import '../creation-style.css';
 
 import React, { useEffect, useState } from 'react';
-import Editor, { Toolbar } from 'react-simple-wysiwyg';
+import Editor, {
+  BtnBold, BtnClearFormatting, BtnItalic, BtnStrikeThrough, BtnStyles, BtnUnderline, Toolbar,
+} from 'react-simple-wysiwyg';
 import Flashcards from '../../../components/activities/flashcards';
 import { generateIframe } from '../../../utils';
 import useInput from '../../../hooks/useInput';
@@ -70,7 +72,14 @@ export default function FlashcardsCreatorPage() {
                     value={card.front}
                     onChange={(event) => updateCard(card, 'front', event.target.value)}
                   >
-                    <Toolbar />
+                    <Toolbar>
+                      <BtnBold />
+                      <BtnItalic />
+                      <BtnUnderline />
+                      <BtnStrikeThrough />
+                      <BtnClearFormatting />
+                      <BtnStyles />
+                    </Toolbar>
                   </Editor>
                 </label>
               </div>
@@ -82,7 +91,14 @@ export default function FlashcardsCreatorPage() {
                     placeholder="CTRL + B = bold, CTRL + I = italic"
                     onChange={(event) => updateCard(card, 'back', event.target.value)}
                   >
-                    <Toolbar />
+                    <Toolbar>
+                      <BtnBold />
+                      <BtnItalic />
+                      <BtnUnderline />
+                      <BtnStrikeThrough />
+                      <BtnClearFormatting />
+                      <BtnStyles />
+                    </Toolbar>
                   </Editor>
                 </label>
               </div>
@@ -132,7 +148,6 @@ export default function FlashcardsCreatorPage() {
 
       <div className="creation-preview">
         <h2>Preview</h2>
-
         <Flashcards cards={cards} instructionsText={instruction} />
       </div>
     </div>
