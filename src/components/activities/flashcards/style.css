@@ -76,3 +76,16 @@
 .flashcards-item__inner__front div, .flashcards-item__inner__back div {
   max-height: 100%;
 }
+
+.flashcards-item__inner__front img, .flashcards-item__inner__back img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  aspect-ratio: 1 /1;
+  border-radius: 50%;
+}
+
+.rsw-ce img {
+  max-height: 100%;
+  max-width: 100%;
+}
