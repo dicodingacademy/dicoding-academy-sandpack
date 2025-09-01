@@ -1,13 +1,9 @@
-/* eslint-disable react/no-array-index-key */
-/* eslint-disable no-nested-ternary */
-/* eslint-disable react/no-unstable-nested-components */
-/* eslint-disable react/prop-types */
-/* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable object-curly-newline */
-
+/* eslint-disable react/jsx-props-no-spreading, react/no-unstable-nested-components */
 import './style.css';
 
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React, {
+  useState, useEffect, useMemo, useCallback,
+} from 'react';
 import PropTypes from 'prop-types';
 import { toast, ToastContainer } from 'react-toastify';
 import Markdown from 'react-markdown';
@@ -28,7 +24,12 @@ function InputInline({ answerIndex }) {
   const ctx = React.useContext(FillBlankContext);
   const expectedLength = ctx.answers[answerIndex]?.length || 5;
   const correct = ctx.correctness.length > 0 ? !!ctx.correctness[answerIndex] : null;
-  const className = `input-container${correct === null ? '' : (correct ? ' correct' : ' incorrect')}`;
+  let className = 'input-container';
+  if (correct === true) {
+    className += ' correct';
+  } else if (correct === false) {
+    className += ' incorrect';
+  }
   const value = ctx.userAnswers[answerIndex] || '';
 
   return (
@@ -43,6 +44,54 @@ function InputInline({ answerIndex }) {
     </span>
   );
 }
+
+InputInline.propTypes = {
+  answerIndex: PropTypes.number.isRequired,
+};
+
+// Extracted components to avoid nested component definitions
+function MarkdownRenderer({
+  Tag, children, processChildren, ...rest
+}) {
+  return (
+    <Tag {...rest}>
+      {processChildren(children)}
+    </Tag>
+  );
+}
+
+MarkdownRenderer.propTypes = {
+  Tag: PropTypes.string.isRequired,
+  children: PropTypes.node,
+  processChildren: PropTypes.func.isRequired,
+};
+
+function CodeRenderer({
+  inline, className, children, processChildren, ...props
+}) {
+  const content = processChildren(children);
+  if (inline) {
+    return (
+      <code className={className} {...props}>
+        {content}
+      </code>
+    );
+  }
+  return (
+    <pre className={className ? `code-block ${className}` : 'code-block'}>
+      <code className={className} {...props}>
+        {content}
+      </code>
+    </pre>
+  );
+}
+
+CodeRenderer.propTypes = {
+  inline: PropTypes.bool,
+  className: PropTypes.string,
+  children: PropTypes.node,
+  processChildren: PropTypes.func.isRequired,
+};
 
 function FillInTheBlank({
   template, answers, storageKey, hint, instructionText,
@@ -164,50 +213,24 @@ function FillInTheBlank({
     return result;
   };
 
-  const makeRenderer = (Tag) => function Renderer(props) {
-    const { children, ...rest } = props;
-    return (
-      <Tag {...rest}>
-        {processChildren(children)}
-      </Tag>
-    );
-  };
-
   // Memoize components map to avoid re-creating on each render
   const markdownComponents = useMemo(() => ({
     // Process common container/inline elements, including code/pre
-    p: makeRenderer('p'),
-    li: makeRenderer('li'),
-    span: makeRenderer('span'),
-    strong: makeRenderer('strong'),
-    em: makeRenderer('em'),
-    blockquote: makeRenderer('blockquote'),
-    h1: makeRenderer('h1'),
-    h2: makeRenderer('h2'),
-    h3: makeRenderer('h3'),
-    h4: makeRenderer('h4'),
-    h5: makeRenderer('h5'),
-    h6: makeRenderer('h6'),
-    code: ({ inline, className, children, ...props }) => {
-      const content = processChildren(children);
-      if (inline) {
-        return (
-          // inline code
-          <code className={className} {...props}>
-            {content}
-          </code>
-        );
-      }
-      // fenced code block
-      return (
-        <pre className={className ? `code-block ${className}` : 'code-block'}>
-          <code className={className} {...props}>
-            {content}
-          </code>
-        </pre>
-      );
-    },
-  }), []);
+    p: (props) => <MarkdownRenderer Tag="p" processChildren={processChildren} {...props} />,
+    li: (props) => <MarkdownRenderer Tag="li" processChildren={processChildren} {...props} />,
+    span: (props) => <MarkdownRenderer Tag="span" processChildren={processChildren} {...props} />,
+    strong: (props) => <MarkdownRenderer Tag="strong" processChildren={processChildren} {...props} />,
+    em: (props) => <MarkdownRenderer Tag="em" processChildren={processChildren} {...props} />,
+    blockquote: (props) => <MarkdownRenderer Tag="blockquote" processChildren={processChildren} {...props} />,
+    h1: (props) => <MarkdownRenderer Tag="h1" processChildren={processChildren} {...props} />,
+    h2: (props) => <MarkdownRenderer Tag="h2" processChildren={processChildren} {...props} />,
+    h3: (props) => <MarkdownRenderer Tag="h3" processChildren={processChildren} {...props} />,
+    h4: (props) => <MarkdownRenderer Tag="h4" processChildren={processChildren} {...props} />,
+    h5: (props) => <MarkdownRenderer Tag="h5" processChildren={processChildren} {...props} />,
+    h6: (props) => <MarkdownRenderer Tag="h6" processChildren={processChildren} {...props} />,
+    code: (props) => <CodeRenderer processChildren={processChildren} {...props} />,
+
+  }), [processChildren]);
 
   return (
     <ActivitiesContainer>
