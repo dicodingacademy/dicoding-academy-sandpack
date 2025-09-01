@@ -28,6 +28,7 @@ export default function DragAndOrder({
   const [orderedItems, setOrderedItems] = useState([]);
   const [isDragging, setIsDragging] = useState(false);
   const [draggedItem, setDraggedItem] = useState(null);
+  const [dragOverIndex, setDragOverIndex] = useState(null);
 
   const [isAlreadyChecked, setIsAlreadyChecked] = useState(false);
   const [attemptsCount, setAttemptsCount] = useState(0);
@@ -70,25 +71,93 @@ export default function DragAndOrder({
   function handleDragStart(event, orderedItem) {
     setIsDragging(true);
     setDraggedItem(orderedItem);
-    event.dataTransfer.setData('text/plain', orderedItem);
+    event.dataTransfer.effectAllowed = 'move';
+    event.dataTransfer.setData('text/plain', JSON.stringify(orderedItem));
   }
 
   function handleDragOver(event) {
     event.preventDefault();
+    event.dataTransfer.dropEffect = 'move';
+  }
+
+  function handleDragEnter(event, index) {
+    event.preventDefault();
+    if (!draggedItem) return;
+
+    const rect = event.currentTarget.getBoundingClientRect();
+    const y = event.clientY - rect.top;
+    const itemHeight = rect.height;
+
+    // If dragging over top half, insert before this item
+    // If dragging over bottom half, insert after this item
+    if (y < itemHeight / 2) {
+      setDragOverIndex(index);
+    } else {
+      setDragOverIndex(index + 1);
+    }
+  }
+
+  function handleDropOnPlaceholder(event, targetIndex) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    setIsDragging(false);
+    setDragOverIndex(null);
+
+    if (!draggedItem) return;
+
+    const draggedIndex = orderedItems.findIndex((item) => item.id === draggedItem.id);
+    if (draggedIndex === -1) return;
+
+    // Don't move if dropping in the same position
+    if (draggedIndex === targetIndex || (draggedIndex + 1 === targetIndex)) return;
+
+    const newItems = [...orderedItems];
+    newItems.splice(draggedIndex, 1);
+
+    // Adjust insert index if we removed an item before it
+    const insertIndex = targetIndex > draggedIndex ? targetIndex - 1 : targetIndex;
+    newItems.splice(insertIndex, 0, draggedItem);
+
+    setOrderedItems(newItems);
+    localStorage.setItem(storageKey, JSON.stringify(newItems));
+    setDraggedItem(null);
   }
 
   function handleDrop(event, targetIndex) {
     event.preventDefault();
+    event.stopPropagation();
 
     setIsDragging(false);
+    setDragOverIndex(null);
 
-    const draggedIndex = orderedItems.indexOf(draggedItem);
+    if (!draggedItem) return;
+
+    const draggedIndex = orderedItems.findIndex((item) => item.id === draggedItem.id);
+    if (draggedIndex === -1) return;
+
+    // Use dragOverIndex if it's set, otherwise use targetIndex
+    const dropIndex = dragOverIndex !== null ? dragOverIndex : targetIndex;
+
+    // Don't move if dropping in the same position
+    if (draggedIndex === dropIndex || (draggedIndex + 1 === dropIndex)) return;
+
     const newItems = [...orderedItems];
     newItems.splice(draggedIndex, 1);
-    newItems.splice(targetIndex, 0, draggedItem);
+
+    // Adjust insert index if we removed an item before it
+    const insertIndex = dropIndex > draggedIndex ? dropIndex - 1 : dropIndex;
+    newItems.splice(insertIndex, 0, draggedItem);
 
     setOrderedItems(newItems);
     localStorage.setItem(storageKey, JSON.stringify(newItems));
+    setDraggedItem(null);
+  }
+
+  function handleDragEnd() {
+    setIsDragging(false);
+    setDragOverIndex(null);
+    setDraggedItem(null);
   }
 
   function checkOrder() {
@@ -123,45 +192,67 @@ export default function DragAndOrder({
 
         <div className="drag-drop">
           <div className="draggable-items">
-            {orderedItems.map((orderedItem, index) => (
+            {dragOverIndex === 0 && isDragging && (
               <div
-                key={orderedItem.id}
-                className={cn('draggable-item', {
-                  'draggable-item__dragging': isDragging,
-                  'draggable-item__valid': isAlreadyChecked && orderedItem.isMatched,
-                  'draggable-item__invalid': isAlreadyChecked && !orderedItem.isMatched,
-                })}
+                className="drop-placeholder"
+                onDragOver={handleDragOver}
+                onDrop={(event) => handleDropOnPlaceholder(event, 0)}
               >
-                <button
-                  type="button"
-                  className="draggable-item__button"
-                  draggable
-                  onDragStart={(event) => handleDragStart(event, orderedItem)}
-                  onDragOver={(event) => handleDragOver(event)}
-                  onDrop={(event) => handleDrop(event, index)}
-                >
-                  <img src={draggedItemIconUrl} alt="Draggable Item" width={25} height={25} />
-                </button>
-                <div
-                  role="button"
-                  tabIndex="0"
-                  className="draggable-item__text"
-                  draggable
-                  onDragStart={(event) => handleDragStart(event, orderedItem)}
-                  onDragOver={(event) => handleDragOver(event)}
-                  onDrop={(event) => handleDrop(event, index)}
-                >
-                  <span>{orderedItem.text}</span>
-                  {isAlreadyChecked && (
-                    <img
-                      src={orderedItem.isMatched ? validIconUrl : invalidIconUrl}
-                      alt={orderedItem.isMatched ? 'Valid Icon' : 'Invalid Icon'}
-                      width={20}
-                      height={20}
-                    />
-                  )}
-                </div>
+                <div className="drop-placeholder__line" />
+                <span className="drop-placeholder__text">Drop here</span>
               </div>
+            )}
+            {orderedItems.map((orderedItem, index) => (
+              <React.Fragment key={orderedItem.id}>
+                <div
+                  className={cn('draggable-item', {
+                    'draggable-item__dragging': isDragging && draggedItem?.id === orderedItem.id,
+                    'draggable-item__valid': isAlreadyChecked && orderedItem.isMatched,
+                    'draggable-item__invalid': isAlreadyChecked && !orderedItem.isMatched,
+                  })}
+                  onDragOver={handleDragOver}
+                  onDragEnter={(event) => handleDragEnter(event, index)}
+                  onDrop={(event) => handleDrop(event, index)}
+                >
+                  <button
+                    type="button"
+                    className="draggable-item__button"
+                    draggable
+                    onDragStart={(event) => handleDragStart(event, orderedItem)}
+                    onDragEnd={handleDragEnd}
+                  >
+                    <img src={draggedItemIconUrl} alt="Draggable Item" width={25} height={25} />
+                  </button>
+                  <div
+                    role="button"
+                    tabIndex="0"
+                    className="draggable-item__text"
+                    draggable
+                    onDragStart={(event) => handleDragStart(event, orderedItem)}
+                    onDragEnd={handleDragEnd}
+                  >
+                    <span>{orderedItem.text}</span>
+                    {isAlreadyChecked && (
+                      <img
+                        src={orderedItem.isMatched ? validIconUrl : invalidIconUrl}
+                        alt={orderedItem.isMatched ? 'Valid Icon' : 'Invalid Icon'}
+                        width={20}
+                        height={20}
+                      />
+                    )}
+                  </div>
+                </div>
+                {dragOverIndex === index + 1 && isDragging && (
+                  <div
+                    className="drop-placeholder"
+                    onDragOver={handleDragOver}
+                    onDrop={(event) => handleDropOnPlaceholder(event, index + 1)}
+                  >
+                    <div className="drop-placeholder__line" />
+                    <span className="drop-placeholder__text">Drop here</span>
+                  </div>
+                )}
+              </React.Fragment>
             ))}
           </div>
         </div>
