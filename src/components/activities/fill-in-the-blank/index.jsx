@@ -172,7 +172,7 @@ function FillInTheBlank({
     <InputInline key={key} answerIndex={answerIndex} />
   );
 
-  const processChildren = (children) => {
+  const processChildren = useCallback((children) => {
     const result = [];
 
     React.Children.forEach(children, (child) => {
@@ -211,7 +211,7 @@ function FillInTheBlank({
     });
 
     return result;
-  };
+  }, []);
 
   // Memoize components map to avoid re-creating on each render
   const markdownComponents = useMemo(() => ({
