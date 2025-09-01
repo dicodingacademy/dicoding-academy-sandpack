@@ -46,3 +46,15 @@
   color: black;
 }
 
+
+/* Support inputs inside code and pre blocks */
+.fill-blank code,
+.fill-blank pre {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.fill-blank code .input-container,
+.fill-blank pre .input-container {
+  display: inline-block;
+}
