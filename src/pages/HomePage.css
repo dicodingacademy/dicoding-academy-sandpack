@@ -1,0 +1,100 @@
+.homepage {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.homepage__header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.homepage__header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 1rem 0;
+}
+
+.homepage__header p {
+  font-size: 1.125rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+.homepage__main {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.homepage__section h2 {
+  font-size: 1.875rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 0.5rem 0;
+}
+
+.homepage__section p {
+  font-size: 1rem;
+  color: #6b7280;
+  margin: 0 0 2rem 0;
+}
+
+.homepage__cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.homepage__card {
+  display: block;
+  padding: 1.5rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  background-color: #ffffff;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.homepage__card:hover {
+  border-color: #3b82f6;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+  transform: translateY(-2px);
+}
+
+.homepage__card h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 0.5rem 0;
+}
+
+.homepage__card p {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .homepage {
+    padding: 1rem;
+  }
+  
+  .homepage__header h1 {
+    font-size: 2rem;
+  }
+  
+  .homepage__header p {
+    font-size: 1rem;
+  }
+  
+  .homepage__cards {
+    grid-template-columns: 1fr;
+  }
+}

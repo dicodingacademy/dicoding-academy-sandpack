@@ -24,6 +24,7 @@ import { a610Routes } from './embeds/a610';
 import { a134Routes } from './embeds/a134-demo';
 import { activitiesRoutes } from './pages/activities';
 import HomePage from './pages/HomePage';
+import EmbedGeneratorPage from './pages/EmbedGeneratorPage';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { a413Routes } from './embeds/a413';
 
@@ -31,6 +32,10 @@ const appRouter = createBrowserRouter([
   {
     path: '/',
     element: <HomePage />,
+  },
+  {
+    path: '/embed-generator',
+    element: <EmbedGeneratorPage />,
   },
 
   /* Front-end learning path */
