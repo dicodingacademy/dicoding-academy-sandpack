@@ -25,6 +25,7 @@ import { a134Routes } from './embeds/a134-demo';
 import { activitiesRoutes } from './pages/activities';
 import HomePage from './pages/HomePage';
 import { ThemeProvider } from './contexts/ThemeContext';
+import { a413Routes } from './embeds/a413';
 
 const appRouter = createBrowserRouter([
   {
@@ -42,6 +43,7 @@ const appRouter = createBrowserRouter([
 
   /* React learning path */
   ...a403Routes,
+  ...a413Routes,
   ...a418Routes,
 
   /* Back-end learning path */
