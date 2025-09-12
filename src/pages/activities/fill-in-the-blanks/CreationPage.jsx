@@ -1,6 +1,8 @@
-/* eslint-disable react/no-array-index-key,jsx-a11y/label-has-associated-control */
 import React, { useState, useEffect } from 'react';
 import FillInTheBlank from '../../../components/activities/fill-in-the-blank';
+import ResizableLayout from '../../../components/activities/commons/ResizableLayout';
+import AccessibleFormField from '../../../components/activities/commons/AccessibleFormField';
+import LoadFromBase64 from '../../../components/activities/commons/LoadFromBase64';
 
 function FillInBlankCreationPage() {
   const [template, setTemplate] = useState('');
@@ -8,15 +10,45 @@ function FillInBlankCreationPage() {
   const [hint, setHint] = useState('');
   const [embedCode, setEmbedCode] = useState('');
   const [instruction, setInstruction] = useState('Lengkapi kalimat berikut dengan kata yang tepat.');
+  const [errors, setErrors] = useState({});
+
+  const validateTemplate = (value) => {
+    const placeholders = value.match(/\{(\d+)\}/g) || [];
+    const numbers = placeholders.map(p => parseInt(p.match(/\d+/)[0]));
+    const maxNumber = Math.max(...numbers, 0);
+    
+    if (placeholders.length === 0 && value.trim()) {
+      return 'Template harus mengandung setidaknya satu placeholder seperti {1}';
+    }
+    
+    if (maxNumber > answers.length) {
+      return `Template menggunakan placeholder {${maxNumber}} tetapi hanya ada ${answers.length} jawaban`;
+    }
+    
+    return '';
+  };
+
+  const validateAnswers = () => {
+    const emptyAnswers = answers.filter(answer => !answer.trim()).length;
+    if (emptyAnswers > 0) {
+      return `${emptyAnswers} jawaban masih kosong`;
+    }
+    return '';
+  };
 
   const addAnswer = () => {
     setAnswers([...answers, '']);
   };
 
   const removeAnswer = (index) => {
-    setAnswers(answers.filter((_, i) => i !== index));
+    const newAnswers = answers.filter((_, i) => i !== index);
+    setAnswers(newAnswers);
+    
     // Update template placeholders
-    const newTemplate = template.replace(`{${index + 1}}`, `{${index}}`);
+    let newTemplate = template;
+    for (let i = index + 1; i <= answers.length; i++) {
+      newTemplate = newTemplate.replace(new RegExp(`\\{${i}\\}`, 'g'), `{${i - 1}}`);
+    }
     setTemplate(newTemplate);
   };
 
@@ -26,128 +58,201 @@ function FillInBlankCreationPage() {
     setAnswers(newAnswers);
   };
 
+  const handleLoadFromBase64 = (data) => {
+    if (data.template) setTemplate(data.template);
+    if (data.answers) setAnswers(data.answers.length > 0 ? data.answers : ['']);
+    if (data.hint) setHint(data.hint);
+    if (data.instruction) setInstruction(data.instruction);
+  };
+
   useEffect(() => {
-    // Only update preview if we have valid data
-    if (template && answers.some((answer) => answer.trim())) {
-      setTemplate(template);
-      setAnswers(answers.filter((answer) => answer.trim()));
-      setHint(hint);
+    const newErrors = {};
+    
+    if (template) {
+      const templateError = validateTemplate(template);
+      if (templateError) newErrors.template = templateError;
     }
-  }, []);
+    
+    if (answers.some(answer => answer.trim())) {
+      const answersError = validateAnswers();
+      if (answersError) newErrors.answers = answersError;
+    }
+    
+    setErrors(newErrors);
+  }, [template, answers]);
 
   const generateEmbedCode = () => {
+    if (Object.keys(errors).length > 0) {
+      alert('Harap perbaiki kesalahan sebelum generate embed code');
+      return;
+    }
+
     const rawData = {
       template,
-      answers,
+      answers: answers.filter(answer => answer.trim()),
       hint,
       storageKey: `fill-in-the-blank-${+new Date()}`,
       instruction,
     };
 
     const data = btoa(JSON.stringify(rawData));
-    const code = `<iframe src="${window.location.protocol}//${window.location.host}/activities/fill-in-the-blank?data=${encodeURIComponent(data)}" width="870" height="400"></iframe>`;
+    const code = `<iframe src="${window.location.protocol}//${window.location.host}/activities/fill-in-the-blank?data=${encodeURIComponent(data)}" width="870" height="400" title="Fill in the Blank Activity"></iframe>`;
     setEmbedCode(code);
   };
 
-  return (
-    <div className="creation-container">
-      <div className="creation-form">
-        <h2>Generate Fill in the Blank Activity</h2>
-        <div className="template-form">
-          <div className="input-group">
-            <label htmlFor="template">Template Text:</label>
-            <div className="template-help">
-              Use
-              {' '}
-              {'{1}'}
-              ,
-              {' '}
-              {'{2}'}
-              , etc. for blank spaces
+  const formPanel = (
+    <div className="creation-form">
+      <header>
+        <h1>Generate Fill in the Blank Activity</h1>
+        <p>Buat aktivitas isian kosong interaktif untuk pembelajaran</p>
+      </header>
+
+      <LoadFromBase64 
+        onLoad={handleLoadFromBase64} 
+        activityType="fill-in-the-blank"
+      />
+
+      <form onSubmit={(e) => e.preventDefault()}>
+        <AccessibleFormField
+          id="template"
+          label="Template Text"
+          type="textarea"
+          value={template}
+          onChange={(e) => setTemplate(e.target.value)}
+          placeholder="Enter text with {1}, {2}, etc. for blanks"
+          helpText="Gunakan {1}, {2}, dll. untuk menandai tempat kosong yang harus diisi. Mendukung Markdown formatting."
+          error={errors.template}
+          required
+          rows={4}
+          showMarkdownToolbar={true}
+        />
+
+        <fieldset>
+          <legend>Answers</legend>
+          {errors.answers && (
+            <div className="form-field__error" role="alert">
+              {errors.answers}
             </div>
-            <textarea
-              id="template"
-              value={template}
-              onChange={(e) => setTemplate(e.target.value)}
-              placeholder="Enter text with {1}, {2}, etc. for blanks"
-              rows={4}
-            />
-          </div>
-
-          <div className="answers-form">
-            <h3>Answers</h3>
-            {answers.map((answer, index) => (
-              <div key={index} className="input-group">
-                <label htmlFor={`answer-${index}`}>
-                  Answer for
-                  {' '}
-                  {`{${index + 1}}`}
-                  :
-                </label>
-                <div className="input-with-button">
-                  <input
-                    type="text"
-                    id={`answer-${index}`}
-                    value={answer}
-                    onChange={(e) => updateAnswer(index, e.target.value)}
-                    placeholder={`Enter answer ${index + 1}`}
-                  />
-                  {answers.length > 1 && (
-                    <button
-                      type="button"
-                      onClick={() => removeAnswer(index)}
-                      className="btn btn-secondary remove-btn"
-                    >
-                      Remove
-                    </button>
-                  )}
-                </div>
+          )}
+          
+          {answers.map((answer, index) => (
+            <AccessibleFormField
+              key={index}
+              id={`answer-${index}`}
+              label={`Answer for {${index + 1}}`}
+              value={answer}
+              onChange={(e) => updateAnswer(index, e.target.value)}
+              placeholder={`Enter answer ${index + 1}`}
+              required
+            >
+              <div className="form-field__input-with-button">
+                <input
+                  type="text"
+                  id={`answer-${index}`}
+                  className="form-field__input"
+                  value={answer}
+                  onChange={(e) => updateAnswer(index, e.target.value)}
+                  placeholder={`Enter answer ${index + 1}`}
+                  required
+                  aria-label={`Answer for placeholder ${index + 1}`}
+                />
+                {answers.length > 1 && (
+                  <button
+                    type="button"
+                    onClick={() => removeAnswer(index)}
+                    className="form-field__button form-field__button--secondary"
+                    aria-label={`Remove answer ${index + 1}`}
+                  >
+                    Remove
+                  </button>
+                )}
               </div>
-            ))}
-          </div>
+            </AccessibleFormField>
+          ))}
+        </fieldset>
 
-          <div className="input-group">
-            <label htmlFor="hint">Hint:</label>
-            <textarea
-              id="hint"
-              value={hint}
-              onChange={(e) => setHint(e.target.value)}
-              placeholder="Enter hint for when user makes 3 mistakes"
-            />
-          </div>
+        <AccessibleFormField
+          id="hint"
+          label="Hint"
+          type="textarea"
+          value={hint}
+          onChange={(e) => setHint(e.target.value)}
+          placeholder="Enter hint for when user makes 3 mistakes"
+          helpText="Petunjuk ini akan muncul setelah siswa salah 3 kali"
+          rows={3}
+        />
 
-          <div className="input-group">
-            <label htmlFor="instruction">Instruksi:</label>
-            <input id="instruction" value={instruction} onChange={(e) => setInstruction(e.target.value)} />
-          </div>
+        <AccessibleFormField
+          id="instruction"
+          label="Instruksi"
+          value={instruction}
+          onChange={(e) => setInstruction(e.target.value)}
+          placeholder="Masukkan instruksi untuk siswa"
+          required
+        />
 
-          <button type="button" onClick={addAnswer} className="btn btn-primary add-btn">
+        <div className="form-actions">
+          <button 
+            type="button" 
+            onClick={addAnswer} 
+            className="form-field__button form-field__button--primary"
+            aria-label="Add new answer field"
+          >
             Add New Answer
           </button>
-          <button type="button" onClick={generateEmbedCode} className="btn btn-primary generate-embed-btn">
+          
+          <button 
+            type="button" 
+            onClick={generateEmbedCode} 
+            className="form-field__button form-field__button--primary"
+            disabled={Object.keys(errors).length > 0}
+            aria-describedby="generate-help"
+          >
             Generate Embed Code
           </button>
-
-          <div className="embed-code">
-            <p>Embed Code:</p>
-            <textarea
-              readOnly
-              value={embedCode}
-            />
+          <div id="generate-help" className="form-field__help">
+            Pastikan semua field sudah diisi dengan benar
           </div>
         </div>
-      </div>
 
-      <div className="creation-preview">
+        <AccessibleFormField
+          id="embed-code"
+          label="Embed Code"
+          type="textarea"
+          value={embedCode}
+          readOnly
+          placeholder="Embed code akan muncul di sini setelah generate"
+          helpText="Salin kode ini untuk menyematkan aktivitas di halaman web"
+          rows={4}
+        />
+      </form>
+    </div>
+  );
+
+  const previewPanel = (
+    <div className="creation-preview">
+      <header>
         <h2>Preview</h2>
+        <p>Pratinjau aktivitas yang akan dibuat</p>
+      </header>
+      
+      <div role="region" aria-label="Activity preview">
         <FillInTheBlank
           template={template}
-          answers={answers}
+          answers={answers.filter(answer => answer.trim())}
           hint={hint}
           instructionText={instruction}
         />
       </div>
     </div>
+  );
+
+  return (
+    <ResizableLayout 
+      leftPanel={formPanel} 
+      rightPanel={previewPanel}
+      initialLeftWidth={45}
+    />
   );
 }
 
