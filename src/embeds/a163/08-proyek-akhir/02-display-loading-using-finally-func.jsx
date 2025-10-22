@@ -32,6 +32,7 @@ const files = {
     active: true,
     code: `\
 import { createUserItemElement, showLoading, hideLoading, sleep } from './utils.js';
+import { options } from './fetch-options.js';
 
 // Get elements
 const usersListElement = document.querySelector('.usersList');
@@ -41,7 +42,7 @@ function getData() {
   // Tampilkan loading saat request mulai dibuat dan dikirim
   showLoading(loading);
 
-  fetch('https://reqres.in/api/users')
+  fetch('https://reqres.in/api/users', options)
 
     // Hanya simulasi saja!
     // Chaining \`then\` ini hanya untuk memperlama loading.
@@ -76,6 +77,14 @@ function getData() {
 
 getData();
 `,
+  },
+  'fetch-options.js': {
+    code: `\
+export const options = {
+  headers: {
+    'x-api-key': 'reqres-free-v1',
+  },
+};`,
   },
   'utils.js': {
     active: true,
