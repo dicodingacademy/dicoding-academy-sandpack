@@ -32,6 +32,7 @@ const files = {
     active: true,
     code: `\
 import { createUserItemElement, showLoading, hideLoading, sleep } from './utils.js';
+import { options } from './fetch-options.js';
 
 // Get elements
 const usersListElement = document.querySelector('.usersList');
@@ -42,7 +43,7 @@ async function getData() {
   showLoading(loading);
 
   try {
-    const response = await fetch('https://reqres.in/api/users');
+    const response = await fetch('https://reqres.in/api/users', options);
     
     // Hanya simulasi saja!
     // Anda bisa menghapusnya jika tidak dibutuhkan lagi. 
@@ -73,6 +74,14 @@ async function getData() {
 
 await getData();
 `,
+  },
+  'fetch-options.js': {
+    code: `\
+export const options = {
+  headers: {
+    'x-api-key': 'reqres-free-v1',
+  },
+};`,
   },
   'utils.js': {
     active: true,

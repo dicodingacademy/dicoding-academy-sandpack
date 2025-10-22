@@ -35,6 +35,7 @@ const files = {
     active: true,
     code: `\
 import { sampleUsers } from './sample-users.js';
+import { options } from './fetch-options.js';
 
 // Get elements
 const usersListElementForLocal = document.querySelector('#usingLocalData .usersList');
@@ -69,7 +70,7 @@ function usingLocalData() {
 
 async function usingRestfulApi() {
   try {
-    const response = await fetch('https://reqres.in/api/users');
+    const response = await fetch('https://reqres.in/api/users', options);
     const data = await response.json();
     const users = data.data;
   
@@ -101,6 +102,14 @@ usingLocalData();
  */
 await usingRestfulApi();
 `,
+  },
+  'fetch-options.js': {
+    code: `\
+export const options = {
+  headers: {
+    'x-api-key': 'reqres-free-v1',
+  },
+};`,
   },
   'sample-users.js': {
     code: `\
