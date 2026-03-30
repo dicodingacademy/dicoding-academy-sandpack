@@ -20,3 +20,16 @@ export const toastOption = {
   theme: 'colored',
   transition: Slide,
 };
+
+export const unicodeToBase64 = (str) => {
+  const utf8Bytes = new TextEncoder().encode(str);
+  const binaryString = Array.from(utf8Bytes).map(byte => String.fromCharCode(byte)).join('');
+  return btoa(binaryString);
+}
+
+export const base64ToUnicode = (base64) => {
+  const binaryString = atob(base64);
+  const bytes = Uint8Array.from(binaryString, char => char.charCodeAt(0));
+  return new TextDecoder('utf-8').decode(bytes);
+};
+

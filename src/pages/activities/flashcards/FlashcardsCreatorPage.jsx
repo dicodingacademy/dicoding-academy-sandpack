@@ -6,7 +6,7 @@ import Flashcards from '../../../components/activities/flashcards';
 import ResizableLayout from '../../../components/activities/commons/ResizableLayout';
 import AccessibleFormField from '../../../components/activities/commons/AccessibleFormField';
 import LoadFromBase64 from '../../../components/activities/commons/LoadFromBase64';
-import { generateIframe } from '../../../utils';
+import { generateIframe, unicodeToBase64 } from '../../../utils';
 import useInput from '../../../hooks/useInput';
 
 function generateId() {
@@ -77,7 +77,7 @@ export default function FlashcardsCreatorPage() {
       return;
     }
 
-    const data = btoa(JSON.stringify({ cards, instruction }));
+    const data = unicodeToBase64(JSON.stringify({ cards, instruction }));
 
     setEmbedCode(generateIframe(
       `${window.location.protocol}//${window.location.host}/activities/flashcards?data=${encodeURIComponent(data)}`,

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import AccessibleFormField from './AccessibleFormField';
+import { base64ToUnicode } from '../../../utils';
 
 function LoadFromBase64({ onLoad, activityType }) {
   const [base64Code, setBase64Code] = useState('');
@@ -24,7 +25,7 @@ function LoadFromBase64({ onLoad, activityType }) {
       }
 
       // Decode base64
-      const decodedData = JSON.parse(atob(extractedBase64));
+      const decodedData = JSON.parse(base64ToUnicode(extractedBase64));
       
       // Validate activity type if needed
       const expectedKeys = {
