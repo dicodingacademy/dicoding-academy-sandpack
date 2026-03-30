@@ -3,6 +3,7 @@ import React from 'react';
 import OpeningEvent01 from './01-opening-event';
 import EventBubbling02 from './02-event-bubbling';
 import EventCapturing03 from './03-event-capturing';
+import EventStopPropagation031 from './03.1-event-stop-propagation';
 import FormOnsubmit04 from './04-form-onsubmit';
 import InputEventFormPrepare05A from './05a-input-event-form-prepare';
 import InputEventFormOninput05B from './05b-input-event-form-oninput';
@@ -37,6 +38,10 @@ const a315Routes = [
   {
     path: '/a315/03-event-capturing',
     element: <EventCapturing03 />,
+  },
+  {
+    path: '/a315/03.1-event-stop-propagation',
+    element: <EventStopPropagation031 />,
   },
   {
     path: '/a315/04-form-onsubmit',
