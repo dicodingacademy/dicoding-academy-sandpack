@@ -3,7 +3,7 @@ import DragAndOrder from '../../../components/activities/drag-and-order';
 import ResizableLayout from '../../../components/activities/commons/ResizableLayout';
 import AccessibleFormField from '../../../components/activities/commons/AccessibleFormField';
 import LoadFromBase64 from '../../../components/activities/commons/LoadFromBase64';
-import { generateIframe } from '../../../utils';
+import { generateIframe, unicodeToBase64 } from '../../../utils';
 import useInput from '../../../hooks/useInput';
 
 function generateId() {
@@ -87,7 +87,7 @@ export default function DragAndOrderCreationPage() {
       instruction,
     };
 
-    const data = btoa(JSON.stringify(rawData));
+    const data = unicodeToBase64(JSON.stringify(rawData));
     setEmbedCode(generateIframe(
       `${window.location.protocol}//${window.location.host}/activities/drag-and-order?data=${encodeURIComponent(data)}`,
       'Dicoding Learning Activities - Drag and Order',

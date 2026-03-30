@@ -3,6 +3,7 @@ import FillInTheBlank from '../../../components/activities/fill-in-the-blank';
 import ResizableLayout from '../../../components/activities/commons/ResizableLayout';
 import AccessibleFormField from '../../../components/activities/commons/AccessibleFormField';
 import LoadFromBase64 from '../../../components/activities/commons/LoadFromBase64';
+import { unicodeToBase64 } from '../../../utils';
 
 function FillInBlankCreationPage() {
   const [template, setTemplate] = useState('');
@@ -95,7 +96,7 @@ function FillInBlankCreationPage() {
       instruction,
     };
 
-    const data = btoa(JSON.stringify(rawData));
+    const data = unicodeToBase64(JSON.stringify(rawData));
     const code = `<iframe src="${window.location.protocol}//${window.location.host}/activities/fill-in-the-blank?data=${encodeURIComponent(data)}" width="870" height="400" title="Fill in the Blank Activity"></iframe>`;
     setEmbedCode(code);
   };
