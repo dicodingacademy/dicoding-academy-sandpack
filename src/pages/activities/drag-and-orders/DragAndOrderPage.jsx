@@ -2,6 +2,7 @@ import React from 'react';
 import { useSearchParams } from 'react-router-dom';
 import DragAndOrder from '../../../components/activities/drag-and-order';
 import ActivitiesError from '../../../components/activities/commons/ActivitiesError';
+import { base64ToUnicode } from '../../../utils';
 
 export default function DragAndOrderPage() {
   const [searchParams] = useSearchParams();
@@ -12,7 +13,7 @@ export default function DragAndOrderPage() {
   }
 
   try {
-    const jsonString = atob(dataParam);
+    const jsonString = base64ToUnicode(dataParam);
     const {
       items, hintText = '', storageKey, instruction,
     } = JSON.parse(jsonString);

@@ -2,6 +2,7 @@ import React from 'react';
 import { useSearchParams } from 'react-router-dom';
 import Flashcards from '../../../components/activities/flashcards';
 import ActivitiesError from '../../../components/activities/commons/ActivitiesError';
+import { base64ToUnicode } from '../../../utils';
 
 export default function FlashcardsPage() {
   const [searchParam] = useSearchParams();
@@ -13,7 +14,7 @@ export default function FlashcardsPage() {
   }
 
   try {
-    const data = JSON.parse(atob(dataParam));
+    const data = JSON.parse(base64ToUnicode(dataParam));
 
     if (Array.isArray(data)) {
       return <Flashcards cards={data} />;

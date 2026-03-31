@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSearchParams } from 'react-router-dom';
 import FillInTheBlank from '../../../components/activities/fill-in-the-blank';
+import { base64ToUnicode } from '../../../utils';
 
 function FillInTheBlankPage() {
   const [searchParams] = useSearchParams();
@@ -12,7 +13,7 @@ function FillInTheBlankPage() {
 
   try {
     const data = JSON.parse(
-      atob(dataParam),
+      base64ToUnicode(dataParam),
     );
 
     const {
