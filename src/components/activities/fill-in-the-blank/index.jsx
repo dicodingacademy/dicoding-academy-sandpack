@@ -22,7 +22,11 @@ const FillBlankContext = React.createContext({
 
 function InputInline({ answerIndex }) {
   const ctx = React.useContext(FillBlankContext);
-  const expectedLength = ctx.answers[answerIndex]?.length || 5;
+  const answer = ctx.answers[answerIndex];
+  const answerLengths = Array.isArray(answer) ? answer.map((a) => a.length) : [];
+  const expectedLength = answerLengths.length > 0
+    ? Math.max(...answerLengths, 5)
+    : (answer?.length || 5);
   const correct = ctx.correctness.length > 0 ? !!ctx.correctness[answerIndex] : null;
   let className = 'input-container';
   if (correct === true) {
@@ -134,9 +138,21 @@ function FillInTheBlank({
   }), [userAnswers, answers, correctness, handleInputChange]);
 
   const checkAnswers = () => {
-    const results = userAnswers.map(
-      (answer, index) => (answer || '').toLowerCase() === (answers[index] || '').toLowerCase(),
-    );
+    const emptyUserAnswers = userAnswers.filter((a) => !a || !a.trim());
+    if (emptyUserAnswers.length > 0) {
+      toast.info('Silakan isi semua jawaban terlebih dahulu.', toastOption);
+      return;
+    }
+
+    const results = userAnswers.map((userAnswer, index) => {
+      const expected = answers[index];
+      const userAnswerLower = userAnswer.toLowerCase().trim();
+
+      if (Array.isArray(expected)) {
+        return expected.some((answer) => answer.toLowerCase().trim() === userAnswerLower);
+      }
+      return expected.toLowerCase().trim() === userAnswerLower;
+    });
 
     setCorrectness(results);
     const isAllCorrect = results.every((result) => result);
@@ -264,7 +280,9 @@ function FillInTheBlank({
 // define prop-types
 FillInTheBlank.propTypes = {
   template: PropTypes.string.isRequired,
-  answers: PropTypes.arrayOf(PropTypes.string).isRequired,
+  answers: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
+  ).isRequired,
   storageKey: PropTypes.string,
   hint: PropTypes.string.isRequired,
   instructionText: PropTypes.string,

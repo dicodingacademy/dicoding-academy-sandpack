@@ -32,6 +32,16 @@ function FillInTheBlankPage() {
       return (<p>failed to show activities</p>);
     }
 
+    const isValidAnswerFormat = answers.every((answer) => {
+      if (typeof answer === 'string') return true;
+      if (Array.isArray(answer)) return answer.every((a) => typeof a === 'string');
+      return false;
+    });
+
+    if (!isValidAnswerFormat) {
+      return (<p>failed to show activities</p>);
+    }
+
     if (!storageKey) {
       return (<p>failed to show activities</p>);
     }
