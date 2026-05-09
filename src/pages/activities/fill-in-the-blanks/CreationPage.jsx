@@ -13,26 +13,39 @@ function FillInBlankCreationPage() {
   const [instruction, setInstruction] = useState('Lengkapi kalimat berikut dengan kata yang tepat.');
   const [errors, setErrors] = useState({});
 
+  const getTotalAnswerCount = () => answers.filter((a) => {
+    if (Array.isArray(a)) return a.length > 0;
+    return !!a;
+  }).length;
+
   const validateTemplate = (value) => {
     const placeholders = value.match(/\{(\d+)\}/g) || [];
-    const numbers = placeholders.map(p => parseInt(p.match(/\d+/)[0]));
+    const numbers = placeholders.map((p) => parseInt(p.match(/\d+/)[0]));
     const maxNumber = Math.max(...numbers, 0);
-    
+
     if (placeholders.length === 0 && value.trim()) {
       return 'Template harus mengandung setidaknya satu placeholder seperti {1}';
     }
-    
-    if (maxNumber > answers.length) {
-      return `Template menggunakan placeholder {${maxNumber}} tetapi hanya ada ${answers.length} jawaban`;
+
+    if (maxNumber > getTotalAnswerCount()) {
+      return `Template menggunakan placeholder {${maxNumber}} tetapi hanya ada ${getTotalAnswerCount()} jawaban`;
     }
-    
+
     return '';
   };
 
   const validateAnswers = () => {
-    const emptyAnswers = answers.filter(answer => !answer.trim()).length;
-    if (emptyAnswers > 0) {
-      return `${emptyAnswers} jawaban masih kosong`;
+    let emptyPlaceholders = 0;
+    answers.forEach((answer) => {
+      if (Array.isArray(answer)) {
+        const hasValidAnswer = answer.some((a) => a.trim());
+        if (!hasValidAnswer) emptyPlaceholders++;
+      } else if (!answer.trim()) {
+        emptyPlaceholders++;
+      }
+    });
+    if (emptyPlaceholders > 0) {
+      return `${emptyPlaceholders} jawaban masih kosong`;
     }
     return '';
   };
@@ -44,7 +57,7 @@ function FillInBlankCreationPage() {
   const removeAnswer = (index) => {
     const newAnswers = answers.filter((_, i) => i !== index);
     setAnswers(newAnswers);
-    
+
     // Update template placeholders
     let newTemplate = template;
     for (let i = index + 1; i <= answers.length; i++) {
@@ -55,32 +68,89 @@ function FillInBlankCreationPage() {
 
   const updateAnswer = (index, value) => {
     const newAnswers = [...answers];
-    newAnswers[index] = value;
+    if (Array.isArray(newAnswers[index])) {
+      newAnswers[index] = [...newAnswers[index]];
+      newAnswers[index][0] = value;
+    } else {
+      newAnswers[index] = value;
+    }
+    setAnswers(newAnswers);
+  };
+
+  const addAlternative = (index) => {
+    const newAnswers = [...answers];
+    const current = newAnswers[index];
+    if (Array.isArray(current)) {
+      newAnswers[index] = [...current, ''];
+    } else {
+      newAnswers[index] = [current, ''];
+    }
+    setAnswers(newAnswers);
+  };
+
+  const removeAlternative = (index, altIndex) => {
+    const newAnswers = [...answers];
+    const current = newAnswers[index];
+    if (Array.isArray(current)) {
+      const filtered = current.filter((_, i) => i !== altIndex);
+      newAnswers[index] = filtered.length === 1 ? filtered[0] : filtered;
+    }
+    setAnswers(newAnswers);
+  };
+
+  const updateAlternative = (index, altIndex, value) => {
+    const newAnswers = [...answers];
+    if (Array.isArray(newAnswers[index])) {
+      newAnswers[index] = [...newAnswers[index]];
+      newAnswers[index][altIndex] = value;
+    }
     setAnswers(newAnswers);
   };
 
   const handleLoadFromBase64 = (data) => {
     if (data.template) setTemplate(data.template);
-    if (data.answers) setAnswers(data.answers.length > 0 ? data.answers : ['']);
+    if (data.answers) {
+      const isValidFormat = data.answers.every((answer) => {
+        if (typeof answer === 'string') return true;
+        if (Array.isArray(answer)) return answer.every((a) => typeof a === 'string');
+        return false;
+      });
+      if (isValidFormat) {
+        setAnswers(data.answers.length > 0 ? data.answers : ['']);
+      }
+    }
     if (data.hint) setHint(data.hint);
     if (data.instruction) setInstruction(data.instruction);
   };
 
   useEffect(() => {
     const newErrors = {};
-    
+
     if (template) {
       const templateError = validateTemplate(template);
       if (templateError) newErrors.template = templateError;
     }
-    
-    if (answers.some(answer => answer.trim())) {
+
+    if (answers.some((answer) => {
+      if (Array.isArray(answer)) return answer.some((a) => a.trim());
+      return answer.trim();
+    })) {
       const answersError = validateAnswers();
       if (answersError) newErrors.answers = answersError;
     }
-    
+
     setErrors(newErrors);
   }, [template, answers]);
+
+  const processAnswersForExport = () => answers.map((answer) => {
+    if (Array.isArray(answer)) {
+      return answer.filter((a) => a.trim());
+    }
+    return answer.trim();
+  }).filter((answer) => {
+    if (Array.isArray(answer)) return answer.length > 0;
+    return !!answer;
+  });
 
   const generateEmbedCode = () => {
     if (Object.keys(errors).length > 0) {
@@ -90,7 +160,7 @@ function FillInBlankCreationPage() {
 
     const rawData = {
       template,
-      answers: answers.filter(answer => answer.trim()),
+      answers: processAnswersForExport(),
       hint,
       storageKey: `fill-in-the-blank-${+new Date()}`,
       instruction,
@@ -108,8 +178,8 @@ function FillInBlankCreationPage() {
         <p>Buat aktivitas isian kosong interaktif untuk pembelajaran</p>
       </header>
 
-      <LoadFromBase64 
-        onLoad={handleLoadFromBase64} 
+      <LoadFromBase64
+        onLoad={handleLoadFromBase64}
         activityType="fill-in-the-blank"
       />
 
@@ -125,7 +195,7 @@ function FillInBlankCreationPage() {
           error={errors.template}
           required
           rows={4}
-          showMarkdownToolbar={true}
+          showMarkdownToolbar
         />
 
         <fieldset>
@@ -135,36 +205,78 @@ function FillInBlankCreationPage() {
               {errors.answers}
             </div>
           )}
-          
+
           {answers.map((answer, index) => (
             <AccessibleFormField
               key={index}
               id={`answer-${index}`}
               label={`Answer for {${index + 1}}`}
-              value={answer}
-              onChange={(e) => updateAnswer(index, e.target.value)}
-              placeholder={`Enter answer ${index + 1}`}
               required
             >
-              <div className="form-field__input-with-button">
-                <input
-                  type="text"
-                  id={`answer-${index}`}
-                  className="form-field__input"
-                  value={answer}
-                  onChange={(e) => updateAnswer(index, e.target.value)}
-                  placeholder={`Enter answer ${index + 1}`}
-                  required
-                  aria-label={`Answer for placeholder ${index + 1}`}
-                />
+              <div className="form-field__answer-group">
+                {Array.isArray(answer) ? (
+                  <div className="form-field__alternatives">
+                    {answer.map((alt, altIndex) => (
+                      <div key={altIndex} className="form-field__input-with-button">
+                        <input
+                          type="text"
+                          id={`answer-${index}-alt-${altIndex}`}
+                          className="form-field__input"
+                          value={alt}
+                          onChange={(e) => updateAlternative(index, altIndex, e.target.value)}
+                          placeholder={`Alternative answer ${altIndex + 1}`}
+                          aria-label={`Alternative answer ${altIndex + 1} for placeholder ${index + 1}`}
+                        />
+                        {altIndex > 0 && (
+                          <button
+                            type="button"
+                            onClick={() => removeAlternative(index, altIndex)}
+                            className="form-field__button form-field__button--secondary"
+                            aria-label={`Remove alternative ${altIndex + 1}`}
+                          >
+                            Remove
+                          </button>
+                        )}
+                      </div>
+                    ))}
+                    <button
+                      type="button"
+                      onClick={() => addAlternative(index)}
+                      className="form-field__button form-field__button--secondary"
+                    >
+                      + Add Alternative
+                    </button>
+                  </div>
+                ) : (
+                  <div className="form-field__input-with-button">
+                    <input
+                      type="text"
+                      id={`answer-${index}`}
+                      className="form-field__input"
+                      value={answer}
+                      onChange={(e) => updateAnswer(index, e.target.value)}
+                      placeholder={`Enter answer ${index + 1}`}
+                      required
+                      aria-label={`Answer for placeholder ${index + 1}`}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => addAlternative(index)}
+                      className="form-field__button form-field__button--secondary"
+                      aria-label={`Add alternative answer for placeholder ${index + 1}`}
+                    >
+                      + Add Alternative
+                    </button>
+                  </div>
+                )}
                 {answers.length > 1 && (
                   <button
                     type="button"
                     onClick={() => removeAnswer(index)}
-                    className="form-field__button form-field__button--secondary"
+                    className="form-field__button form-field__button--danger"
                     aria-label={`Remove answer ${index + 1}`}
                   >
-                    Remove
+                    Remove Answer
                   </button>
                 )}
               </div>
@@ -193,18 +305,18 @@ function FillInBlankCreationPage() {
         />
 
         <div className="form-actions">
-          <button 
-            type="button" 
-            onClick={addAnswer} 
+          <button
+            type="button"
+            onClick={addAnswer}
             className="form-field__button form-field__button--primary"
             aria-label="Add new answer field"
           >
             Add New Answer
           </button>
-          
-          <button 
-            type="button" 
-            onClick={generateEmbedCode} 
+
+          <button
+            type="button"
+            onClick={generateEmbedCode}
             className="form-field__button form-field__button--primary"
             disabled={Object.keys(errors).length > 0}
             aria-describedby="generate-help"
@@ -236,11 +348,11 @@ function FillInBlankCreationPage() {
         <h2>Preview</h2>
         <p>Pratinjau aktivitas yang akan dibuat</p>
       </header>
-      
+
       <div role="region" aria-label="Activity preview">
         <FillInTheBlank
           template={template}
-          answers={answers.filter(answer => answer.trim())}
+          answers={processAnswersForExport()}
           hint={hint}
           instructionText={instruction}
         />
@@ -249,8 +361,8 @@ function FillInBlankCreationPage() {
   );
 
   return (
-    <ResizableLayout 
-      leftPanel={formPanel} 
+    <ResizableLayout
+      leftPanel={formPanel}
       rightPanel={previewPanel}
       initialLeftWidth={45}
     />
