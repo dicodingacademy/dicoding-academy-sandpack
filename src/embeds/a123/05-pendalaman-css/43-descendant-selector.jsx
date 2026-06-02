@@ -34,7 +34,7 @@ const files = {
   },
   'styles.css': {
     code: `\
-/* Rule akan diterapkan pada elemen header yang berada tepat setelah elemen img */
+/* Rule akan diterapkan pada semua elemen paragraf yang berada di dalam elemen div */
 div p {
   background-color: yellow;
 }
