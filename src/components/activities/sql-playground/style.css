@@ -1,0 +1,241 @@
+.activities__instructions {
+  margin-block: 20px;
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--text-color);
+}
+
+/* SQL Playground */
+.sql-playground {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden;
+  min-height: 70vh;
+}
+
+/* Editor Panel */
+.sql-playground__editor-panel {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.sql-playground__editor {
+  width: 100%;
+  min-height: 200px;
+  padding: 16px;
+  border: none;
+  outline: none;
+  resize: vertical;
+  box-sizing: border-box;
+
+  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  tab-size: 2;
+
+  background-color: var(--card-bg);
+  color: var(--text-color);
+}
+
+.sql-playground__editor::placeholder {
+  color: var(--text-muted);
+}
+
+/* Action Bar */
+.sql-playground__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background-color: var(--bg-color);
+  border-top: 1px solid var(--border-color);
+}
+
+.sql-playground__actions-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sql-playground__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease, opacity 0.15s ease;
+}
+
+.sql-playground__btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.sql-playground__btn--primary {
+  background-color: var(--primary-color);
+  color: var(--text-primary-color);
+  border-color: var(--primary-color);
+}
+
+.sql-playground__btn--primary:hover:not(:disabled) {
+  opacity: 0.85;
+}
+
+.sql-playground__btn--secondary {
+  background-color: var(--secondary-color);
+  color: var(--text-secondary-color);
+}
+
+.sql-playground__btn--secondary:hover:not(:disabled) {
+  background-color: var(--secondary-hover-color);
+}
+
+/* Results Panel */
+.sql-playground__results-panel {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 250px;
+  background-color: var(--card-bg);
+}
+
+/* Tabs */
+.sql-playground__tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--bg-color);
+}
+
+.sql-playground__tab {
+  padding: 10px 20px;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: none;
+  color: var(--text-muted);
+  font-family: 'Open Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.sql-playground__tab:hover {
+  color: var(--text-color);
+}
+
+.sql-playground__tab--active {
+  color: var(--primary-color);
+  border-bottom-color: var(--primary-color);
+}
+
+/* Tab Content */
+.sql-playground__tab-content {
+  flex: 1;
+  overflow: auto;
+  padding: 16px;
+}
+
+.sql-playground__placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 150px;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+/* Results Table */
+.sql-playground__table-wrapper {
+  overflow-x: auto;
+}
+
+.sql-playground__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+}
+
+.sql-playground__table th,
+.sql-playground__table td {
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  text-align: left;
+  white-space: nowrap;
+}
+
+.sql-playground__table th {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+}
+
+.sql-playground__table td {
+  color: var(--text-color);
+}
+
+.sql-playground__table tr:hover td {
+  background-color: var(--secondary-color);
+}
+
+/* Status Messages */
+.sql-playground__status {
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-family: 'JetBrains Mono', 'Consolas', monospace;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.sql-playground__status--success {
+  background-color: var(--success-bg);
+  color: var(--success-text);
+}
+
+.sql-playground__status--error {
+  background-color: var(--error-bg);
+  color: var(--error-text);
+}
+
+/* Schema Display */
+.sql-playground__schema-table {
+  margin-bottom: 20px;
+}
+
+.sql-playground__schema-table:last-child {
+  margin-bottom: 0;
+}
+
+.sql-playground__schema-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 8px;
+  font-family: 'JetBrains Mono', 'Consolas', monospace;
+}
+
+/* Loading Indicator */
+.sql-playground__loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 20px;
+  color: var(--text-muted);
+  font-size: 14px;
+}

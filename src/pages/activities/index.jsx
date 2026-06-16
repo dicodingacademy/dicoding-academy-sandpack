@@ -5,6 +5,7 @@ import DragAndOrderCreationPage from './drag-and-orders/DragAndOrderCreationPage
 import DragAndOrderPage from './drag-and-orders/DragAndOrderPage';
 import FillInBlankCreationPage from './fill-in-the-blanks/CreationPage';
 import FillInTheBlankPage from './fill-in-the-blanks/FillInTheBlankPage';
+import PlaygroundPage from './sql-playground/PlaygroundPage';
 
 export const activitiesRoutes = [
   {
@@ -30,5 +31,9 @@ export const activitiesRoutes = [
   {
     path: '/activities/fill-in-the-blank/create',
     element: <FillInBlankCreationPage />,
+  },
+  {
+    path: '/activities/sql-playground',
+    element: <PlaygroundPage />,
   },
 ];
