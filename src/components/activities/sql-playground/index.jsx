@@ -69,7 +69,7 @@ JOIN courses c ON c.id = e.course_id
 ORDER BY s.name, c.title;`;
 
 const TABS = [
-  { id: 'output', label: 'Output' },
+  { id: 'query', label: 'Query' },
   { id: 'schema', label: 'Schema' },
   { id: 'data', label: 'Data' },
 ];
@@ -112,9 +112,15 @@ ResultTable.propTypes = {
 
 const SCHEMA_COLUMNS = ['column_name', 'data_type', 'is_nullable', 'column_default'];
 
+// Keep the current table selection if it still exists, otherwise pick the first.
+function pickTableName(tables, current) {
+  return tables.some((table) => table.name === current) ? current : (tables[0]?.name ?? null);
+}
+
 export default function SqlPlayground({ setupSql, defaultQuery, instructionsText }) {
   const [query, setQuery] = useState(defaultQuery);
-  const [activeTab, setActiveTab] = useState('output');
+  const [activeTab, setActiveTab] = useState('query');
+  const [selectedTable, setSelectedTable] = useState(null);
   const [content, setContent] = useState({ type: 'placeholder', text: 'Run a query to see results here.' });
   const [isResetting, setIsResetting] = useState(false);
 
@@ -136,7 +142,7 @@ export default function SqlPlayground({ setupSql, defaultQuery, instructionsText
   };
 
   const executeQuery = async (sql) => {
-    setActiveTab('output');
+    setActiveTab('query');
 
     if (!sql.trim()) {
       setContent({ type: 'placeholder', text: 'Write a query and click Run.' });
@@ -207,6 +213,7 @@ export default function SqlPlayground({ setupSql, defaultQuery, instructionsText
       }));
 
       setContent({ type: 'schema', tables });
+      setSelectedTable((prev) => pickTableName(tables, prev));
     } catch (error) {
       setContent({ type: 'status', variant: 'error', message: error instanceof Error ? error.message : String(error) });
     }
@@ -240,6 +247,7 @@ export default function SqlPlayground({ setupSql, defaultQuery, instructionsText
         type: 'data',
         tables,
       });
+      setSelectedTable((prev) => pickTableName(tables, prev));
     } catch (error) {
       setContent({
         type: 'status',
@@ -267,7 +275,7 @@ export default function SqlPlayground({ setupSql, defaultQuery, instructionsText
       dbRef.current = createDb(setupSql);
       await dbRef.current;
       setQuery(defaultQuery);
-      setActiveTab('output');
+      setActiveTab('query');
       setContent({ type: 'placeholder', text: 'Database reset. Run a query to see results.' });
     } finally {
       setIsResetting(false);
@@ -318,15 +326,38 @@ export default function SqlPlayground({ setupSql, defaultQuery, instructionsText
       case 'table':
         return <ResultTable columns={content.columns} rows={content.rows} />;
       case 'schema':
-      case 'data':
-        return content.tables.map((table) => (
-          <div key={table.name} className="sql-playground__schema-table">
-            <div className="sql-playground__schema-title">{table.label ?? table.name}</div>
-            {table.columns.length > 0
-              ? <ResultTable columns={table.columns} rows={table.rows} />
-              : <p>Empty table</p>}
+      case 'data': {
+        const { tables } = content;
+        const active = tables.find((table) => table.name === selectedTable) ?? tables[0];
+
+        return (
+          <div className="sql-playground__table-view">
+            <div className="sql-playground__subtabs">
+              {tables.map((table) => (
+                <button
+                  key={table.name}
+                  type="button"
+                  className={`sql-playground__subtab${active?.name === table.name ? ' sql-playground__subtab--active' : ''}`}
+                  onClick={() => setSelectedTable(table.name)}
+                >
+                  {table.name}
+                </button>
+              ))}
+            </div>
+
+            {active && (
+              <div className="sql-playground__schema-table">
+                {content.type === 'data' && (
+                  <div className="sql-playground__schema-title">{`${active.rows.length} rows`}</div>
+                )}
+                {active.columns.length > 0
+                  ? <ResultTable columns={active.columns} rows={active.rows} />
+                  : <p>Empty table</p>}
+              </div>
+            )}
           </div>
-        ));
+        );
+      }
       case 'placeholder':
       default:
         return <div className="sql-playground__placeholder">{content.text}</div>;
@@ -338,54 +369,54 @@ export default function SqlPlayground({ setupSql, defaultQuery, instructionsText
       {instructionsText ? <p className="activities__instructions">{instructionsText}</p> : null}
 
       <div className="sql-playground">
-        <div className="sql-playground__editor-panel">
-          <textarea
-            className="sql-playground__editor"
-            spellCheck="false"
-            placeholder={'-- Write your SQL query here...\n-- Press Ctrl+Enter to run'}
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-            onKeyDown={handleEditorKeyDown}
-          />
-
-          <div className="sql-playground__actions">
+        <div className="sql-playground__tabs">
+          {TABS.map((tab) => (
             <button
+              key={tab.id}
               type="button"
-              className="sql-playground__btn sql-playground__btn--secondary"
-              onClick={handleReset}
-              disabled={isResetting}
+              className={`sql-playground__tab${activeTab === tab.id ? ' sql-playground__tab--active' : ''}`}
+              onClick={() => handleTabClick(tab.id)}
             >
-              Reset
+              {tab.label}
             </button>
-            <div className="sql-playground__actions-right">
-              <button
-                type="button"
-                className="sql-playground__btn sql-playground__btn--primary"
-                onClick={() => executeQuery(query)}
-              >
-                Run
-              </button>
-            </div>
-          </div>
+          ))}
         </div>
 
-        <div className="sql-playground__results-panel">
-          <div className="sql-playground__tabs">
-            {TABS.map((tab) => (
-              <button
-                key={tab.id}
-                type="button"
-                className={`sql-playground__tab${activeTab === tab.id ? ' sql-playground__tab--active' : ''}`}
-                onClick={() => handleTabClick(tab.id)}
-              >
-                {tab.label}
-              </button>
-            ))}
-          </div>
+        {activeTab === 'query' && (
+          <div className="sql-playground__editor-panel">
+            <textarea
+              className="sql-playground__editor"
+              spellCheck="false"
+              placeholder={'-- Write your SQL query here...\n-- Press Ctrl+Enter to run'}
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              onKeyDown={handleEditorKeyDown}
+            />
 
-          <div className="sql-playground__tab-content">
-            {renderContent()}
+            <div className="sql-playground__actions">
+              <button
+                type="button"
+                className="sql-playground__btn sql-playground__btn--secondary"
+                onClick={handleReset}
+                disabled={isResetting}
+              >
+                Reset
+              </button>
+              <div className="sql-playground__actions-right">
+                <button
+                  type="button"
+                  className="sql-playground__btn sql-playground__btn--primary"
+                  onClick={() => executeQuery(query)}
+                >
+                  Run
+                </button>
+              </div>
+            </div>
           </div>
+        )}
+
+        <div className="sql-playground__tab-content">
+          {renderContent()}
         </div>
       </div>
     </ActivitiesContainer>
