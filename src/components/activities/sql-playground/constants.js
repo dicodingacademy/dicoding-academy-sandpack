@@ -70,7 +70,7 @@ export const TABS = [
 ];
 
 // Columns shown when introspecting a table's structure on the Schema tab.
-export const SCHEMA_COLUMNS = ['column_name', 'data_type', 'is_nullable', 'column_default'];
+export const SCHEMA_COLUMNS = ['column_name', 'data_type', 'is_nullable', 'column_default', 'constraints'];
 
 // Rows fetched per table on the Data tab.
 export const DATA_ROW_LIMIT = 50;
