@@ -99,7 +99,10 @@ export async function fetchSchema(db) {
           ELSE upper(data_type)
         END AS data_type,
         is_nullable,
-        column_default
+        CASE
+          WHEN column_default LIKE 'nextval(%' THEN 'AUTO_INCREMENT'
+          ELSE regexp_replace(column_default, '::[a-zA-Z ]+', '', 'g')
+        END AS column_default
       FROM information_schema.columns
       WHERE table_schema = 'public' AND table_name = '${name}'
       ORDER BY ordinal_position;
