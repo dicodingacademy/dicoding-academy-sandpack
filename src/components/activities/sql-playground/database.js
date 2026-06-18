@@ -100,6 +100,7 @@ export async function fetchSchema(db) {
         END AS data_type,
         is_nullable,
         CASE
+          WHEN column_default IS NULL THEN ''
           WHEN column_default LIKE 'nextval(%' THEN 'AUTO_INCREMENT'
           ELSE regexp_replace(column_default, '::[a-zA-Z ]+', '', 'g')
         END AS column_default
