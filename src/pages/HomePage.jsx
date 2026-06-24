@@ -29,6 +29,11 @@ function HomePage() {
               <h3>Drag and Order</h3>
               <p>Buat aktivitas drag and drop untuk mengurutkan item</p>
             </a>
+
+            <a href="/activities/sql-playground/create" className="homepage__card">
+              <h3>SQL Playground</h3>
+              <p>Buat aktivitas drag and drop untuk mengurutkan item</p>
+            </a>
           </div>
         </section>
 
