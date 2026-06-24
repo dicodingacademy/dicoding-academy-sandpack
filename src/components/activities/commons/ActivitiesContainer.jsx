@@ -38,7 +38,7 @@ export default function ActivitiesContainer({ children, title = 'Komponen Intera
           </div>
           <div className="activities__buttons">
             <button type="button" className="activities__buttons-item theme-switch" onClick={() => toggleTheme()}>
-              {theme === 'dark' ? <Sun /> : <Moon />}
+              {theme === 'dark' ? <Moon /> : <Sun />}
             </button>
           </div>
         </div>
