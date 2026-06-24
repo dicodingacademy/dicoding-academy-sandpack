@@ -31,7 +31,8 @@ function LoadFromBase64({ onLoad, activityType }) {
       const expectedKeys = {
         'fill-in-the-blank': ['template', 'answers'],
         'flashcards': ['cards'],
-        'drag-and-order': ['items']
+        'drag-and-order': ['items'],
+        'sql-playground': ['setupSql', 'defaultQuery'],
       };
 
       const requiredKeys = expectedKeys[activityType];
