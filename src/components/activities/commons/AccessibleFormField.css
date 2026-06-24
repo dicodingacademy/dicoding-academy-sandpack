@@ -185,7 +185,7 @@ legend {
 
 /* Header styling */
 header {
-  margin-bottom: 2rem;
+  margin-bottom: 1.25rem;
 }
 
 header h1 {
@@ -230,15 +230,15 @@ header p {
   .form-field__input-with-button {
     flex-direction: column;
   }
-  
+
   .form-field__button {
     width: 100%;
   }
-  
+
   .form-actions .form-field__button {
     align-self: stretch;
   }
-  
+
   .creation-preview {
     max-height: none;
   }
