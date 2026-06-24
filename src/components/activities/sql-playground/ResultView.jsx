@@ -1,6 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const pad = (n) => String(n).padStart(2, '0');
+
+// pglite returns date/timestamp columns as Date objects. Render them as
+// Y-m-d H:i:s instead of the verbose default Date string. Local getters
+// reproduce the stored value for timestamp-without-time-zone / date columns.
+function formatCell(value) {
+  if (value instanceof Date) {
+    const date = `${value.getFullYear()}-${pad(value.getMonth() + 1)}-${pad(value.getDate())}`;
+    const time = `${pad(value.getHours())}:${pad(value.getMinutes())}:${pad(value.getSeconds())}`;
+    return `${date} ${time}`;
+  }
+  return String(value);
+}
+
 function ResultTable({ columns, rows }) {
   return (
     <div className="sql-playground__table-wrapper">
@@ -20,7 +34,7 @@ function ResultTable({ columns, rows }) {
                 const value = row[col];
                 return (
                   <td key={col}>
-                    {value === null ? <em>NULL</em> : String(value)}
+                    {value === null ? <em>NULL</em> : formatCell(value)}
                   </td>
                 );
               })}
