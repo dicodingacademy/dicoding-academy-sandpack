@@ -47,12 +47,6 @@ export default function CreationPage() {
   };
 
   const generateEmbedCode = () => {
-    if (!setupSql.trim()) {
-      // eslint-disable-next-line no-alert
-      alert('Setup SQL tidak boleh kosong');
-      return;
-    }
-
     const data = unicodeToBase64(JSON.stringify({ setupSql, defaultQuery, instruction }));
     const src = `${window.location.protocol}//${window.location.host}/activities/sql-playground?data=${encodeURIComponent(data)}`;
 
@@ -79,9 +73,8 @@ export default function CreationPage() {
           value={setupSql}
           onChange={(e) => setSetupSql(e.target.value)}
           placeholder="CREATE TABLE ...; INSERT INTO ...;"
-          helpText="Perintah SQL untuk membuat skema dan mengisi data awal. Dijalankan saat playground dimuat dan saat di-reset."
+          helpText="Perintah SQL untuk membuat skema dan mengisi data awal. Dijalankan saat playground dimuat dan saat di-reset. Boleh dikosongkan untuk memulai tanpa skema."
           rows={12}
-          required
         />
 
         <AccessibleFormField
