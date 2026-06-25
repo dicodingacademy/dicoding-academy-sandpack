@@ -18,7 +18,7 @@ export default function PlaygroundPage() {
 
     return (
       <SqlPlayground
-        setupSql={setupSql || undefined}
+        setupSql={typeof setupSql === 'string' ? setupSql : undefined}
         defaultQuery={defaultQuery || undefined}
         instructionsText={instruction}
       />
