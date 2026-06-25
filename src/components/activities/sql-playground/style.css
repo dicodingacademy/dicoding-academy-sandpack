@@ -132,6 +132,7 @@
 /* Tab Content */
 .sql-playground__tab-content {
   flex: 1;
+  max-height: 360px;
   overflow: auto;
   padding: 16px;
   background-color: var(--card-bg);
