@@ -15,7 +15,7 @@ export default function CreationPage() {
   const [setupSql, setSetupSql] = useState(INITIAL_SETUP_SQL);
   const [defaultQuery, setDefaultQuery] = useState(DEFAULT_QUERY);
   const [instruction, setInstruction] = useState('');
-  const [height, onHeightChange] = useInput('630');
+  const [height, onHeightChange] = useInput('600');
   const [embedCode, setEmbedCode] = useState('');
 
   // The values that actually drive the preview. Updated only via "Apply" so
