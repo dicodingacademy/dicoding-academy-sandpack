@@ -9,17 +9,41 @@ import LoadFromBase64 from '../../../components/activities/commons/LoadFromBase6
 import { generateIframe, unicodeToBase64 } from '../../../utils';
 import useInput from '../../../hooks/useInput';
 
+const INITIAL_SETUP_SQL = DEFAULT_SETUP_SQL.trim();
+
 export default function CreationPage() {
-  const [setupSql, setSetupSql] = useState(DEFAULT_SETUP_SQL.trim());
+  const [setupSql, setSetupSql] = useState(INITIAL_SETUP_SQL);
   const [defaultQuery, setDefaultQuery] = useState(DEFAULT_QUERY);
   const [instruction, setInstruction] = useState('');
   const [height, onHeightChange] = useInput('630');
   const [embedCode, setEmbedCode] = useState('');
 
+  // The values that actually drive the preview. Updated only via "Apply" so
+  // editing the schema doesn't rebuild the in-browser Postgres on every keystroke.
+  const [preview, setPreview] = useState({
+    setupSql: INITIAL_SETUP_SQL,
+    defaultQuery: DEFAULT_QUERY,
+    instruction: '',
+  });
+
+  const isPreviewStale = setupSql !== preview.setupSql
+    || defaultQuery !== preview.defaultQuery
+    || instruction !== preview.instruction;
+
+  const applyPreview = () => {
+    setPreview({ setupSql, defaultQuery, instruction });
+  };
+
   const handleLoadFromBase64 = (data) => {
-    if (typeof data.setupSql === 'string') setSetupSql(data.setupSql);
-    if (typeof data.defaultQuery === 'string') setDefaultQuery(data.defaultQuery);
-    if (typeof data.instruction === 'string') setInstruction(data.instruction);
+    const next = {
+      setupSql: typeof data.setupSql === 'string' ? data.setupSql : setupSql,
+      defaultQuery: typeof data.defaultQuery === 'string' ? data.defaultQuery : defaultQuery,
+      instruction: typeof data.instruction === 'string' ? data.instruction : instruction,
+    };
+    setSetupSql(next.setupSql);
+    setDefaultQuery(next.defaultQuery);
+    setInstruction(next.instruction);
+    setPreview(next);
   };
 
   const generateEmbedCode = () => {
@@ -122,11 +146,27 @@ export default function CreationPage() {
         <p>Pratinjau SQL playground yang akan dibuat</p>
       </header>
 
+      <div className="form-actions">
+        <button
+          type="button"
+          className="form-field__button form-field__button--primary"
+          onClick={applyPreview}
+          disabled={!isPreviewStale}
+        >
+          Perbarui Pratinjau
+        </button>
+        {isPreviewStale && (
+          <span className="form-field__help">
+            Pratinjau belum sesuai dengan perubahan terbaru. Klik untuk memperbarui.
+          </span>
+        )}
+      </div>
+
       <div role="region" aria-label="SQL Playground preview">
         <SqlPlayground
-          setupSql={setupSql}
-          defaultQuery={defaultQuery}
-          instructionsText={instruction}
+          setupSql={preview.setupSql}
+          defaultQuery={preview.defaultQuery}
+          instructionsText={preview.instruction}
         />
       </div>
     </div>
