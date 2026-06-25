@@ -13,18 +13,18 @@ function HomePage() {
         <section className="homepage__section">
           <h2>Interactive Activities</h2>
           <p>Buat aktivitas pembelajaran interaktif untuk meningkatkan engagement siswa</p>
-          
+
           <div className="homepage__cards">
             <a href="/activities/fill-in-the-blank/create" className="homepage__card">
               <h3>Fill in the Blank</h3>
               <p>Buat aktivitas isian kosong dengan placeholder dan validasi jawaban</p>
             </a>
-            
+
             <a href="/activities/flashcards/create" className="homepage__card">
               <h3>Flashcards</h3>
               <p>Buat kartu belajar interaktif dengan rich text editor</p>
             </a>
-            
+
             <a href="/activities/drag-and-order/create" className="homepage__card">
               <h3>Drag and Order</h3>
               <p>Buat aktivitas drag and drop untuk mengurutkan item</p>
@@ -32,7 +32,7 @@ function HomePage() {
 
             <a href="/activities/sql-playground/create" className="homepage__card">
               <h3>SQL Playground</h3>
-              <p>Buat aktivitas drag and drop untuk mengurutkan item</p>
+              <p>Buat playground SQL interaktif dengan skema dan data Anda sendiri.</p>
             </a>
           </div>
         </section>
@@ -40,7 +40,7 @@ function HomePage() {
         <section className="homepage__section">
           <h2>Embed Code Generator</h2>
           <p>Generate embed code untuk konten Dicoding Sandpack lainnya</p>
-          
+
           <div className="homepage__cards">
             <a href="/embed-generator" className="homepage__card">
               <h3>Sandpack Embed Generator</h3>
