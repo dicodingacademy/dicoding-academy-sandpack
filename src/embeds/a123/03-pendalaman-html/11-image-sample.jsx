@@ -8,6 +8,7 @@ const files = {
     code: `\
 <img
   src="https://raw.githubusercontent.com/dicodingacademy/a123-webdasar-labs/099-shared-files/shared-media/dicoding-logo.jpg" 
+  width="100%"
   alt="Dicoding Logo"
 >
 `,
