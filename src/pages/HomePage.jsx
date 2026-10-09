@@ -34,6 +34,11 @@ function HomePage() {
               <h3>SQL Playground</h3>
               <p>Buat playground SQL interaktif dengan skema dan data Anda sendiri.</p>
             </a>
+
+            <a href="/activities/mini-quiz/create" className="homepage__card">
+              <h3>Mini Quiz</h3>
+              <p>Buat satu soal Benar/Salah atau pilihan ganda yang dijawab siswa sampai benar</p>
+            </a>
           </div>
         </section>
 
