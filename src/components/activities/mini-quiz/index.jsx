@@ -183,6 +183,7 @@ MiniQuiz.propTypes = {
       id: PropTypes.string.isRequired,
       text: PropTypes.string.isRequired,
       isCorrect: PropTypes.bool,
+      feedback: PropTypes.string,
     }),
   ).isRequired,
   instructionText: PropTypes.string,

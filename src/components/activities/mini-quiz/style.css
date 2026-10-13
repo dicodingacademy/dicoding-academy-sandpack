@@ -1,10 +1,18 @@
 .mini-quiz {
+  /* Readable text versions of the valid/invalid colours, used for option feedback. */
+  --mini-quiz-correct-text: #047857;
+  --mini-quiz-wrong-text: #BE123C;
+
   min-width: 0;
   margin: 0;
   padding: 24px;
   border: 1px solid var(--border-color);
   border-radius: 4px;
   background-color: var(--drag-and-drop-bg);
+}
+:root[data-theme="dark"] .mini-quiz {
+  --mini-quiz-correct-text: #D1FAE5;
+  --mini-quiz-wrong-text: #FFE4E6;
 }
 
 .mini-quiz__question {
@@ -69,10 +77,40 @@
   accent-color: var(--primary-color);
 }
 
-.mini-quiz__option-text {
+.mini-quiz__option-body {
   flex-grow: 1;
   min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mini-quiz__option-text {
   overflow-wrap: anywhere;
+}
+
+/* With feedback the option grows taller, so keep the input and icon on the first line. */
+.mini-quiz__option:has(.mini-quiz__option-feedback) {
+  align-items: flex-start;
+}
+.mini-quiz__option:has(.mini-quiz__option-feedback) input {
+  margin-top: 3px;
+}
+
+.mini-quiz__option-feedback {
+  padding-left: 10px;
+  border-left: 3px solid;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.mini-quiz__option--correct .mini-quiz__option-feedback {
+  border-left-color: var(--draggable-item-valid-border-color);
+  color: var(--mini-quiz-correct-text);
+}
+.mini-quiz__option--wrong .mini-quiz__option-feedback {
+  border-left-color: var(--draggable-item-invalid-border-color);
+  color: var(--mini-quiz-wrong-text);
 }
 
 .mini-quiz code {

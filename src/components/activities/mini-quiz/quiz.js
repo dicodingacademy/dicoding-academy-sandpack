@@ -8,6 +8,8 @@ export const QUIZ_TYPES = {
 
 export const MIN_OPTIONS = 2;
 export const MAX_OPTIONS = 4;
+// Keeps feedback a short plain-text note under the option rather than a paragraph.
+export const MAX_FEEDBACK_LENGTH = 150;
 
 // Stable ids for choice options. Saved progress refers to these, not to indexes.
 export const OPTION_IDS = ['a', 'b', 'c', 'd'];
@@ -33,13 +35,31 @@ export function nextOptionId(options) {
   return OPTION_IDS.find((id) => !options.some((option) => option.id === id));
 }
 
-export function createTrueFalseOptions(answer) {
-  return TRUE_FALSE_OPTIONS.map((option) => ({ ...option, isCorrect: option.id === answer }));
+const toFeedback = (value) => (typeof value === 'string' ? value : '');
+
+export function isFeedbackTooLong(value) {
+  return toFeedback(value).trim().length > MAX_FEEDBACK_LENGTH;
+}
+
+// `feedback` maps an option id ('true' / 'false') to its optional feedback text.
+export function createTrueFalseOptions(answer, feedback = {}) {
+  return TRUE_FALSE_OPTIONS.map((option) => ({
+    ...option,
+    isCorrect: option.id === answer,
+    feedback: toFeedback(feedback[option.id]),
+  }));
 }
 
 export function getTrueFalseAnswer(options) {
   const correct = options.find((option) => option?.isCorrect);
   return correct?.id === 'false' ? 'false' : 'true';
+}
+
+export function getTrueFalseFeedback(options) {
+  return Object.fromEntries(TRUE_FALSE_OPTIONS.map(({ id }) => [
+    id,
+    toFeedback(options.find((option) => option?.id === id)?.feedback),
+  ]));
 }
 
 // Turns options from an untrusted payload into choice options with fresh, stable ids.
@@ -48,6 +68,7 @@ export function normalizeChoiceOptions(options) {
     id: OPTION_IDS[index],
     text: typeof option?.text === 'string' ? option.text : '',
     isCorrect: option?.isCorrect === true,
+    feedback: toFeedback(option?.feedback),
   }));
 }
 
@@ -83,7 +104,15 @@ export function createQuizPayload({
     type,
     instruction: instruction.trim(),
     question: question.trim(),
-    options: options.map((option) => ({ ...option, text: option.text.trim() })),
+    options: options.map(({ feedback, ...option }) => {
+      const trimmedFeedback = toFeedback(feedback).trim();
+      // Feedback is optional, so it is only stored when the admin filled it in.
+      return {
+        ...option,
+        text: option.text.trim(),
+        ...(trimmedFeedback ? { feedback: trimmedFeedback } : {}),
+      };
+    }),
     storageKey: createStorageKey(),
   };
 }
@@ -138,6 +167,10 @@ export function validateQuiz(quiz) {
     errors.options = `${texts.filter((text) => !text).length} opsi masih kosong`;
   } else if (new Set(texts).size !== texts.length) {
     errors.options = 'Teks opsi tidak boleh sama';
+  } else if (options.some((option) => option.feedback != null && typeof option.feedback !== 'string')) {
+    errors.options = 'Feedback opsi harus berupa teks';
+  } else if (options.some(({ feedback }) => isFeedbackTooLong(feedback))) {
+    errors.options = `Feedback opsi maksimal ${MAX_FEEDBACK_LENGTH} karakter`;
   } else if (type === QUIZ_TYPES.MULTIPLE && correctCount < 1) {
     errors.options = 'Tandai minimal satu jawaban benar';
   } else if (type !== QUIZ_TYPES.MULTIPLE && correctCount !== 1) {

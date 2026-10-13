@@ -21,6 +21,8 @@ export default function QuizOption({
   const { theme } = useTheme();
   const icon = STATUS_ICONS[status];
   const inputId = `${name}-${option.id}`;
+  // Feedback only appears once the option has been graded (marked wrong, or correct when solved).
+  const feedback = status !== 'idle' ? option.feedback?.trim() : '';
 
   return (
     <label
@@ -40,7 +42,10 @@ export default function QuizOption({
         disabled={disabled}
         onChange={() => onChange(option.id)}
       />
-      <MarkdownContent inline className="mini-quiz__option-text">{option.text}</MarkdownContent>
+      <span className="mini-quiz__option-body">
+        <MarkdownContent inline className="mini-quiz__option-text">{option.text}</MarkdownContent>
+        {feedback && <span className="mini-quiz__option-feedback">{feedback}</span>}
+      </span>
       {icon && (
         <img
           src={theme.toString() === 'light' ? icon.light : icon.dark}
@@ -59,6 +64,7 @@ QuizOption.propTypes = {
   option: PropTypes.shape({
     id: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
+    feedback: PropTypes.string,
   }).isRequired,
   checked: PropTypes.bool.isRequired,
   status: PropTypes.oneOf(['idle', 'correct', 'wrong']).isRequired,
