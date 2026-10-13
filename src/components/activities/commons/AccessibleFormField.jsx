@@ -16,6 +16,7 @@ function AccessibleFormField({
   children,
   className = '',
   showMarkdownToolbar = false,
+  inlineMarkdown = false,
   ...props
 }) {
   const fieldId = id || `field-${Math.random().toString(36).substr(2, 9)}`;
@@ -41,6 +42,7 @@ function AccessibleFormField({
           {showMarkdownToolbar && (
             <MarkdownToolbar 
               targetId={fieldId}
+              inline={inlineMarkdown}
               onInsert={(newValue) => {
                 const event = { target: { value: newValue } };
                 onChange(event);

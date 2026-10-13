@@ -1,7 +1,7 @@
 import React from 'react';
 import './MarkdownToolbar.css';
 
-function MarkdownToolbar({ onInsert, targetId }) {
+function MarkdownToolbar({ onInsert, targetId, inline = false }) {
   const insertFormat = (before, after = '', placeholder = 'text') => {
     const textarea = document.getElementById(targetId);
     if (!textarea) return;
@@ -60,15 +60,17 @@ function MarkdownToolbar({ onInsert, targetId }) {
           {'</>'}
         </button>
         
-        <button
-          type="button"
-          className="markdown-toolbar__btn"
-          onClick={() => insertFormat('\n```\n', '\n```\n', 'code block')}
-          title="Code block"
-          aria-label="Insert code block formatting"
-        >
-          {'{ }'}
-        </button>
+        {!inline && (
+          <button
+            type="button"
+            className="markdown-toolbar__btn"
+            onClick={() => insertFormat('\n```\n', '\n```\n', 'code block')}
+            title="Code block"
+            aria-label="Insert code block formatting"
+          >
+            {'{ }'}
+          </button>
+        )}
       </div>
       
       <div className="markdown-toolbar__info">

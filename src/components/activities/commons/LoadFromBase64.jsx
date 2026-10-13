@@ -33,6 +33,7 @@ function LoadFromBase64({ onLoad, activityType }) {
         'flashcards': ['cards'],
         'drag-and-order': ['items'],
         'sql-playground': ['setupSql', 'defaultQuery'],
+        'mini-quiz': ['question', 'options'],
       };
 
       const requiredKeys = expectedKeys[activityType];
